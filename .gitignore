@@ -1,0 +1,20 @@
+# Ignore Data
+data/
+
+# Ignore Output
+output/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# IDE/OS files
+.vscode/
+.idea/
+.DS_Store
