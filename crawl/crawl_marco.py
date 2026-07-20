@@ -55,11 +55,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading M2 (VIX)...")
         df_vix = yf.download('^VIX', start=start, end=end)
-        # Clean columns if multi-index
-        if isinstance(df_vix.columns, pd.MultiIndex):
-            df_vix.columns = df_vix.columns.get_level_values(0)
-        df_vix.to_csv(os.path.join(DATA_DIR, "vix.csv"))
-        log("VIX saved.")
+        if not df_vix.empty:
+            if isinstance(df_vix.columns, pd.MultiIndex):
+                df_vix.columns = df_vix.columns.get_level_values(0)
+            df_vix.to_csv(os.path.join(DATA_DIR, "vix.csv"))
+            log("VIX saved.")
+        else:
+            log("Error VIX: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error VIX: {e}")
 
@@ -67,10 +69,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading M3 (S&P 500)...")
         df_sp500 = yf.download('^GSPC', start=start, end=end)
-        if isinstance(df_sp500.columns, pd.MultiIndex):
-            df_sp500.columns = df_sp500.columns.get_level_values(0)
-        df_sp500.to_csv(os.path.join(DATA_DIR, "sp500.csv"))
-        log("S&P 500 saved.")
+        if not df_sp500.empty:
+            if isinstance(df_sp500.columns, pd.MultiIndex):
+                df_sp500.columns = df_sp500.columns.get_level_values(0)
+            df_sp500.to_csv(os.path.join(DATA_DIR, "sp500.csv"))
+            log("S&P 500 saved.")
+        else:
+            log("Error S&P 500: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error S&P 500: {e}")
 
@@ -78,10 +83,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading E1 (USD/VND)...")
         df_fx = yf.download('USDVND=X', start=start, end=end)
-        if isinstance(df_fx.columns, pd.MultiIndex):
-            df_fx.columns = df_fx.columns.get_level_values(0)
-        df_fx.to_csv(os.path.join(DATA_DIR, "usdvnd.csv"))
-        log("USD/VND saved.")
+        if not df_fx.empty:
+            if isinstance(df_fx.columns, pd.MultiIndex):
+                df_fx.columns = df_fx.columns.get_level_values(0)
+            df_fx.to_csv(os.path.join(DATA_DIR, "usdvnd.csv"))
+            log("USD/VND saved.")
+        else:
+            log("Error USD/VND: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error USD/VND: {e}")
 
@@ -89,10 +97,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading S1 (Brent Oil)...")
         df_oil = yf.download('BZ=F', start=start, end=end)
-        if isinstance(df_oil.columns, pd.MultiIndex):
-            df_oil.columns = df_oil.columns.get_level_values(0)
-        df_oil.to_csv(os.path.join(DATA_DIR, "brent_oil.csv"))
-        log("Brent Oil saved.")
+        if not df_oil.empty:
+            if isinstance(df_oil.columns, pd.MultiIndex):
+                df_oil.columns = df_oil.columns.get_level_values(0)
+            df_oil.to_csv(os.path.join(DATA_DIR, "brent_oil.csv"))
+            log("Brent Oil saved.")
+        else:
+            log("Error Brent Oil: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error Brent Oil: {e}")
 
@@ -100,10 +111,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading S2 (Gold)...")
         df_gold = yf.download('GC=F', start=start, end=end)
-        if isinstance(df_gold.columns, pd.MultiIndex):
-            df_gold.columns = df_gold.columns.get_level_values(0)
-        df_gold.to_csv(os.path.join(DATA_DIR, "gold.csv"))
-        log("Gold saved.")
+        if not df_gold.empty:
+            if isinstance(df_gold.columns, pd.MultiIndex):
+                df_gold.columns = df_gold.columns.get_level_values(0)
+            df_gold.to_csv(os.path.join(DATA_DIR, "gold.csv"))
+            log("Gold saved.")
+        else:
+            log("Error Gold: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error Gold: {e}")
 
@@ -111,10 +125,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading S4 (Copper)...")
         df_copper = yf.download('HG=F', start=start, end=end)
-        if isinstance(df_copper.columns, pd.MultiIndex):
-            df_copper.columns = df_copper.columns.get_level_values(0)
-        df_copper.to_csv(os.path.join(DATA_DIR, "copper_price.csv"))
-        log("Copper saved.")
+        if not df_copper.empty:
+            if isinstance(df_copper.columns, pd.MultiIndex):
+                df_copper.columns = df_copper.columns.get_level_values(0)
+            df_copper.to_csv(os.path.join(DATA_DIR, "copper_price.csv"))
+            log("Copper saved.")
+        else:
+            log("Error Copper: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error Copper: {e}")
 
@@ -122,10 +139,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading G1 (DXY)...")
         df_dxy = yf.download('DX-Y.NYB', start=start, end=end)
-        if isinstance(df_dxy.columns, pd.MultiIndex):
-            df_dxy.columns = df_dxy.columns.get_level_values(0)
-        df_dxy.to_csv(os.path.join(DATA_DIR, "dxy.csv"))
-        log("DXY saved.")
+        if not df_dxy.empty:
+            if isinstance(df_dxy.columns, pd.MultiIndex):
+                df_dxy.columns = df_dxy.columns.get_level_values(0)
+            df_dxy.to_csv(os.path.join(DATA_DIR, "dxy.csv"))
+            log("DXY saved.")
+        else:
+            log("Error DXY: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error DXY: {e}")
 
@@ -133,10 +153,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading G3 (US 10Y Treasury Yield)...")
         df_us10y = yf.download('^TNX', start=start, end=end)
-        if isinstance(df_us10y.columns, pd.MultiIndex):
-            df_us10y.columns = df_us10y.columns.get_level_values(0)
-        df_us10y.to_csv(os.path.join(DATA_DIR, "us10y_yield.csv"))
-        log("US 10Y Yield saved.")
+        if not df_us10y.empty:
+            if isinstance(df_us10y.columns, pd.MultiIndex):
+                df_us10y.columns = df_us10y.columns.get_level_values(0)
+            df_us10y.to_csv(os.path.join(DATA_DIR, "us10y_yield.csv"))
+            log("US 10Y Yield saved.")
+        else:
+            log("Error US 10Y Yield: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error US 10Y Yield (yfinance): {e}")
 
