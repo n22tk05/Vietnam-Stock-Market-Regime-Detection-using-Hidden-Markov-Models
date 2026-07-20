@@ -17,10 +17,17 @@ import datetime
 import time
 from vnstock import Market, Reference
 
+import argparse
+
 # Configure stdout for UTF-8
 sys.stdout.reconfigure(encoding='utf-8')
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--date", type=str, default=None, help="Target end date")
+args = parser.parse_args()
+
 START_TIME = "2016-11-10"
-END_TIME = "2026-05-01"
+END_TIME = args.date if args.date else datetime.datetime.now().strftime('%Y-%m-%d')
 N_VOLUME_VALIDATE = 2300
 # Output directory
 # Đường dẫn tương đối an toàn dựa trên vị trí file script

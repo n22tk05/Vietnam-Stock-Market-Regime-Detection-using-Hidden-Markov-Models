@@ -16,8 +16,6 @@ print(f"🎲 Random Seed: {seed_val}")
 th.manual_seed(seed_val)
 np.random.seed(seed_val)
 random.seed(seed_val)
-# Thiết lập thêm cho tính ổn định của môi trường Gym
-os.makedirs('v7_3', exist_ok=True)
 # os.environ['PYTHONHASHSEED'] = str(seed_val)
 from torch import nn
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
@@ -38,6 +36,109 @@ os.makedirs(save_dir, exist_ok=True)
 
 def log(msg):
     print(f"[{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}")
+def allocate_portfolio_real(tickers, w, p, C, LOT_SIZE=100, tracking_err_threshold=0.3):
+    import math
+    
+    # Ở VN, giá cổ phiếu trên data thường chia 1000 (VD: 40 tức là 40,000 đ)
+    # Ta nhân lại cho đúng mệnh giá tiền mặt VND
+    p = [price * 1000 for price in p]
+    
+    # Bước 1: Lọc mã không đủ vốn mua tối thiểu 1 lô
+    E = []
+    min_capital = {}
+    for i in range(len(w)):
+        if w[i] > 0 and p[i] > 0:
+            min_cap = p[i] * LOT_SIZE
+            if min_cap <= C:
+                E.append(i)
+                min_capital[i] = min_cap
+                
+    if not E:
+        min_price = min([price for price in p if price > 0], default=0)
+        warning_msg = f"Vốn quá nhỏ, không mua nổi mã nào. Vốn tối thiểu khuyến nghị là {min_price * LOT_SIZE:,.0f} đ." if min_price > 0 else "Không có mã hợp lệ."
+        return {
+            'warning_flag': True,
+            'warning_msg': warning_msg,
+            'allocations': [],
+            'used': 0,
+            'cash_left': C,
+            'tracking_error': sum(w)
+        }
+        
+    # Bước 2: Re-normalize lại tỷ trọng trên tập mã khả thi
+    sum_w_E = sum(w[i] for i in E)
+    w_norm = {i: w[i] / sum_w_E for i in E}
+    
+    # Bước 3: Tính số lô cho từng mã (làm tròn xuống)
+    lot = {}
+    shares = {}
+    spent = {}
+    for i in E:
+        target_amount = w_norm[i] * C
+        lot[i] = math.floor(target_amount / (p[i] * LOT_SIZE))
+        shares[i] = lot[i] * LOT_SIZE
+        spent[i] = shares[i] * p[i]
+        
+    # Bước 4: Xử lý phần vốn dư (greedy refill)
+    used = sum(spent.values())
+    cash_left = C - used
+    
+    # Sắp xếp E theo độ ưu tiên: w_norm[i] / p[i] giảm dần
+    sorted_E = sorted(E, key=lambda i: w_norm[i] / p[i], reverse=True)
+    
+    while True:
+        bought_any = False
+        for i in sorted_E:
+            if cash_left >= min_capital[i]:
+                lot[i] += 1
+                shares[i] = lot[i] * LOT_SIZE
+                spent[i] = shares[i] * p[i]
+                
+                cash_left -= min_capital[i]
+                used += min_capital[i]
+                bought_any = True
+        if not bought_any:
+            break
+            
+    # Bước 5: Tính lại tỷ trọng thực tế & sai số
+    w_actual = {}
+    tracking_error = 0
+    for i in range(len(w)):
+        if i in E:
+            w_act = spent[i] / C
+        else:
+            w_act = 0
+        w_actual[i] = w_act
+        tracking_error += abs(w[i] - w_act)
+        
+    # Bước 6: Ra quyết định / cảnh báo
+    warning_flag = False
+    warning_msg = ""
+    if len(E) <= 5 or tracking_error > tracking_err_threshold:
+        warning_flag = True
+        warning_msg = f"Danh mục thực tế lệch khá nhiều so với khuyến nghị gốc do giới hạn vốn (Tracking Error: {tracking_error:.4f})."
+        
+    allocations = []
+    for i in E:
+        if lot[i] > 0:
+            allocations.append({
+                'ma_co_phieu': tickers[i],
+                'so_lo': lot[i],
+                'so_co_phieu': shares[i],
+                'gia_hien_tai': p[i],
+                'so_tien_chi': spent[i],
+                'ty_trong_goc_ppo': w[i],
+                'ty_trong_thuc_te': w_actual[i]
+            })
+            
+    return {
+        'warning_flag': warning_flag,
+        'warning_msg': warning_msg,
+        'allocations': allocations,
+        'used': used,
+        'cash_left': cash_left,
+        'tracking_error': tracking_error
+    }
 
 
 # ## [CẤU HÌNH CHIẾN LƯỢC ĐẦU TƯ - AI TRADING]
@@ -451,8 +552,17 @@ class AdvancedPortfolioEnv(gym.Env):
             self.prev_weights = self.weights.copy()
             self.weights = action
 
-            market_ret = np.mean(self.returns_arr[self.current_step])
-            daily_ret = np.sum(self.weights * self.returns_arr[self.current_step]) - cost
+            # SỬA LỖI LOOKAHEAD BIAS: Mô hình phải ăn lợi nhuận của ngày T+3
+            # (Thị trường VN là T+2.5, làm tròn T+3 để thuận tiện dữ liệu)
+            if self.current_step + 3 < self.n_steps:
+                next_return = self.returns_arr[self.current_step + 3]
+            elif self.current_step + 1 < self.n_steps:
+                next_return = self.returns_arr[self.current_step + 1]
+            else:
+                next_return = np.zeros(self.weights_dim)
+
+            market_ret = np.mean(next_return)
+            daily_ret = np.sum(self.weights * next_return) - cost
 
             self.current_portfolio_value = self.current_portfolio_value * (1 + daily_ret)
 
@@ -499,10 +609,32 @@ class AdvancedPortfolioEnv(gym.Env):
                     allocations = [f"{self.tickers[k]}: {self.weights[k]*100:.1f}%" for k in range(self.weights_dim) if self.weights[k] > 0.01]
                     alloc_str = ", ".join(allocations) if allocations else "Trống"
                     print(f"\n[{date_str}] 📅 BÁO CÁO GIAO DỊCH:")
-                    for log in trade_logs:
-                        print(f"  > {log}")
+                    for log_msg in trade_logs:
+                        print(f"  > {log_msg}")
                     print(f"  💵 Tỷ trọng: Tiền mặt {cash_weight*100:.1f}% | Cổ phiếu: [{alloc_str}]")
                     print(f"  📈 Tài sản: {daily_capital_change:+,.0f} đ | Hiệu suất ngày: {daily_ret*100:+.2f}% | Tổng NAV: {self.current_capital:,.0f} đ")
+
+                    # THÊM MỚI: In ra số tiền phân bổ thực tế (Lot size) thông qua pipeline chuẩn
+                    capital_for_real = self.current_capital
+                    print(f"  [+] KHUYẾN NGHỊ ĐI LỆNH THỰC TẾ (Vốn {capital_for_real:,.0f} đ - Lô 100):")
+                    
+                    real_alloc = allocate_portfolio_real(
+                        tickers=self.tickers, 
+                        w=self.weights, 
+                        p=current_prices, 
+                        C=capital_for_real, 
+                        LOT_SIZE=100, 
+                        tracking_err_threshold=0.3
+                    )
+                    
+                    if real_alloc['warning_flag']:
+                        print(f"      ⚠️ CẢNH BÁO: {real_alloc['warning_msg']}")
+                        
+                    for item in real_alloc['allocations']:
+                        print(f"      - NẮM GIỮ / MUA {item['ma_co_phieu']}: {item['so_co_phieu']:,} cổ phiếu (Giá {item['gia_hien_tai']:,.0f}) => Tổng tiền {item['so_tien_chi']:,.0f} đ")
+                        
+                    print(f"      - 💵 TIỀN MẶT CÒN DƯ (Thực tế): {real_alloc['cash_left']:,.0f} đ")
+                    print(f"      - 📉 Tracking Error: {real_alloc['tracking_error']:.4f}")
             # ------------ HỆ THỐNG PHẠT DRAWDOWN & GAME OVER ------------
             self.peak_nav = max(self.peak_nav, getattr(self, 'current_capital', 100_000_000))
             drawdown = (self.peak_nav - getattr(self, 'current_capital', 100_000_000)) / self.peak_nav
@@ -770,7 +902,6 @@ def run_training_cycle():
         log(f"\nĐã lưu bộ não AI mới nhất vào {getattr(CONFIG, 'SAVE_MODEL_PATH', 'AI_Brain.zip')}. Có thể dùng trực tiếp cho Live Trading ngày mai!")
 
     # --- Centralized Leaderboard Logger ---
-    os.makedirs('v7_3', exist_ok=True)
 
     log_file = os.path.join(root_dir, "output", 'training_leaderboard.csv')
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -842,7 +973,7 @@ if __name__ == "__main__":
     # CÔNG TẮC BẬT/TẮT AUTO TUNING
     # ==========================================
     ENABLE_AUTO_TUNING = True  # Đổi thành True để chạy N lần tự động đổi tham số
-    N_TRIALS = 5  # Số lần muốn chạy
+    N_TRIALS = 10  # Số lần muốn chạy
 
     if ENABLE_AUTO_TUNING:
         run_auto_tuning(n_trials=N_TRIALS)

@@ -33,20 +33,13 @@ if __name__ == "__main__":
         strategies_test = strategies_features_df.iloc[test_start:]
         dates_test = dates[test_start:]
 
-        # Check CONFIG for paths, falling back if needed
-        # Handle the case where SAVE_MODEL_PATH is just a directory vs a file
-        model_path = getattr(CONFIG, 'SAVE_MODEL_PATH', 'v7_3/AI_Brain_v7_3.zip')
-        if os.path.isdir(model_path):
-            model_path = os.path.join(model_path, 'AI_Brain.zip')
-            
-        env_path = 'v7_3/vec_normalize.pkl'
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
         
-        # If the environment paths are saved in output/ppo_model, try to read from there
-        if not os.path.exists(env_path):
-            # ppo save_dir is os.path.join(root_dir, "output", "ppo_model")
-            script_dir = os.path.dirname(os.path.abspath(__file__))
-            root_dir = os.path.abspath(os.path.join(script_dir, ".."))
-            env_path = os.path.join(root_dir, "output", "ppo_model", "vec_normalize.pkl")
+        # Load model
+        model_dir = os.path.join(root_dir, "output", "ppo_model")
+        model_path = os.path.join(model_dir, "AI_Brain.zip")
+        env_path = os.path.join(model_dir, "vec_normalize.pkl")
 
         print(f"🔄 Đang nạp bộ não từ {model_path} để tiến hành phân tích...")
         model = PPO.load(model_path)
