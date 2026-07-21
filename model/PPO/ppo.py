@@ -758,7 +758,7 @@ def run_training_cycle():
         log(f"Khởi tạo Mạng Nơ-ron AI (Train: {len(dates_train)} days, Val: {len(dates_val)} days, Test: {len(dates_test)} days)...")
         model = PPO("MlpPolicy", train_env, 
                     policy_kwargs=policy_kwargs, 
-                    verbose=1, 
+                    verbose=0, 
                     n_steps=CONFIG.N_STEPS,
                     learning_rate=CONFIG.LEARNING_RATE,
                     ent_coef=CONFIG.ENT_COEF,
@@ -840,7 +840,7 @@ def run_training_cycle():
                 train_env = VecNormalize(train_env, norm_obs=False, norm_reward=True, clip_reward=10.0)
                 model = PPO("MlpPolicy", train_env, 
                     policy_kwargs=policy_kwargs, 
-                    verbose=1, 
+                    verbose=0, 
                     n_steps=CONFIG.N_STEPS,
                     learning_rate=CONFIG.LEARNING_RATE,
                     ent_coef=CONFIG.ENT_COEF,

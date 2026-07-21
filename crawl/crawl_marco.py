@@ -167,10 +167,13 @@ def crawl_yfinance_and_fred(start=START_TIME, end=END_TIME):
     try:
         log("Downloading G4 (China SSE)...")
         df_sse = yf.download('000001.SS', start=start, end=end)
-        if isinstance(df_sse.columns, pd.MultiIndex):
-            df_sse.columns = df_sse.columns.get_level_values(0)
-        df_sse.to_csv(os.path.join(DATA_DIR, "china_sse.csv"))
-        log("China SSE saved.")
+        if not df_sse.empty:
+            if isinstance(df_sse.columns, pd.MultiIndex):
+                df_sse.columns = df_sse.columns.get_level_values(0)
+            df_sse.to_csv(os.path.join(DATA_DIR, "china_sse.csv"))
+            log("China SSE saved.")
+        else:
+            log("Error China SSE: Empty data returned by yfinance.")
     except Exception as e:
         log(f"Error China SSE: {e}")
 
@@ -676,24 +679,7 @@ if __name__ == "__main__":
     start_date = START_TIME
     end_date = END_TIME
     
-    if len(sys.argv) >= 3:
-        start_date = sys.argv[1]
-        end_date = sys.argv[2]
-        log(f"Using date range from arguments: {start_date} to {end_date}")
-    else:
-        if sys.stdin.isatty():
-            try:
-                u_start = input(f"Enter start date (YYYY-MM-DD) [default: {START_TIME}]: ").strip()
-                if u_start:
-                    start_date = u_start
-                u_end = input(f"Enter end date (YYYY-MM-DD) [default: {END_TIME}]: ").strip()
-                if u_end:
-                    end_date = u_end
-                log(f"Using date range from input: {start_date} to {end_date}")
-            except Exception:
-                log(f"Interactive input failed, using default date range: {start_date} to {end_date}")
-        else:
-            log(f"Using default date range: {start_date} to {end_date}")
+    log(f"Using date range: {start_date} to {end_date}")
             
     # Run the downloads
     crawl_yfinance_and_fred(start=start_date, end=end_date)

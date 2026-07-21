@@ -19,7 +19,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
-root_dir = os.path.abspath(os.path.join(script_dir, ".."))
+root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
 if root_dir not in sys.path:
     sys.path.append(root_dir)
 from helper import check_stationarity, make_Z, auto_label_sector,filter_vif_greedy, evaluate_hmm, get_hmm_filtered_inference, auto_label
@@ -33,7 +33,7 @@ def log(msg):
 
 
 HMM_TRAIN_END = pd.Timestamp('2019-12-31')
-OUTPUT_DIR = Path('../output/hmm_model')
+OUTPUT_DIR = Path('../../output/hmm_model')
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 script_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, ".."))
@@ -43,7 +43,7 @@ log(f"Thư mục đầu ra được thiết lập tại: {OUTPUT_DIR.resolve()}"
 
 # Tải Dữ Liệu Đã Qua Tiền Xử Lý & Chuẩn Hóa
 log("Đang tải dữ liệu final_model_data.csv")
-df_market = pd.read_csv('../output/final_model_data.csv')
+df_market = pd.read_csv('../../output/final_model_data.csv')
 df_market['time'] = pd.to_datetime(df_market['time'])
 log(f"Kích thước bảng dữ liệu Market: {df_market.shape}")
 
@@ -260,7 +260,7 @@ log(f"Đã lưu kết quả Market HMM ra: {OUTPUT_DIR / 'market_hmm_results.csv
 
 # Chuẩn bị Dữ liệu Ngành & Huấn luyện Sector HMM (Grid Search K)
 log("Huấn luyện Sector HMM (Grid Search K)")
-df_sector_final = pd.read_csv("../data/processed/industry_features.csv")
+df_sector_final = pd.read_csv("../../data/processed/industry_features.csv")
 df_sector_final['time'] = pd.to_datetime(df_sector_final['time'])
 
 from hmmlearn.hmm import GMMHMM
@@ -360,9 +360,9 @@ log("Huấn Luyện Ticker HMM Kết Hợp Vĩ Mô & Ngành")
 from helper import make_Z_ticker
 
 log("Đang tải dữ liệu m1_vn60.csv cho Ticker HMM...")
-df_m1 = pd.read_csv('../data/processed/m1_vn60.csv')
+df_m1 = pd.read_csv('../../data/processed/m1_vn60.csv')
 df_m1['time'] = pd.to_datetime(df_m1['time']).dt.normalize()
-_ind_df = pd.read_csv('../data/industry/industries.csv')
+_ind_df = pd.read_csv('../../data/industry/industries.csv')
 _ind_df = _ind_df[_ind_df['icb_level'] == 1]
 industry_mapping = dict(zip(_ind_df['symbol'], _ind_df['icb_name']))
 df_m1['industry'] = df_m1['ticker'].map(industry_mapping)

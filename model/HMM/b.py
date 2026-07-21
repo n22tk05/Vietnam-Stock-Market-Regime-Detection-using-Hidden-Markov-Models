@@ -15,7 +15,7 @@ def log(msg):
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
-OUTPUT_DIR = Path('../output/hmm_model')
+OUTPUT_DIR = Path('../../output/hmm_model')
 
 log("Đang tải dữ liệu master_ticker_hmm_results.csv...")
 master_ticker = pd.read_csv(OUTPUT_DIR / 'master_ticker_hmm_results.csv')

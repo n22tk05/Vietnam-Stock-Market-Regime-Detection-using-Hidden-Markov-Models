@@ -3,6 +3,9 @@ import os
 import numpy as np
 import subprocess
 
+# Configure stdout for UTF-8 to prevent emoji printing errors
+sys.stdout.reconfigure(encoding='utf-8')
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 def run_cmd(script_name, cwd):
@@ -31,7 +34,7 @@ def daily_live_trading(run_crawl=False, target_date=None):
         run_cmd("pipeline.py", cwd=os.path.join(script_dir, "data_processing"))
         
         print("\n🧠 [3/4] CHẠY MÔ HÌNH HMM (HIDDEN MARKOV MODEL)...")
-        run_cmd("hmm.py", cwd=os.path.join(script_dir, "model"))
+        run_cmd("hmm.py", cwd=os.path.join(script_dir, "model", "HMM"))
     else:
         print("\n⚡ [1/4] BỎ QUA BƯỚC CRAWL VÀ XỬ LÝ DỮ LIỆU. Đọc thẳng vào kho dữ liệu đang có...")
 
