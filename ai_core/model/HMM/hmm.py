@@ -8,7 +8,8 @@ from scipy.stats import norm
 from sklearn.feature_selection import mutual_info_regression
 import lightgbm as lgb
 import shap
-from joblib import Parallel, delayed
+import argparse
+from joblib import Parallel, delayed, dump, load
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 import datetime
@@ -16,6 +17,12 @@ import sys
 import os
 
 sys.stdout.reconfigure(encoding='utf-8')
+
+parser = argparse.ArgumentParser(description="HMM Training and Fast Prediction Pipeline")
+parser.add_argument("--mode", type=str, choices=["train", "predict"], default="train", help="Mode: 'train' to re-fit HMM models, 'predict' to use pre-trained .pkl models")
+args, _ = parser.parse_known_args()
+MODE = args.mode
+
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
@@ -172,9 +179,19 @@ if len(res_df_macro) > 0:
     res_df_macro['Composite'] = 0.5 * res_df_macro['Rank_bic'] + 0.5 * res_df_macro['Rank_oos']
     res_df_macro = res_df_macro.sort_values('Composite')
     K_macro = int(res_df_macro.iloc[0]['K'])
-    best_macro_hmm = models_macro[K_macro]
+    
+    macro_model_path = OUTPUT_DIR / 'macro_hmm.pkl'
+    if MODE == 'predict' and macro_model_path.exists():
+        log(f"⚡ [FAST MODE] Nạp Macro HMM pre-trained từ {macro_model_path}")
+        best_macro_hmm = load(macro_model_path)
+    else:
+        best_macro_hmm = models_macro[K_macro]
+        dump(best_macro_hmm, macro_model_path)
+        log(f"💾 Đã lưu Macro HMM model vào: {macro_model_path}")
+        
     log(res_df_macro)
     log(f"--> Quyết định K tối ưu Macro: K = {K_macro}")
+
 
     global_macro_regimes, macro_probs = get_hmm_filtered_inference(best_macro_hmm, Z_data_macro)
 
@@ -227,9 +244,18 @@ if len(res_df_market) > 0:
     K_market = 0 # Thường cố định K=3
     if K_market not in models_market:
         K_market = int(res_df_market.iloc[0]['K'])
-    best_market_hmm = models_market[K_market]
+    market_model_path = OUTPUT_DIR / 'market_hmm.pkl'
+    if MODE == 'predict' and market_model_path.exists():
+        log(f"⚡ [FAST MODE] Nạp Market HMM pre-trained từ {market_model_path}")
+        best_market_hmm = load(market_model_path)
+    else:
+        best_market_hmm = models_market[K_market]
+        dump(best_market_hmm, market_model_path)
+        log(f"💾 Đã lưu Market HMM model vào: {market_model_path}")
+        
     log(res_df_market)
     log(f"--> Quyết định K tối ưu Market: K = {K_market}")
+
 
     global_market_regimes_filtered, market_probs = get_hmm_filtered_inference(best_market_hmm, Z_data_market)
     for i in range(K_market):
@@ -287,7 +313,13 @@ def evaluate_hmm_sector(K, Z_train, Z_oos, seeds=3):
         except: continue
     return best_model, best_bic, best_ll_oos, best_min_dur
 
-log("Huấn luyện Sector HMM (Tự động Grid Search chọn K tốt nhất cho từng ngành)...")
+sector_pkl_path = OUTPUT_DIR / 'sector_hmms.pkl'
+sector_models_dict = {}
+if MODE == 'predict' and sector_pkl_path.exists():
+    log(f"⚡ [FAST MODE] Nạp Sector HMMs pre-trained từ {sector_pkl_path}")
+    sector_models_dict = load(sector_pkl_path)
+
+log("Huấn luyện / Dự báo Sector HMM...")
 sector_results = []
 all_semantic_labels = set()
 Z_sector_cols = [c for c in df_sector_final.columns if c.endswith('_Z')]
@@ -297,31 +329,36 @@ for industry, group in df_sector_final.groupby('industry'):
     Z_sec = group[Z_sector_cols].fillna(0).values
     if len(Z_sec) < 100: continue
 
-    train_mask = group['time'] <= HMM_TRAIN_END
-    Z_train = Z_sec[train_mask]
-    Z_oos = Z_sec[~train_mask]
-    if len(Z_train) < 50: 
-        Z_train = Z_sec; Z_oos = np.array([])
-
-    results, models = [], {}
-    for K in [2, 3, 4]:
-        m, bic, ll_oos, min_dur = evaluate_hmm_sector(K, Z_train, Z_oos)
-        if m:
-            results.append({'K': K, 'BIC': bic, 'll_oos': ll_oos, 'min_dur': min_dur})
-            models[K] = m
-
-    res_df = pd.DataFrame(results)
-    if len(res_df) > 0:
-        res_df['Rank_bic'] = res_df['BIC'].rank(ascending=True)
-        res_df['Rank_oos'] = res_df['ll_oos'].rank(ascending=False)
-        res_df['Rank_min_dur'] = res_df['min_dur'].rank(ascending=False)
-        res_df['Composite'] = 0.3 * res_df['Rank_bic'] + 0.5 * res_df['Rank_oos'] + 0.2 * res_df['Rank_min_dur']
-        res_df = res_df.sort_values('Composite')
-        best_K = int(res_df.iloc[0]['K'])
-        best_model = models[best_K]
+    if MODE == 'predict' and industry in sector_models_dict:
+        best_model = sector_models_dict[industry]
+        best_K = best_model.n_components
     else:
-        log(f"[-] Bỏ qua {industry}: Không model nào hội tụ.")
-        continue 
+        train_mask = group['time'] <= HMM_TRAIN_END
+        Z_train = Z_sec[train_mask]
+        Z_oos = Z_sec[~train_mask]
+        if len(Z_train) < 50: 
+            Z_train = Z_sec; Z_oos = np.array([])
+
+        results, models = [], {}
+        for K in [2, 3, 4]:
+            m, bic, ll_oos, min_dur = evaluate_hmm_sector(K, Z_train, Z_oos)
+            if m:
+                results.append({'K': K, 'BIC': bic, 'll_oos': ll_oos, 'min_dur': min_dur})
+                models[K] = m
+
+        res_df = pd.DataFrame(results)
+        if len(res_df) > 0:
+            res_df['Rank_bic'] = res_df['BIC'].rank(ascending=True)
+            res_df['Rank_oos'] = res_df['ll_oos'].rank(ascending=False)
+            res_df['Rank_min_dur'] = res_df['min_dur'].rank(ascending=False)
+            res_df['Composite'] = 0.3 * res_df['Rank_bic'] + 0.5 * res_df['Rank_oos'] + 0.2 * res_df['Rank_min_dur']
+            res_df = res_df.sort_values('Composite')
+            best_K = int(res_df.iloc[0]['K'])
+            best_model = models[best_K]
+            sector_models_dict[industry] = best_model
+        else:
+            log(f"[-] Bỏ qua {industry}: Không model nào hội tụ.")
+            continue 
 
     group['sector_regime'], probs = get_hmm_filtered_inference(best_model, Z_sec)
 
@@ -342,7 +379,11 @@ for industry, group in df_sector_final.groupby('industry'):
         all_semantic_labels.add(f'prob_sector_{semantic}')
 
     sector_results.append(group)
-    log(f"[+] Hoàn thành Sector HMM: {industry} (Tối ưu K={best_K})")
+    log(f"[+] Hoàn thành Sector HMM: {industry} (K={best_K})")
+
+if MODE != 'predict' and sector_models_dict:
+    dump(sector_models_dict, sector_pkl_path)
+    log(f"💾 Đã lưu Sector HMMs vào: {sector_pkl_path}")
 
 df_sector_hmm = pd.concat(sector_results, ignore_index=True)
 for col in all_semantic_labels:
@@ -352,6 +393,7 @@ for col in all_semantic_labels:
 # LƯU KẾT QUẢ SECTOR HMM
 df_sector_hmm.to_csv(OUTPUT_DIR / 'sector_hmm_results.csv', index=False)
 log(f"Đã lưu kết quả Sector HMM ra: {OUTPUT_DIR / 'sector_hmm_results.csv'}")
+
 
 # =====================================================================
 # 8. Huấn Luyện Ticker HMM Kết Hợp Vĩ Mô & Ngành
@@ -376,6 +418,12 @@ for k in range(K_market):
     prob_col = f'Market_Prob_{k}'
     if prob_col in df_market.columns:
         global_vars[prob_col] = df_market[prob_col]
+
+ticker_pkl_path = OUTPUT_DIR / 'ticker_hmms.pkl'
+ticker_models_dict = {}
+if MODE == 'predict' and ticker_pkl_path.exists():
+    log(f"⚡ [FAST MODE] Nạp Ticker HMMs pre-trained từ {ticker_pkl_path}")
+    ticker_models_dict = load(ticker_pkl_path)
 
 ticker_dfs = []
 for i, ticker in enumerate(tickers):
@@ -415,9 +463,14 @@ for i, ticker in enumerate(tickers):
         continue
 
     K_tick = 3
-    ticker_hmm = GMMHMM(n_components=K_tick, n_mix=2, covariance_type='diag', min_covar=0.01, n_iter=100, random_state=42)
     try:
-        ticker_hmm.fit(Z_all_tick)
+        if MODE == 'predict' and ticker in ticker_models_dict:
+            ticker_hmm = ticker_models_dict[ticker]
+        else:
+            ticker_hmm = GMMHMM(n_components=K_tick, n_mix=2, covariance_type='diag', min_covar=0.01, n_iter=100, random_state=42)
+            ticker_hmm.fit(Z_all_tick)
+            ticker_models_dict[ticker] = ticker_hmm
+
         ticker_daily_states, ticker_daily_probs = get_hmm_filtered_inference(ticker_hmm, Z_all_tick)
 
         stats = []
@@ -450,6 +503,10 @@ for i, ticker in enumerate(tickers):
     ticker_dfs.append(ticker_master)
     log(f"[+] Hoàn thành Ticker HMM: {ticker}")
 
+if MODE != 'predict' and ticker_models_dict:
+    dump(ticker_models_dict, ticker_pkl_path)
+    log(f"💾 Đã lưu Ticker HMMs vào: {ticker_pkl_path}")
+
 master_ticker = pd.concat(ticker_dfs, ignore_index=True)
 master_ticker = master_ticker.dropna(subset=['close']).reset_index(drop=True)
 cols_reordered = ['time', 'ticker'] + [col for col in master_ticker.columns if col not in ['time', 'ticker']]
@@ -459,4 +516,5 @@ log(f'Hoàn thành huấn luyện Ticker HMM. Kích thước master_ticker: {mas
 # LƯU KẾT QUẢ TICKER HMM
 master_ticker.to_csv(OUTPUT_DIR / 'master_ticker_hmm_results.csv', index=False)
 log(f"Đã lưu kết quả toàn bộ HMM ra: {OUTPUT_DIR / 'master_ticker_hmm_results.csv'}")
+
 

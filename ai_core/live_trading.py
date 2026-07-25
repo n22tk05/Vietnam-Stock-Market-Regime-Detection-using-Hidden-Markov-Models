@@ -33,10 +33,11 @@ def daily_live_trading(run_crawl=False, target_date=None):
         print("\n⚙️ [2/4] CHẠY DATA PROCESSING...")
         run_cmd("pipeline.py", cwd=os.path.join(script_dir, "data_processing"))
         
-        print("\n🧠 [3/4] CHẠY MÔ HÌNH HMM (HIDDEN MARKOV MODEL)...")
-        run_cmd("hmm.py", cwd=os.path.join(script_dir, "model", "HMM"))
+        print("\n🧠 [3/4] CHẠY MÔ HÌNH HMM (HIDDEN MARKOV MODEL - FAST PREDICT MODE)...")
+        run_cmd("hmm.py --mode predict", cwd=os.path.join(script_dir, "model", "HMM"))
     else:
         print("\n⚡ [1/4] BỎ QUA BƯỚC CRAWL VÀ XỬ LÝ DỮ LIỆU. Đọc thẳng vào kho dữ liệu đang có...")
+
 
     # ========================================================
     # BƯỚC 2: AI RA QUYẾT ĐỊNH (INFERENCE)
