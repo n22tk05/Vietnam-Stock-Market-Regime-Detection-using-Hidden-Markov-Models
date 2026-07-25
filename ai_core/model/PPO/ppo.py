@@ -183,7 +183,7 @@ class CONFIG:
     NET_ARCH = [64, 64]
     N_STEPS = 1024
     LEARNING_RATE = 0.00005
-    BATCH_SIZE = 90
+    BATCH_SIZE = 64
     USE_SDE = False
     SDE_SAMPLE_FREQ = 5
 
@@ -973,7 +973,7 @@ if __name__ == "__main__":
     # CÔNG TẮC BẬT/TẮT AUTO TUNING
     # ==========================================
     ENABLE_AUTO_TUNING = True  # Đổi thành True để chạy N lần tự động đổi tham số
-    N_TRIALS = 10  # Số lần muốn chạy
+    N_TRIALS = 15  # Số lần muốn chạy
 
     if ENABLE_AUTO_TUNING:
         run_auto_tuning(n_trials=N_TRIALS)

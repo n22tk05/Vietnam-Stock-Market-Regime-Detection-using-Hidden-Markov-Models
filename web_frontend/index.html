@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI QUANTUM - Trading Platform Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-cyan-500 to-blue-600 p-2.5 rounded-xl shadow-lg shadow-cyan-500/20">
+                    <i class="fa-solid fa-brain-circuit text-xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">AI QUANTUM</h1>
+                    <p class="text-xs text-slate-400">PPO & HMM Live Trading Engine</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping mr-2"></span>
+                    AI Engine Online
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+        <!-- Controls & Input Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+                <div class="md:col-span-2 space-y-2">
+                    <label class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+                        <i class="fa-solid fa-wallet text-cyan-400"></i>
+                        Nhập số vốn đầu tư thực tế (VND):
+                    </label>
+                    <div class="relative">
+                        <input type="number" id="capitalInput" value="100000000" step="10000000" 
+                               class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3.5 pl-12 text-lg font-semibold text-cyan-400 focus:outline-none focus:border-cyan-500 transition">
+                        <span class="absolute left-4 top-4 text-slate-500 font-bold">₫</span>
+                    </div>
+                </div>
+                <div>
+                    <button id="fetchBtn" onclick="fetchSignals()" 
+                            class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-cyan-500/20 transition duration-200 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>LẤY KHUYẾN NGHỊ AI</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Overview Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Ngày dữ liệu</div>
+                <div id="metricDate" class="text-xl font-bold text-white">--/--/----</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Tổng vốn phân bổ</div>
+                <div id="metricUsed" class="text-xl font-bold text-cyan-400">0 ₫</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Tiền mặt dư</div>
+                <div id="metricCash" class="text-xl font-bold text-emerald-400">0 ₫</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider mb-1">Tracking Error (Sai số lô)</div>
+                <div id="metricError" class="text-xl font-bold text-amber-400">0.0000</div>
+            </div>
+        </div>
+
+        <!-- Warning Alert Container -->
+        <div id="warningAlert" class="hidden bg-amber-500/10 border border-amber-500/30 text-amber-400 p-4 rounded-xl flex items-start gap-3">
+            <i class="fa-solid fa-triangle-exclamation text-xl mt-0.5"></i>
+            <div>
+                <h4 class="font-bold">Cảnh báo mô hình:</h4>
+                <p id="warningText" class="text-sm opacity-90"></p>
+            </div>
+        </div>
+
+        <!-- Allocation Table & Chart Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Signal Table (2 cols) -->
+            <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-cyan-400"></i>
+                    Danh mục Lệnh Mua Khuyến Nghị (Lô 100)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-950 text-slate-400 font-semibold uppercase text-xs">
+                            <tr>
+                                <th class="p-3 rounded-l-lg">Mã CP</th>
+                                <th class="p-3">Số Lô (100)</th>
+                                <th class="p-3">Tổng Cổ Phiếu</th>
+                                <th class="p-3">Giá Khớp (VND)</th>
+                                <th class="p-3">Số Tiền Chi (VND)</th>
+                                <th class="p-3 rounded-r-lg">Tỷ Trọng AI</th>
+                            </tr>
+                        </thead>
+                        <tbody id="signalTableBody" class="divide-y divide-slate-800/50">
+                            <tr>
+                                <td colspan="6" class="p-8 text-center text-slate-500">
+                                    Vui lòng bấm nút "LẤY KHUYẾN NGHỊ AI" để tải danh mục.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Portfolio Chart (1 col) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center">
+                <h3 class="text-lg font-bold text-white mb-4 self-start flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie text-cyan-400"></i>
+                    Tỷ Trọng Phân Bổ
+                </h3>
+                <div class="w-full max-w-[280px]">
+                    <canvas id="portfolioChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const NODE_API_URL = 'http://localhost:3000/api/trading-signals';
+        let chartInstance = null;
+
+        async function fetchSignals() {
+            const capital = document.getElementById('capitalInput').value;
+            const fetchBtn = document.getElementById('fetchBtn');
+            fetchBtn.disabled = true;
+            fetchBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i><span>Đang tính toán AI...</span>`;
+
+            try {
+                const response = await fetch(`${NODE_API_URL}?capital=${capital}`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    alert('Lỗi: ' + (result.message || 'Không thể lấy dữ liệu'));
+                    return;
+                }
+
+                renderDashboard(result.data);
+            } catch (error) {
+                console.error(error);
+                alert('Không thể kết nối đến Node.js Backend Server (Port 3000). Vui lòng kiểm tra server!');
+            } finally {
+                fetchBtn.disabled = false;
+                fetchBtn.innerHTML = `<i class="fa-solid fa-bolt"></i><span>LẤY KHUYẾN NGHỊ AI</span>`;
+            }
+        }
+
+        function renderDashboard(data) {
+            // Update Metrics
+            document.getElementById('metricDate').innerText = data.date;
+            document.getElementById('metricUsed').innerText = data.used_capital.toLocaleString() + ' ₫';
+            document.getElementById('metricCash').innerText = data.cash_left.toLocaleString() + ' ₫';
+            document.getElementById('metricError').innerText = data.tracking_error;
+
+            // Update Warning
+            const warningAlert = document.getElementById('warningAlert');
+            if (data.warning_flag) {
+                warningAlert.classList.remove('hidden');
+                document.getElementById('warningText').innerText = data.warning_msg;
+            } else {
+                warningAlert.classList.add('hidden');
+            }
+
+            // Update Table
+            const tbody = document.getElementById('signalTableBody');
+            tbody.innerHTML = '';
+
+            data.allocations.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/40 transition';
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-cyan-400 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        ${item.ma_co_phieu}
+                    </td>
+                    <td class="p-3 font-semibold text-white">${item.so_lo}</td>
+                    <td class="p-3 text-slate-300">${item.so_co_phieu.toLocaleString()}</td>
+                    <td class="p-3 text-slate-300">${item.gia_hien_tai.toLocaleString()} ₫</td>
+                    <td class="p-3 font-semibold text-emerald-400">${item.so_tien_chi.toLocaleString()} ₫</td>
+                    <td class="p-3 text-cyan-400 font-medium">${(item.ty_trong_goc_ppo * 100).toFixed(1)}%</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Update Pie Chart
+            renderChart(data);
+        }
+
+        function renderChart(data) {
+            const ctx = document.getElementById('portfolioChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+
+            const labels = data.allocations.map(a => a.ma_co_phieu);
+            const values = data.allocations.map(a => a.so_tien_chi);
+            
+            labels.push('Tiền mặt');
+            values.push(data.cash_left);
+
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: [
+                            '#06b6d4', '#3b82f6', '#10b981', '#f59e0b', '#ec4899', 
+                            '#8b5cf6', '#6366f1', '#14b8a6', '#f97316', '#64748b'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+    </script>
+</body>
+</html>
