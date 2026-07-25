@@ -63,7 +63,7 @@ def load_ai_core():
     
     save_dir = os.path.join(script_dir, "output", "ppo_model")
     vec_norm_path = os.path.join(save_dir, "vec_normalize.pkl")
-    model_path = os.path.join(save_dir, "AI_Brain.zip")
+    model_path = os.path.join(save_dir, "AI_Brain_v7_Seed4984_Profit_58.06.zip")
     
     live_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
         returns_live, ai_live, strategies_live, weights_dim, num_strategies_features, tickers=tickers, dates=dates_live, is_test=True

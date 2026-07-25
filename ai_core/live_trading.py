@@ -73,7 +73,7 @@ def daily_live_trading(run_crawl=False, target_date=None):
     # Định tuyến tới thư mục chứa Model
     save_dir = os.path.join(script_dir, "output", "ppo_model")
     vec_norm_path = os.path.join(save_dir, "vec_normalize.pkl")
-    model_path = os.path.join(save_dir, "AI_Brain.zip")
+    model_path = os.path.join(save_dir, "AI_Brain_v7_Seed4984_Profit_58.06.zip")
     
     # BẮT BUỘC: Nạp lại chuẩn hóa (VecNormalize) của quá trình huấn luyện
     if os.path.exists(vec_norm_path):
