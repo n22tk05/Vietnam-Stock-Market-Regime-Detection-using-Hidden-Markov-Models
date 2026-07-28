@@ -89,43 +89,7 @@ function addDaysToDateStr(dateStr: string, daysToAdd: number): string {
   return dateStr;
 }
 
-// User's pre-existing holdings in system (Mock database)
-const INITIAL_EXISTING_PORTFOLIO: ExistingPosition[] = [
-  { ma_co_phieu: 'CTD', so_co_phieu: 100, gia_von: 55000, gia_hien_tai: 59100, status: 'UNLOCKED' },
-  { ma_co_phieu: 'VHC', so_co_phieu: 500, gia_von: 65000, gia_hien_tai: 61700, status: 'UNLOCKED' },
-  { ma_co_phieu: 'SSI', so_co_phieu: 400, gia_von: 28000, gia_hien_tai: 27200, status: 'UNLOCKED' },
-  { ma_co_phieu: 'HPG', so_co_phieu: 600, gia_von: 26500, gia_hien_tai: 29100, status: 'LOCKED_T1' },
-];
 
-const DEFAULT_MOCK: RecommendationResponse = {
-  date: '21/07/2026',
-  capital: 100000000,
-  warning_flag: true,
-  warning_msg:
-    'Danh mục thực tế lệch khá nhiều so với khuyến nghị gốc do giới hạn vốn (Tracking Error: 0.5756).',
-  cash_left: 258000,
-  used_capital: 99742000,
-  tracking_error: 0.5756,
-  allocations: [
-    { ma_co_phieu: 'VHC', so_lo: 2, so_co_phieu: 200, gia_hien_tai: 61700, so_tien_chi: 12340000, ty_trong_goc_ppo: 0.0624, ty_trong_thuc_te: 0.1234 },
-    { ma_co_phieu: 'IMP', so_lo: 2, so_co_phieu: 200, gia_hien_tai: 49170, so_tien_chi: 9834000, ty_trong_goc_ppo: 0.0943, ty_trong_thuc_te: 0.0983 },
-    { ma_co_phieu: 'KDC', so_lo: 2, so_co_phieu: 200, gia_hien_tai: 45950, so_tien_chi: 9190000, ty_trong_goc_ppo: 0.051, ty_trong_thuc_te: 0.0919 },
-    { ma_co_phieu: 'VGC', so_lo: 2, so_co_phieu: 200, gia_hien_tai: 43000, so_tien_chi: 8600000, ty_trong_goc_ppo: 0.0492, ty_trong_thuc_te: 0.086 },
-    { ma_co_phieu: 'GAS', so_lo: 1, so_co_phieu: 100, gia_hien_tai: 73100, so_tien_chi: 7310000, ty_trong_goc_ppo: 0.0463, ty_trong_thuc_te: 0.0731 },
-    { ma_co_phieu: 'DGW', so_lo: 2, so_co_phieu: 200, gia_hien_tai: 35150, so_tien_chi: 7030000, ty_trong_goc_ppo: 0.0422, ty_trong_thuc_te: 0.0703 },
-    { ma_co_phieu: 'TCH', so_lo: 4, so_co_phieu: 400, gia_hien_tai: 17300, so_tien_chi: 6920000, ty_trong_goc_ppo: 0.0671, ty_trong_thuc_te: 0.0692 },
-    { ma_co_phieu: 'CTD', so_lo: 3, so_co_phieu: 300, gia_hien_tai: 59100, so_tien_chi: 17730000, ty_trong_goc_ppo: 0.0842, ty_trong_thuc_te: 0.1773 },
-    { ma_co_phieu: 'EIB', so_lo: 3, so_co_phieu: 300, gia_hien_tai: 17850, so_tien_chi: 5355000, ty_trong_goc_ppo: 0.0438, ty_trong_thuc_te: 0.05355 },
-    { ma_co_phieu: 'KDH', so_lo: 2, so_co_phieu: 200, gia_hien_tai: 25000, so_tien_chi: 5000000, ty_trong_goc_ppo: 0.0344, ty_trong_thuc_te: 0.05 },
-    { ma_co_phieu: 'HDC', so_lo: 3, so_co_phieu: 300, gia_hien_tai: 16570, so_tien_chi: 4971000, ty_trong_goc_ppo: 0.0364, ty_trong_thuc_te: 0.04971 },
-    { ma_co_phieu: 'PDR', so_lo: 3, so_co_phieu: 300, gia_hien_tai: 16500, so_tien_chi: 4950000, ty_trong_goc_ppo: 0.0441, ty_trong_thuc_te: 0.0495 },
-    { ma_co_phieu: 'DXG', so_lo: 3, so_co_phieu: 300, gia_hien_tai: 11350, so_tien_chi: 3405000, ty_trong_goc_ppo: 0.0232, ty_trong_thuc_te: 0.03405 },
-    { ma_co_phieu: 'HAG', so_lo: 2, so_co_phieu: 200, gia_hien_tai: 14450, so_tien_chi: 2890000, ty_trong_goc_ppo: 0.0218, ty_trong_thuc_te: 0.0289 },
-    { ma_co_phieu: 'NLG', so_lo: 1, so_co_phieu: 100, gia_hien_tai: 27270, so_tien_chi: 2727000, ty_trong_goc_ppo: 0.0189, ty_trong_thuc_te: 0.02727 },
-    { ma_co_phieu: 'VIX', so_lo: 1, so_co_phieu: 100, gia_hien_tai: 16850, so_tien_chi: 1685000, ty_trong_goc_ppo: 0.0161, ty_trong_thuc_te: 0.01685 },
-    { ma_co_phieu: 'DBC', so_lo: 1, so_co_phieu: 100, gia_hien_tai: 16250, so_tien_chi: 1625000, ty_trong_goc_ppo: 0.0158, ty_trong_thuc_te: 0.01625 },
-  ],
-};
 
 export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose }) => {
   const [capitalInput, setCapitalInput] = useState<number>(100000000);
@@ -135,7 +99,8 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose })
   const [isLiveConnected, setIsLiveConnected] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'ACTION_PLAN' | 'HOLDINGS' | 'LOGS'>('ACTION_PLAN');
-  const [existingPortfolio, setExistingPortfolio] = useState<ExistingPosition[]>(INITIAL_EXISTING_PORTFOLIO);
+  const [existingPortfolio, setExistingPortfolio] = useState<ExistingPosition[]>([]);
+
 
   useEffect(() => {
     fetch('/simulated_users.json')
@@ -246,31 +211,10 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose })
           throw new Error('history.json not found');
         }
       } catch (histErr) {
-        addLog('ℹ️ Dùng dữ liệu Mock dự phòng...');
-        const ratio = capitalVal / 100000000;
-        const scaledAllocations = DEFAULT_MOCK.allocations.map((item) => {
-          const newLots = Math.max(1, Math.floor(item.so_lo * ratio));
-          const newShares = newLots * 100;
-          const newSpent = newShares * item.gia_hien_tai;
-          return {
-            ...item,
-            so_lo: newLots,
-            so_co_phieu: newShares,
-            so_tien_chi: newSpent,
-            ty_trong_thuc_te: Math.round((newSpent / capitalVal) * 10000) / 10000,
-          };
-        });
-
-        const totalSpent = scaledAllocations.reduce((acc, curr) => acc + curr.so_tien_chi, 0);
-        setData({
-          ...DEFAULT_MOCK,
-          capital: capitalVal,
-          used_capital: totalSpent,
-          cash_left: Math.max(0, capitalVal - totalSpent),
-          allocations: scaledAllocations,
-        });
+        addLog('❌ Không thể nạp dữ liệu khuyến nghị. Vui lòng kiểm tra lại Backend API (Port 8000) hoặc file history.json');
       }
     }
+
 
 
     addLog('⚙️ Quy đổi tỷ trọng sang lô chẵn 100 & Tối ưu hóa tiền lẻ (Greedy Refill)...');
