@@ -472,7 +472,8 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose })
             }`}
           >
             <Layers className="w-4 h-4" />
-            <span>Danh mục Hiện tại ({INITIAL_EXISTING_PORTFOLIO.length} Mã)</span>
+            <span>Danh mục Hiện tại ({existingPortfolio.length} Mã)</span>
+
           </button>
 
           <button
