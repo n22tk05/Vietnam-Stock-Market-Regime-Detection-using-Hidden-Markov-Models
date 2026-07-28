@@ -102,6 +102,23 @@ def health_check():
         "tickers_count": CACHE["weights_dim"] if CACHE["loaded"] else 0
     }
 
+def sanitize_json(obj):
+    """Recursively convert numpy types to standard Python primitives for JSON serialization"""
+    if isinstance(obj, dict):
+        return {k: sanitize_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [sanitize_json(v) for v in obj]
+    elif isinstance(obj, (np.integer, np.int64, np.int32)):
+        return int(obj)
+    elif isinstance(obj, (np.floating, np.float64, np.float32)):
+        return float(obj)
+    elif isinstance(obj, (np.bool_)):
+        return bool(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    else:
+        return obj
+
 @app.get("/api/recommendation")
 def get_recommendation(capital: float = Query(100_000_000, description="Capital in VND")):
     """
@@ -142,7 +159,7 @@ def get_recommendation(capital: float = Query(100_000_000, description="Capital 
             LOT_SIZE=100
         )
         
-        return {
+        raw_response = {
             "status": "success",
             "data": {
                 "date": dates[-1],
@@ -152,11 +169,13 @@ def get_recommendation(capital: float = Query(100_000_000, description="Capital 
                 "allocations": result["allocations"],
                 "cash_left": result["cash_left"],
                 "used_capital": result["used"],
-                "tracking_error": round(result["tracking_error"], 4)
+                "tracking_error": round(float(result["tracking_error"]), 4)
             }
         }
+        return sanitize_json(raw_response)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Inference Error: {str(e)}")
+
 
 @app.post("/api/reload")
 def reload_ai_data():
