@@ -35,11 +35,11 @@ from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 
-def extract_weekly_history(step_interval=5, capital=100_000_000, output_csv="history.csv", output_json="history.json"):
+def extract_weekly_history(days_count=22, step_interval=1, capital=100_000_000, output_csv="history.csv", output_json="history.json"):
     """
-    Extract AI trading predictions and real portfolio allocations across historical weekly steps.
+    Extract AI trading predictions and real portfolio allocations for the most recent 22 trading days (1 Month Daily).
     """
-    print(f"🚀 Starting Historical AI Signal Extraction (Interval: {step_interval} steps, Capital: {capital:,.0f} VND)...")
+    print(f"🚀 Starting Historical AI Signal Extraction (Recent {days_count} Days Daily, Capital: {capital:,.0f} VND)...")
     
     returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data()
     total_steps = len(dates)
@@ -54,12 +54,14 @@ def extract_weekly_history(step_interval=5, capital=100_000_000, output_csv="his
     sys.modules['__main__'].AdvancedTickerExtractor = ppo.AdvancedTickerExtractor
     model = PPO.load(model_path)
     
-    # Target steps: sample every `step_interval` days (e.g. 5 days = 1 week)
-    sample_indices = list(range(0, total_steps, step_interval))
+    # Target steps: sample most recent `days_count` trading days
+    start_idx = max(0, total_steps - days_count)
+    sample_indices = list(range(start_idx, total_steps, step_interval))
     if (total_steps - 1) not in sample_indices:
         sample_indices.append(total_steps - 1)
         
-    print(f"📅 Total historical trading days: {total_steps}. Sampled {len(sample_indices)} weekly points.")
+    print(f"📅 Total trading days: {total_steps}. Sampled recent {len(sample_indices)} daily points.")
+
     
     history_records = []
     json_history = []
