@@ -135,6 +135,25 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose })
   const [isLiveConnected, setIsLiveConnected] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'ACTION_PLAN' | 'HOLDINGS' | 'LOGS'>('ACTION_PLAN');
+  const [existingPortfolio, setExistingPortfolio] = useState<ExistingPosition[]>(INITIAL_EXISTING_PORTFOLIO);
+
+  useEffect(() => {
+    fetch('/simulated_users.json')
+      .then((res) => res.json())
+      .then((json) => {
+        let key = 'tier_100m';
+        if (capitalInput <= 75000000) key = 'tier_50m';
+        else if (capitalInput <= 175000000) key = 'tier_100m';
+        else if (capitalInput <= 375000000) key = 'tier_250m';
+        else key = 'tier_500m';
+
+        if (json[key] && Array.isArray(json[key].holdings) && json[key].holdings.length > 0) {
+          setExistingPortfolio(json[key].holdings);
+        }
+      })
+      .catch((err) => console.warn('Could not load simulated_users.json:', err));
+  }, [capitalInput]);
+
 
   const capitalPresets = [
     { label: '50 Triệu', value: 50000000 },
@@ -279,26 +298,8 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose })
   const nextTradeDateT1 = addDaysToDateStr(eodDataDate, 2);  // T+1
   const settlementDateT3 = addDaysToDateStr(eodDataDate, 4); // T+3
 
-  const [existingPortfolio, setExistingPortfolio] = useState<ExistingPosition[]>(INITIAL_EXISTING_PORTFOLIO);
-
-  useEffect(() => {
-    fetch('/simulated_users.json')
-      .then((res) => res.json())
-      .then((json) => {
-        let key = 'tier_100m';
-        if (capitalInput <= 75000000) key = 'tier_50m';
-        else if (capitalInput <= 175000000) key = 'tier_100m';
-        else if (capitalInput <= 375000000) key = 'tier_250m';
-        else key = 'tier_500m';
-
-        if (json[key] && Array.isArray(json[key].holdings) && json[key].holdings.length > 0) {
-          setExistingPortfolio(json[key].holdings);
-        }
-      })
-      .catch((err) => console.warn('Could not load simulated_users.json:', err));
-  }, [capitalInput]);
-
   // Build Action Plan by comparing existing portfolio vs target allocation
+
   const buildActionPlan = (): ActionPlanItem[] => {
     if (!data) return [];
 
