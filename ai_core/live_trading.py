@@ -25,7 +25,7 @@ import argparse
 def daily_live_trading(run_crawl=False, target_date=None):
     if run_crawl:
         if not target_date:
-            target_date ='2026-05-04' # datetime.datetime.now().strftime('%Y-%m-%d')
+            target_date = datetime.datetime.now().strftime('%Y-%m-%d')
             
         print(f"\n🚀 [1/4] CHẠY CRAWL DỮ LIỆU ĐẾN NGÀY {target_date}...")
         run_cmd(f"pipeline.py --date {target_date}", cwd=os.path.join(script_dir, "crawl"))
@@ -135,7 +135,7 @@ def daily_live_trading(run_crawl=False, target_date=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AIQUANTUM Live Trading System")
-    parser.add_argument("--crawl", action="store_true", help="Bật chế độ tự động Crawl và xử lý dữ liệu mới")
+    parser.add_argument("--crawl", action="store_true", help="Bật chế độ tự động Crawl và xử lý dữ liệu mới") 
     parser.add_argument("--date", type=str, default=None, help="Ngày kết thúc dữ liệu (Format: YYYY-MM-DD)")
     
     args = parser.parse_args()

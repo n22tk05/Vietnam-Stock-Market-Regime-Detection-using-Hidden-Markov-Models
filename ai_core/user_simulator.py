@@ -67,7 +67,8 @@ def run_user_simulation(days_count=22, step_interval=1, seed=42):
             "cash": float(cap),
             "nav": float(cap),
             "holdings": {}, # ticker -> { so_co_phieu, gia_von, gia_hien_tai, shares_unlocked, shares_t1, shares_t2 }
-            "history_log": []
+            "history_log": [],
+            "trade_history": []  # per-tier trade events for frontend visualization
         }
         
     start_idx = max(0, total_steps - days_count)
@@ -76,7 +77,7 @@ def run_user_simulation(days_count=22, step_interval=1, seed=42):
         sample_indices.append(total_steps - 1)
         
     trade_orders_log = []
-
+    ai_perf_log = []
     
     for count, idx in enumerate(sample_indices):
         date_str = dates[idx]
@@ -102,8 +103,35 @@ def run_user_simulation(days_count=22, step_interval=1, seed=42):
         if np.sum(action) > 1.0:
             action = action / np.sum(action)
             
-        current_prices = strategies_live.values[0].reshape(num_strategies_features, weights_dim).T[:, 2]
-        price_dict = {tickers[i]: float(current_prices[i]) for i in range(weights_dim)}
+        # Calculate AI Performance for Frontend Display
+        top_indices = np.argsort(action)[::-1][:3]
+        top_tickers = [f"{tickers[i]} ({action[i]*100:.1f}%)" for i in top_indices if action[i] > 0.01]
+        top_tickers_str = ", ".join(top_tickers) if top_tickers else "Tiền mặt (100%)"
+        
+        ret_t1 = None
+        ret_t3 = None
+        
+        if idx + 1 < len(returns_df):
+            port_ret_1 = np.sum(action * returns_df.iloc[idx + 1].values)
+            ret_t1 = round(port_ret_1 * 100, 2)
+            
+        if idx + 3 < len(returns_df):
+            port_ret_1 = np.sum(action * returns_df.iloc[idx + 1].values)
+            port_ret_2 = np.sum(action * returns_df.iloc[idx + 2].values)
+            port_ret_3 = np.sum(action * returns_df.iloc[idx + 3].values)
+            comp_ret = (1 + port_ret_1) * (1 + port_ret_2) * (1 + port_ret_3) - 1
+            ret_t3 = round(comp_ret * 100, 2)
+            
+        ai_perf_log.append({
+            "date": date_str,
+            "top_tickers": top_tickers_str,
+            "ret_t1": ret_t1,
+            "ret_t3": ret_t3
+        })
+            
+        raw_prices = strategies_live.values[0].reshape(num_strategies_features, weights_dim).T[:, 2]
+        current_prices_vnd = raw_prices * 1000.0
+        price_dict = {tickers[i]: float(current_prices_vnd[i]) for i in range(weights_dim)}
         
         # 1. Update Settlement (T+2.5 Unlocking) & Price updates for all users
         for cap, u in users.items():
@@ -131,34 +159,85 @@ def run_user_simulation(days_count=22, step_interval=1, seed=42):
             u["holdings"] = new_holdings
             u["nav"] = u["cash"] + total_stock_val
 
-        # 2. Perform AI Allocation & Simulate User Buy (0% - 80% random ratio)
+        # 2. Perform AI Allocation & Simulate User Buy/Sell
         for cap, u in users.items():
             ai_alloc = allocate_portfolio_real(
                 tickers=tickers,
                 w=action,
-                p=current_prices,
-                C=u["nav"], # Allocate based on current NAV
+                p=raw_prices,
+                C=u["nav"], # Allocate based on current NAV to match AI returns
                 LOT_SIZE=100
             )
+
+            target_shares_map = {rec['ma_co_phieu']: rec['so_co_phieu'] for rec in ai_alloc['allocations']}
             
-            # Simulate User Buying a random ratio (0.0 to 0.8) of recommended shares
+            # Step 2a. Execute SELL orders first to free up cash
+            holdings_tickers = list(u["holdings"].keys())
+            for ticker in holdings_tickers:
+                cur_h = u["holdings"][ticker]
+                target_shares = target_shares_map.get(ticker, 0)
+                current_shares = cur_h["so_co_phieu"]
+                
+                if target_shares < current_shares:
+                    sell_shares = current_shares - target_shares
+                    max_sellable = cur_h["shares_unlocked"]
+                    actual_sell = min(sell_shares, max_sellable)
+                    
+                    if actual_sell > 0:
+                        price = price_dict[ticker]
+                        revenue = actual_sell * price
+                        
+                        cur_h["so_co_phieu"] -= actual_sell
+                        cur_h["shares_unlocked"] -= actual_sell
+                        u["cash"] += revenue
+                        
+                        event = {
+                            "date": date_str,
+                            "ticker": ticker,
+                            "action": "SELL",
+                            "shares": actual_sell,
+                            "price": price,
+                            "total_cost": -revenue,
+                            "buy_factor_pct": 100
+                        }
+                        u["trade_history"].append(event)
+                        trade_orders_log.append({
+                            "date": date_str,
+                            "user_tier": u["user_tier"],
+                            "capital_tier": cap,
+                            "ticker": ticker,
+                            "action": "SELL",
+                            "shares": actual_sell,
+                            "price": price,
+                            "total_cost": -revenue,
+                            "buy_factor_pct": 100
+                        })
+                        
+                        if cur_h["so_co_phieu"] == 0:
+                            del u["holdings"][ticker]
+
+            # Step 2b. Execute BUY orders
             for rec in ai_alloc['allocations']:
                 ticker = rec['ma_co_phieu']
-                rec_shares = rec['so_co_phieu']
+                target_shares = rec['so_co_phieu']
                 price = rec['gia_hien_tai']
                 
-                # Random buy factor between 0.0 (0%) and 0.8 (80%)
-                buy_factor = random.uniform(0.0, 0.8)
-                user_buy_shares = int(np.floor(rec_shares * buy_factor / 100)) * 100 # Round to LOT 100
+                cur_h = u["holdings"].get(ticker)
+                current_shares = cur_h["so_co_phieu"] if cur_h else 0
                 
-                if user_buy_shares > 0:
-                    cost = user_buy_shares * price
-                    if u["cash"] >= cost:
+                if target_shares > current_shares:
+                    buy_shares = target_shares - current_shares
+                    cost = buy_shares * price
+                    
+                    if u["cash"] < cost:
+                        buy_shares = int(np.floor(u["cash"] / (price * 100))) * 100
+                        cost = buy_shares * price
+                    
+                    if buy_shares > 0:
                         u["cash"] -= cost
                         
-                        holdings = u["holdings"]
-                        if ticker not in holdings:
-                            holdings[ticker] = {
+                        if not cur_h:
+                            u["holdings"][ticker] = {
                                 "ma_co_phieu": ticker,
                                 "so_co_phieu": 0,
                                 "gia_von": price,
@@ -167,29 +246,62 @@ def run_user_simulation(days_count=22, step_interval=1, seed=42):
                                 "shares_t1": 0,
                                 "shares_t2": 0
                             }
-                            
-                        cur_h = holdings[ticker]
+                            cur_h = u["holdings"][ticker]
+                        
                         old_shares = cur_h["so_co_phieu"]
                         old_cost = old_shares * cur_h["gia_von"]
-                        new_total_shares = old_shares + user_buy_shares
+                        new_total_shares = old_shares + buy_shares
                         
-                        # Weighted Average Entry Price
                         cur_h["gia_von"] = (old_cost + cost) / new_total_shares
                         cur_h["so_co_phieu"] = new_total_shares
-                        cur_h["shares_t2"] += user_buy_shares # Newly bought shares locked in T2
+                        cur_h["shares_t2"] += buy_shares
                         cur_h["gia_hien_tai"] = price
                         
+                        event = {
+                            "date": date_str,
+                            "ticker": ticker,
+                            "action": "BUY",
+                            "shares": buy_shares,
+                            "price": price,
+                            "total_cost": cost,
+                            "buy_factor_pct": 100
+                        }
+                        u["trade_history"].append(event)
                         trade_orders_log.append({
                             "date": date_str,
                             "user_tier": u["user_tier"],
                             "capital_tier": cap,
                             "ticker": ticker,
                             "action": "BUY",
-                            "shares": user_buy_shares,
+                            "shares": buy_shares,
                             "price": price,
                             "total_cost": cost,
-                            "buy_factor_pct": round(buy_factor * 100, 1)
+                            "buy_factor_pct": 100
                         })
+
+        # 3. Recalculate NAV and track daily capital history after trading
+        for cap, u in users.items():
+            total_stock_val = sum(
+                h["so_co_phieu"] * h["gia_hien_tai"] for h in u["holdings"].values()
+            )
+            u["nav"] = u["cash"] + total_stock_val
+            prev_nav = u["history_log"][-1]["nav"] if u["history_log"] else u["initial_capital"]
+            daily_change = u["nav"] - prev_nav
+            daily_change_pct = round((daily_change / prev_nav) * 100, 2) if prev_nav != 0 else 0.0
+            delta_from_start = u["nav"] - u["initial_capital"]
+            delta_pct_from_start = round((delta_from_start / u["initial_capital"]) * 100, 2)
+
+            u["history_log"].append({
+                "date": date_str,
+                "nav": round(u["nav"], 0),
+                "cash": round(u["cash"], 0),
+                "stock_value": round(total_stock_val, 0),
+                "daily_change": round(daily_change, 0),
+                "daily_change_pct": daily_change_pct,
+                "delta_from_start": round(delta_from_start, 0),
+                "delta_pct_from_start": delta_pct_from_start,
+                "buy_factor_pct": 100
+            })
 
     # Prepare Final JSON payload for Frontend
     simulated_users_data = {}
@@ -223,7 +335,10 @@ def run_user_simulation(days_count=22, step_interval=1, seed=42):
             "cash_left": round(u["cash"], 0),
             "pnl_cash": round(pnl_cash, 0),
             "pnl_pct": round(pnl_pct, 2),
-            "holdings": holdings_list
+            "holdings": holdings_list,
+            "history": u["history_log"],
+            "trade_history": u["trade_history"],
+            "ai_predictions": ai_perf_log
         }
         
     # Save outputs
