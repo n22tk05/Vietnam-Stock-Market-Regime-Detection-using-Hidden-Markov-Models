@@ -156,7 +156,7 @@ export const PublicPortfolioPage: React.FC = () => {
                         const rawValue = e.target.value.replace(/\D/g, '');
                         setCapitalInput(Number(rawValue));
                       }}
-                      className="w-full bg-slate-50 border-2 border-slate-100 rounded-xl py-2 pl-12 pr-4 text-sm font-bold text-slate-700 focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
+                      className="w-full text-right bg-slate-50 border-2 border-slate-100 rounded-xl py-2 pl-12 pr-4 text-sm font-bold text-slate-700 focus:outline-none focus:border-emerald-500 focus:bg-white transition-all"
                       placeholder="Nhập số vốn tuỳ ý..."
                     />
                   </div>
