@@ -251,4 +251,5 @@ def run_user_simulation(days_count=22, step_interval=1, seed=42):
         print(f"🌐 Synced to Frontend Public: {fe_json} & {fe_csv}")
 
 if __name__ == "__main__":
-    run_user_simulation(step_interval=5)
+    run_user_simulation(days_count=22, step_interval=1)
+

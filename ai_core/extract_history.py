@@ -160,9 +160,11 @@ def extract_weekly_history(days_count=22, step_interval=1, capital=100_000_000, 
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Extract Historical AI Weekly Signals for Frontend Live Demo")
-    parser.add_argument("--interval", type=int, default=5, help="Step interval (5 = weekly)")
+    parser = argparse.ArgumentParser(description="Extract Historical AI Daily Signals for Frontend Live Demo")
+    parser.add_argument("--days", type=int, default=22, help="Number of recent trading days to extract (22 = 1 month daily)")
+    parser.add_argument("--interval", type=int, default=1, help="Step interval (1 = daily)")
     parser.add_argument("--capital", type=float, default=100000000, help="Investment Capital in VND")
     args = parser.parse_args()
     
-    extract_weekly_history(step_interval=args.interval, capital=args.capital)
+    extract_weekly_history(days_count=args.days, step_interval=args.interval, capital=args.capital)
+
