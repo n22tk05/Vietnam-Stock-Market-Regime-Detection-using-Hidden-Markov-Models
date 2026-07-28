@@ -279,6 +279,25 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose })
   const nextTradeDateT1 = addDaysToDateStr(eodDataDate, 2);  // T+1
   const settlementDateT3 = addDaysToDateStr(eodDataDate, 4); // T+3
 
+  const [existingPortfolio, setExistingPortfolio] = useState<ExistingPosition[]>(INITIAL_EXISTING_PORTFOLIO);
+
+  useEffect(() => {
+    fetch('/simulated_users.json')
+      .then((res) => res.json())
+      .then((json) => {
+        let key = 'tier_100m';
+        if (capitalInput <= 75000000) key = 'tier_50m';
+        else if (capitalInput <= 175000000) key = 'tier_100m';
+        else if (capitalInput <= 375000000) key = 'tier_250m';
+        else key = 'tier_500m';
+
+        if (json[key] && Array.isArray(json[key].holdings) && json[key].holdings.length > 0) {
+          setExistingPortfolio(json[key].holdings);
+        }
+      })
+      .catch((err) => console.warn('Could not load simulated_users.json:', err));
+  }, [capitalInput]);
+
   // Build Action Plan by comparing existing portfolio vs target allocation
   const buildActionPlan = (): ActionPlanItem[] => {
     if (!data) return [];
@@ -286,7 +305,8 @@ export const LiveDemoModal: React.FC<LiveDemoModalProps> = ({ isOpen, onClose })
     const planMap = new Map<string, ActionPlanItem>();
 
     // 1. Process existing positions
-    INITIAL_EXISTING_PORTFOLIO.forEach((pos) => {
+    existingPortfolio.forEach((pos) => {
+
       const targetItem = data.allocations.find((a) => a.ma_co_phieu === pos.ma_co_phieu);
       const targetShares = targetItem ? targetItem.so_co_phieu : 0;
       const changeShares = targetShares - pos.so_co_phieu;

@@ -1,0 +1,902 @@
+{
+  "tier_50m": {
+    "user_tier": "50M",
+    "initial_capital": 50000000,
+    "current_nav": 1151869.0,
+    "cash_left": 746000.0,
+    "pnl_cash": -48848131.0,
+    "pnl_pct": -97.7,
+    "holdings": [
+      {
+        "ma_co_phieu": "BSI",
+        "so_co_phieu": 200,
+        "gia_von": 4820.0,
+        "gia_hien_tai": 29.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DGW",
+        "so_co_phieu": 1300,
+        "gia_von": 2743.85,
+        "gia_hien_tai": 35.15,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "EIB",
+        "so_co_phieu": 400,
+        "gia_von": 6225.0,
+        "gia_hien_tai": 17.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HAG",
+        "so_co_phieu": 400,
+        "gia_von": 5290.0,
+        "gia_hien_tai": 14.45,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HDC",
+        "so_co_phieu": 1800,
+        "gia_von": 2180.56,
+        "gia_hien_tai": 16.57,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1800,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "IMP",
+        "so_co_phieu": 400,
+        "gia_von": 11990.0,
+        "gia_hien_tai": 49.17,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "PDR",
+        "so_co_phieu": 1300,
+        "gia_von": 3354.62,
+        "gia_hien_tai": 16.5,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "SJS",
+        "so_co_phieu": 100,
+        "gia_von": 7130.0,
+        "gia_hien_tai": 58.2,
+        "status": "UNLOCKED",
+        "shares_unlocked": 100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "TCH",
+        "so_co_phieu": 400,
+        "gia_von": 7472.5,
+        "gia_hien_tai": 17.3,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VGC",
+        "so_co_phieu": 100,
+        "gia_von": 9910.0,
+        "gia_hien_tai": 43.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIC",
+        "so_co_phieu": 700,
+        "gia_von": 15678.57,
+        "gia_hien_tai": 212.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 700,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIX",
+        "so_co_phieu": 4900,
+        "gia_von": 1272.65,
+        "gia_hien_tai": 16.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 4900,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "KDH",
+        "so_co_phieu": 300,
+        "gia_von": 6896.67,
+        "gia_hien_tai": 25.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "MBB",
+        "so_co_phieu": 300,
+        "gia_von": 2663.33,
+        "gia_hien_tai": 25.1,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VHC",
+        "so_co_phieu": 100,
+        "gia_von": 18370.0,
+        "gia_hien_tai": 61.7,
+        "status": "UNLOCKED",
+        "shares_unlocked": 100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DXG",
+        "so_co_phieu": 100,
+        "gia_von": 4260.0,
+        "gia_hien_tai": 11.35,
+        "status": "UNLOCKED",
+        "shares_unlocked": 100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      }
+    ]
+  },
+  "tier_100m": {
+    "user_tier": "100M",
+    "initial_capital": 100000000,
+    "current_nav": 1354540.0,
+    "cash_left": 723000.0,
+    "pnl_cash": -98645460.0,
+    "pnl_pct": -98.65,
+    "holdings": [
+      {
+        "ma_co_phieu": "DBC",
+        "so_co_phieu": 500,
+        "gia_von": 6422.0,
+        "gia_hien_tai": 16.25,
+        "status": "UNLOCKED",
+        "shares_unlocked": 500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DGW",
+        "so_co_phieu": 3300,
+        "gia_von": 2742.12,
+        "gia_hien_tai": 35.15,
+        "status": "UNLOCKED",
+        "shares_unlocked": 3300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HAG",
+        "so_co_phieu": 700,
+        "gia_von": 5618.57,
+        "gia_hien_tai": 14.45,
+        "status": "UNLOCKED",
+        "shares_unlocked": 700,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HDC",
+        "so_co_phieu": 3700,
+        "gia_von": 2225.41,
+        "gia_hien_tai": 16.57,
+        "status": "UNLOCKED",
+        "shares_unlocked": 3700,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HDG",
+        "so_co_phieu": 400,
+        "gia_von": 4227.5,
+        "gia_hien_tai": 23.51,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "IMP",
+        "so_co_phieu": 500,
+        "gia_von": 12186.0,
+        "gia_hien_tai": 49.17,
+        "status": "UNLOCKED",
+        "shares_unlocked": 500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "KDC",
+        "so_co_phieu": 100,
+        "gia_von": 27010.0,
+        "gia_hien_tai": 45.95,
+        "status": "UNLOCKED",
+        "shares_unlocked": 100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "KDH",
+        "so_co_phieu": 900,
+        "gia_von": 7036.67,
+        "gia_hien_tai": 25.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 900,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "MBB",
+        "so_co_phieu": 500,
+        "gia_von": 2654.0,
+        "gia_hien_tai": 25.1,
+        "status": "UNLOCKED",
+        "shares_unlocked": 500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "NLG",
+        "so_co_phieu": 200,
+        "gia_von": 9890.0,
+        "gia_hien_tai": 27.27,
+        "status": "UNLOCKED",
+        "shares_unlocked": 200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "PDR",
+        "so_co_phieu": 2600,
+        "gia_von": 3276.92,
+        "gia_hien_tai": 16.5,
+        "status": "UNLOCKED",
+        "shares_unlocked": 2600,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "SJS",
+        "so_co_phieu": 400,
+        "gia_von": 6975.0,
+        "gia_hien_tai": 58.2,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "TCH",
+        "so_co_phieu": 1500,
+        "gia_von": 7466.67,
+        "gia_hien_tai": 17.3,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VGC",
+        "so_co_phieu": 700,
+        "gia_von": 9925.71,
+        "gia_hien_tai": 43.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 700,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIC",
+        "so_co_phieu": 500,
+        "gia_von": 15768.0,
+        "gia_hien_tai": 212.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIX",
+        "so_co_phieu": 5300,
+        "gia_von": 1296.6,
+        "gia_hien_tai": 16.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 5300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "BSI",
+        "so_co_phieu": 300,
+        "gia_von": 4880.0,
+        "gia_hien_tai": 29.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VHC",
+        "so_co_phieu": 300,
+        "gia_von": 17723.33,
+        "gia_hien_tai": 61.7,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VND",
+        "so_co_phieu": 200,
+        "gia_von": 1800.0,
+        "gia_hien_tai": 15.74,
+        "status": "UNLOCKED",
+        "shares_unlocked": 200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DXG",
+        "so_co_phieu": 300,
+        "gia_von": 4406.67,
+        "gia_hien_tai": 11.35,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "EIB",
+        "so_co_phieu": 300,
+        "gia_von": 6833.33,
+        "gia_hien_tai": 17.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      }
+    ]
+  },
+  "tier_250m": {
+    "user_tier": "250M",
+    "initial_capital": 250000000,
+    "current_nav": 1815392.0,
+    "cash_left": 158000.0,
+    "pnl_cash": -248184608.0,
+    "pnl_pct": -99.27,
+    "holdings": [
+      {
+        "ma_co_phieu": "BSI",
+        "so_co_phieu": 500,
+        "gia_von": 4802.0,
+        "gia_hien_tai": 29.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DBC",
+        "so_co_phieu": 400,
+        "gia_von": 6527.5,
+        "gia_hien_tai": 16.25,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DGW",
+        "so_co_phieu": 2500,
+        "gia_von": 2766.4,
+        "gia_hien_tai": 35.15,
+        "status": "UNLOCKED",
+        "shares_unlocked": 2500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DXG",
+        "so_co_phieu": 1400,
+        "gia_von": 4239.29,
+        "gia_hien_tai": 11.35,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "EIB",
+        "so_co_phieu": 1300,
+        "gia_von": 6368.46,
+        "gia_hien_tai": 17.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "GAS",
+        "so_co_phieu": 200,
+        "gia_von": 32950.0,
+        "gia_hien_tai": 73.1,
+        "status": "UNLOCKED",
+        "shares_unlocked": 200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HAG",
+        "so_co_phieu": 1000,
+        "gia_von": 5357.0,
+        "gia_hien_tai": 14.45,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1000,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HDC",
+        "so_co_phieu": 7300,
+        "gia_von": 2213.56,
+        "gia_hien_tai": 16.57,
+        "status": "UNLOCKED",
+        "shares_unlocked": 7300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HDG",
+        "so_co_phieu": 100,
+        "gia_von": 4200.0,
+        "gia_hien_tai": 23.51,
+        "status": "UNLOCKED",
+        "shares_unlocked": 100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "IMP",
+        "so_co_phieu": 2000,
+        "gia_von": 12147.5,
+        "gia_hien_tai": 49.17,
+        "status": "UNLOCKED",
+        "shares_unlocked": 2000,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "KDC",
+        "so_co_phieu": 300,
+        "gia_von": 27010.0,
+        "gia_hien_tai": 45.95,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "KDH",
+        "so_co_phieu": 2100,
+        "gia_von": 6887.14,
+        "gia_hien_tai": 25.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 2100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "MBB",
+        "so_co_phieu": 1900,
+        "gia_von": 2631.58,
+        "gia_hien_tai": 25.1,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1900,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "NLG",
+        "so_co_phieu": 600,
+        "gia_von": 9920.0,
+        "gia_hien_tai": 27.27,
+        "status": "UNLOCKED",
+        "shares_unlocked": 600,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "NT2",
+        "so_co_phieu": 200,
+        "gia_von": 12200.0,
+        "gia_hien_tai": 24.4,
+        "status": "UNLOCKED",
+        "shares_unlocked": 200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "PDR",
+        "so_co_phieu": 5000,
+        "gia_von": 3265.0,
+        "gia_hien_tai": 16.5,
+        "status": "UNLOCKED",
+        "shares_unlocked": 5000,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "SJS",
+        "so_co_phieu": 400,
+        "gia_von": 7127.5,
+        "gia_hien_tai": 58.2,
+        "status": "UNLOCKED",
+        "shares_unlocked": 400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VCB",
+        "so_co_phieu": 500,
+        "gia_von": 15784.0,
+        "gia_hien_tai": 60.7,
+        "status": "UNLOCKED",
+        "shares_unlocked": 500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VGC",
+        "so_co_phieu": 1200,
+        "gia_von": 9912.5,
+        "gia_hien_tai": 43.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VHC",
+        "so_co_phieu": 1300,
+        "gia_von": 18365.38,
+        "gia_hien_tai": 61.7,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIC",
+        "so_co_phieu": 3300,
+        "gia_von": 15688.48,
+        "gia_hien_tai": 212.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 3300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIX",
+        "so_co_phieu": 7400,
+        "gia_von": 1124.05,
+        "gia_hien_tai": 16.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 7400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VND",
+        "so_co_phieu": 200,
+        "gia_von": 1785.0,
+        "gia_hien_tai": 15.74,
+        "status": "UNLOCKED",
+        "shares_unlocked": 200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "TCH",
+        "so_co_phieu": 1600,
+        "gia_von": 7272.5,
+        "gia_hien_tai": 17.3,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1600,
+        "shares_t1": 0,
+        "shares_t2": 0
+      }
+    ]
+  },
+  "tier_500m": {
+    "user_tier": "500M",
+    "initial_capital": 500000000,
+    "current_nav": 3685870.0,
+    "cash_left": 310000.0,
+    "pnl_cash": -496314130.0,
+    "pnl_pct": -99.26,
+    "holdings": [
+      {
+        "ma_co_phieu": "BSI",
+        "so_co_phieu": 2300,
+        "gia_von": 4863.91,
+        "gia_hien_tai": 29.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 2300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DBC",
+        "so_co_phieu": 1100,
+        "gia_von": 6570.0,
+        "gia_hien_tai": 16.25,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DGW",
+        "so_co_phieu": 10600,
+        "gia_von": 2746.89,
+        "gia_hien_tai": 35.15,
+        "status": "UNLOCKED",
+        "shares_unlocked": 10600,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "DXG",
+        "so_co_phieu": 1400,
+        "gia_von": 4262.14,
+        "gia_hien_tai": 11.35,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "EIB",
+        "so_co_phieu": 5000,
+        "gia_von": 6401.4,
+        "gia_hien_tai": 17.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 5000,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "GAS",
+        "so_co_phieu": 300,
+        "gia_von": 33040.0,
+        "gia_hien_tai": 73.1,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HAG",
+        "so_co_phieu": 2100,
+        "gia_von": 5432.38,
+        "gia_hien_tai": 14.45,
+        "status": "UNLOCKED",
+        "shares_unlocked": 2100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HDC",
+        "so_co_phieu": 16900,
+        "gia_von": 2219.23,
+        "gia_hien_tai": 16.57,
+        "status": "UNLOCKED",
+        "shares_unlocked": 16900,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "HDG",
+        "so_co_phieu": 900,
+        "gia_von": 4295.56,
+        "gia_hien_tai": 23.51,
+        "status": "UNLOCKED",
+        "shares_unlocked": 900,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "IMP",
+        "so_co_phieu": 3400,
+        "gia_von": 12305.88,
+        "gia_hien_tai": 49.17,
+        "status": "UNLOCKED",
+        "shares_unlocked": 3400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "KDH",
+        "so_co_phieu": 1400,
+        "gia_von": 6926.43,
+        "gia_hien_tai": 25.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "MBB",
+        "so_co_phieu": 3900,
+        "gia_von": 2655.38,
+        "gia_hien_tai": 25.1,
+        "status": "UNLOCKED",
+        "shares_unlocked": 3900,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "NLG",
+        "so_co_phieu": 1700,
+        "gia_von": 9923.53,
+        "gia_hien_tai": 27.27,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1700,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "NT2",
+        "so_co_phieu": 200,
+        "gia_von": 12490.0,
+        "gia_hien_tai": 24.4,
+        "status": "UNLOCKED",
+        "shares_unlocked": 200,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "PDR",
+        "so_co_phieu": 5900,
+        "gia_von": 3294.58,
+        "gia_hien_tai": 16.5,
+        "status": "UNLOCKED",
+        "shares_unlocked": 5900,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "SJS",
+        "so_co_phieu": 2000,
+        "gia_von": 7214.5,
+        "gia_hien_tai": 58.2,
+        "status": "UNLOCKED",
+        "shares_unlocked": 2000,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "TCH",
+        "so_co_phieu": 4600,
+        "gia_von": 7648.91,
+        "gia_hien_tai": 17.3,
+        "status": "UNLOCKED",
+        "shares_unlocked": 4600,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VCB",
+        "so_co_phieu": 1500,
+        "gia_von": 15637.33,
+        "gia_hien_tai": 60.7,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VCG",
+        "so_co_phieu": 600,
+        "gia_von": 6476.67,
+        "gia_hien_tai": 20.27,
+        "status": "UNLOCKED",
+        "shares_unlocked": 600,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VGC",
+        "so_co_phieu": 3800,
+        "gia_von": 9795.0,
+        "gia_hien_tai": 43.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 3800,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIC",
+        "so_co_phieu": 5500,
+        "gia_von": 15670.36,
+        "gia_hien_tai": 212.0,
+        "status": "UNLOCKED",
+        "shares_unlocked": 5500,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VIX",
+        "so_co_phieu": 16100,
+        "gia_von": 990.37,
+        "gia_hien_tai": 16.85,
+        "status": "UNLOCKED",
+        "shares_unlocked": 16100,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VND",
+        "so_co_phieu": 600,
+        "gia_von": 1785.0,
+        "gia_hien_tai": 15.74,
+        "status": "UNLOCKED",
+        "shares_unlocked": 600,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "KDC",
+        "so_co_phieu": 300,
+        "gia_von": 27610.0,
+        "gia_hien_tai": 45.95,
+        "status": "UNLOCKED",
+        "shares_unlocked": 300,
+        "shares_t1": 0,
+        "shares_t2": 0
+      },
+      {
+        "ma_co_phieu": "VHC",
+        "so_co_phieu": 1400,
+        "gia_von": 17951.43,
+        "gia_hien_tai": 61.7,
+        "status": "UNLOCKED",
+        "shares_unlocked": 1400,
+        "shares_t1": 0,
+        "shares_t2": 0
+      }
+    ]
+  }
+}
