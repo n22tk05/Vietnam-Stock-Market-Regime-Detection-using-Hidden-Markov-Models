@@ -534,7 +534,7 @@ export const LiveDemoPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <label className="text-xs font-bold text-slate-700 uppercase tracking-wider shrink-0">
-                Chọn user demo:
+                Chọn phân khúc người dùng :
               </label>
               <div className="rounded-2xl bg-white border border-slate-300 px-4 py-2 text-sm font-black text-slate-900 shadow-2xs sm:w-64">
                 {TIER_CONFIG[selectedTier].label} • {TIER_CONFIG[selectedTier].capital.toLocaleString('vi-VN')} đ

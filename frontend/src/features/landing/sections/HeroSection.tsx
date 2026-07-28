@@ -60,7 +60,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base px-8 py-4 rounded-2xl flex items-center gap-3 transition-all shadow-xl shadow-emerald-600/25 hover:shadow-2xl hover:shadow-emerald-600/35 hover:-translate-y-0.5 active:translate-y-0"
               >
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-300 animate-ping" />
-                <span>⚡ Demo AI Live Core</span>
+                <span> Demo AI Live Core</span>
               </button>
             )}
 

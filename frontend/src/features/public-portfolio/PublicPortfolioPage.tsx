@@ -86,7 +86,7 @@ export const PublicPortfolioPage: React.FC = () => {
           <div className="text-center space-y-3 mb-8">
             <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 flex items-center justify-center gap-3">
               <PieChart className="w-8 h-8 text-blue-600" />
-              Lịch Sử Phân Bổ Danh Mục AI
+              Phân Bổ Danh Mục AI
             </h1>
             <p className="text-slate-500 font-medium max-w-2xl mx-auto">
               Xem chi tiết cơ cấu danh mục và tỷ trọng phân bổ cổ phiếu do mô hình Trí Tuệ Nhân Tạo tính toán qua từng mốc thời gian thực tế.
