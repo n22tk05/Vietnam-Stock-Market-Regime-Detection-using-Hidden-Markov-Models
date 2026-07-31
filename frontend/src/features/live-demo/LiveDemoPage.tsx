@@ -266,13 +266,13 @@ export const LiveDemoPage: React.FC = () => {
     };
 
     addLog('📥 Đang nạp dữ liệu chốt phiên hôm qua (T-1)...');
-    await new Promise((r) => setTimeout(r, 350));
+    await new Promise((r) => setTimeout(r, 3500));
 
     addLog('🧠 Khởi tạo HMM Đa tầng (Macro -> Market -> Sector -> Ticker Regimes)...');
-    await new Promise((r) => setTimeout(r, 350));
+    await new Promise((r) => setTimeout(r, 3500));
 
     addLog('🤖 PPO Agent suy luận bằng mạng Cross-Ticker Attention...');
-    await new Promise((r) => setTimeout(r, 450));
+    await new Promise((r) => setTimeout(r, 4500));
 
     try {
       // Tạm thời comment Live API để sử dụng dữ liệu history.json đã cắt tới tháng 4

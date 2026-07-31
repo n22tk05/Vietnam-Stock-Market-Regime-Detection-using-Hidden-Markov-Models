@@ -157,7 +157,7 @@ class CONFIG:
 
     # Các giá trị tính điểm (Reward/Penalty System)
     REWARD_WIN_MULT = 100
-    REWARD_LOSS_MULT = 200
+    REWARD_LOSS_MULT = 500
     REWARD_ALPHA_MULT = 50
     REWARD_CASH_CRASH_MULT = 100
     PENALTY_OVER_DIVERSIFICATION = 0.01
@@ -176,7 +176,7 @@ class CONFIG:
     # Quyết định AI sẽ All-in hay Rải rác.
     # Giá trị nhỏ (0.001) -> Ưu tiên All-in vài mã mạnh nhất.
     # Giá trị lớn (0.05) -> Ưu tiên chia đều tiền ra mua nhiều mã để phân tán rủi ro.
-    ENT_COEF = 0.005
+    ENT_COEF = 0.025
 
     # 10. NEURAL NETWORK & PPO HYPERPARAMETERS
     FEATURES_DIM = 256
@@ -566,11 +566,10 @@ class AdvancedPortfolioEnv(gym.Env):
 
             self.current_portfolio_value = self.current_portfolio_value * (1 + daily_ret)
 
-            # V7.2 Fix: Hàm Reward mượt mà, tránh sợ hãi cực độ
-
+            # V7.2 Fix: Hàm Reward phòng thủ cao (Defensive)
             base_reward = daily_ret * 100 
             if daily_ret < 0:
-                base_reward *= 2.0  # Phạt gấp 2 lần nếu lỗ
+                base_reward *= 5.0  # Phạt gấp 5 lần nếu lỗ (trước đây là 2.0)
 
             reward = base_reward
 
@@ -641,14 +640,14 @@ class AdvancedPortfolioEnv(gym.Env):
             prev_dd = getattr(self, 'prev_drawdown', 0.0)
             if drawdown > prev_dd:
                 dd_increase = drawdown - prev_dd
-                reward -= (dd_increase * 1000)
+                reward -= (dd_increase * 3000)  # Phạt sụt giảm tài sản cực nặng (trước đây là 1000)
             self.prev_drawdown = drawdown
             force_terminate = False
-            if drawdown > 0.30:
-                reward -= 100
+            if drawdown > 0.15: # Cháy tài khoản nếu lỗ 15% từ đỉnh (trước đây là 30%)
+                reward -= 500  # Phạt 500 điểm nếu cháy tài khoản
                 force_terminate = True
                 if getattr(self, 'is_test', False):
-                    print(f"💀 GAME OVER: Cháy tài khoản! Drawdown {drawdown*100:.1f}% tại Step {self.current_step}")
+                    print(f"💀 GAME OVER: Chạm ngưỡng phòng thủ! Drawdown {drawdown*100:.1f}% tại Step {self.current_step}")
             # -----------------------------------------------------------
             self.current_step += 1
             done = (self.current_step >= self.n_steps - 1) or force_terminate
@@ -726,11 +725,11 @@ def run_training_cycle():
     all_test_returns = []
 
     if TRAINING_MODE == 'fast_split':
+        train_ratio = 0.8
+        val_ratio = 0.1
         log(f"\n=======================================================")
-        log(f"--- CHẾ ĐỘ HỌC NHANH (FAST SPLIT: 70% Train, 15% Val, 15% Test) ---")
+        log(f"--- CHẾ ĐỘ HỌC NHANH (FAST SPLIT: {train_ratio * 100}% Train, {val_ratio * 100}% Val, {val_ratio * 100}% Test) ---")
 
-        train_ratio = 0.7
-        val_ratio = 0.15
 
         train_end = int(total_days * train_ratio)
         val_end = int(total_days * (train_ratio + val_ratio))

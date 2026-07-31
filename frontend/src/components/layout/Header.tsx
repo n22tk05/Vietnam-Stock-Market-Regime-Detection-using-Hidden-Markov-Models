@@ -42,15 +42,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAssessment, onOpenLiveDemo
         {/* Navigation Links */}
         <nav className="hidden lg:flex items-center gap-7">
           <div className="relative">
-            <button
+            {/* <button
               onClick={() => setProductDropdownOpen(!productDropdownOpen)}
               className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors py-1"
             >
               <span>Sản phẩm</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${productDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
+            </button> */}
 
-            {productDropdownOpen && (
+            {/* {productDropdownOpen && (
+                 
               <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 text-sm z-50 animate-in fade-in duration-150">
                 <button onClick={() => { setProductDropdownOpen(false); onOpenLiveDemo(); }} className="w-full text-left block px-4 py-2.5 rounded-xl hover:bg-slate-50 font-bold text-blue-600">
                   AI QUANTUM Live Core Demo
@@ -68,9 +69,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAssessment, onOpenLiveDemo
                   Quản trị rủi ro chủ động
                 </a>
               </div>
-            )}
+            )} */}
           </div>
-
+          <a href="#risk" onClick={() => { setProductDropdownOpen(false); onOpenPortfolio?.(); }} className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">
+                  Danh mục đầu tư 
+                </a>
           <a href="#how-it-works" className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">
             Cách hoạt động
           </a>
