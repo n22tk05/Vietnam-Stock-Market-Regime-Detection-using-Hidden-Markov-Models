@@ -49,12 +49,12 @@ def analyze_model_allocations():
     try:
         model = PPO.load(model_path)
         test_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
-                returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=False
+                returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=True
             )])
         
         if os.path.exists(env_path):
             test_env = VecNormalize.load(env_path, test_env)
-            test_env.training = False
+            test_env.training = True  # Rolling update
             test_env.norm_reward = False
 
         obs = test_env.reset()

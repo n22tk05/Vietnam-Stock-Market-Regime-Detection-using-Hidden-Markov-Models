@@ -5,134 +5,95 @@ import pandas as pd
 import warnings
 warnings.filterwarnings('ignore')
 
-from ppo import load_data, AdvancedPortfolioEnv, CONFIG
+from ppo import load_data, AdvancedPortfolioEnv, CONFIG, allocate_portfolio_real
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 from stable_baselines3 import PPO
 
-def verify_predictions(days_to_test=30, top_k=3):
-    print("="*60)
-    print("🤖 KỂM TRA THỰC TẾ DỰ ĐOÁN CỦA PPO MODEL (BACKTEST CHI TIẾT)")
-    print("="*60)
+def predict_live_tomorrow():
+    print("="*80)
+    print("🚀 HỆ THỐNG GIAO DỊCH TRỰC TIẾP (LIVE INFERENCE) T+1")
+    print("="*80)
     
+    # 1. Tải toàn bộ dữ liệu T (Dữ liệu quá khứ cho đến ngày hiện tại)
     returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data()
     
     total_days = len(returns_df)
-    if total_days < days_to_test + 5:
-        print("Không đủ dữ liệu để test!")
-        return
-
-    # Lấy dữ liệu test (cộng thêm 3 ngày cuối để có thể soi tương lai T+1, T+2, T+3)
-    test_start = total_days - days_to_test - 3
+    today_date = dates[-1]
     
-    returns_test = returns_df.iloc[test_start:]
-    ai_test = ai_features_df.iloc[test_start:]
-    strategies_test = strategies_features_df.iloc[test_start:]
-    dates_test = dates[test_start:]
+    print(f"[*] Đã tải dữ liệu thị trường. Ngày giao dịch hiện tại (T): {today_date}")
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
     root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
     
-    # Load model
+    # 2. Khởi tạo Model Tốt Nhất (Ví dụ: Seed 9491 - Kẻ Sống Sót)
     model_dir = os.path.join(root_dir, "output", "ppo_model")
-    model_path = os.path.join(model_dir, "AI_Brain_v7_Seed4984_Profit_58.06.zip")
+    
+    # Tự động tìm mô hình có chữ Seed9491
+    model_file = next((f for f in os.listdir(model_dir) if "AI_Brain_v7_Seed6445_Profit_-9.19" in f and f.endswith(".zip")), None)
+    if not model_file:
+        print("❌ Không tìm thấy model Seed 6445. Vui lòng kiểm tra lại thư mục!")
+        return
+        
+    model_path = os.path.join(model_dir, model_file)
     env_path = os.path.join(model_dir, "vec_normalize.pkl")
     
-    if not os.path.exists(model_path):
-        print(f"❌ Không tìm thấy model tại {model_path}. Bạn cần train model trước!")
-        return
-        
-    if not os.path.exists(env_path):
-        print(f"❌ Không tìm thấy file vec_normalize.pkl tại {env_path}. Môi trường chưa được lưu!")
-        return
-        
-    print(f"[*] Đang nạp model từ: {model_path}")
+    print(f"[*] Đang nạp Bộ Não AI: {model_file}")
     model = PPO.load(model_path)
     
-    test_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
-        returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=True
+    # 3. Giả lập môi trường chứa DUY NHẤT 1 ngày cuối cùng (T) để dự đoán T+1
+    # Trong thực tế, AI lấy toàn bộ trạng thái T để ra quyết định mua bán cho tương lai
+    latest_returns = returns_df.iloc[-1:]
+    latest_ai = ai_features_df.iloc[-1:]
+    latest_strategies = strategies_features_df.iloc[-1:]
+    latest_dates = dates[-1:]
+    
+    live_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
+        latest_returns, latest_ai, latest_strategies, weights_dim, num_strategies_features, tickers=tickers, dates=latest_dates, is_test=True
     )])
-    test_env = VecNormalize.load(env_path, test_env)
-    test_env.training = False
-    test_env.norm_reward = False
+    
+    # 4. Phục hồi góc nhìn của AI (Scale Normalize)
+    live_env = VecNormalize.load(env_path, live_env)
+    live_env.training = False
+    live_env.norm_reward = False
 
-    obs = test_env.reset()
+    # Reset để trích xuất Feature của ngày T
+    obs = live_env.reset()
     
-    correct_t1 = 0
-    correct_t3 = 0
-    total_trades = 0
+    # 5. Đưa vào Bộ Não PPO dự đoán T+1
+    print("\n⏳ AI ĐANG PHÂN TÍCH TOÀN BỘ DỮ LIỆU T...")
+    action, _ = model.predict(obs, deterministic=True)
     
-    print("\n🔍 CHI TIẾT CÁC QUYẾT ĐỊNH MUA VÀ KẾT QUẢ THỰC TẾ:")
+    raw_action = np.clip(action[0], 0, 1)
+    if np.sum(raw_action) > 1.0:
+        raw_action = raw_action / np.sum(raw_action)
+        
+    # Lấy giá đóng cửa ngày T để tính toán
+    current_prices = latest_strategies.values[0].reshape(num_strategies_features, weights_dim).T[:, 2]
+    
+    # 6. Xuất Khuyến Nghị Phân Bổ
+    CAPITAL = 100_000_000
+    print(f"\n🎯 KHUYẾN NGHỊ DANH MỤC CHO NGÀY MAI (T+1) | Vốn: {CAPITAL:,} đ")
     print("-" * 80)
     
-    # Track previous weights to know what the model BOUGHT today
-    prev_weights = np.zeros(weights_dim)
+    real_alloc = allocate_portfolio_real(
+        tickers=tickers,
+        w=raw_action,
+        p=current_prices,
+        C=CAPITAL,
+        LOT_SIZE=100
+    )
     
-    for i in range(days_to_test):
-        current_date = dates_test[i]
+    if real_alloc['warning_flag']:
+        print(f"⚠️ CẢNH BÁO: {real_alloc['warning_msg']}")
         
-        # Lấy quyết định của model
-        action, _ = model.predict(obs, deterministic=True)
-        
-        # PPO trả ra action (tỷ trọng mong muốn). Mức chênh lệch dương = MUA VÀO.
-        # action là mảng có shape (1, num_tickers)
-        desired_weights = action[0]
-        
-        # Mua vào = tỷ trọng mong muốn - tỷ trọng cũ
-        buy_amounts = desired_weights - prev_weights
-        
-        # Tìm các mã mua nhiều nhất
-        buy_indices = np.argsort(buy_amounts)[::-1]
-        
-        bought_stocks = []
-        for idx in buy_indices:
-            if buy_amounts[idx] > 0.01: # Mua > 1% danh mục
-                bought_stocks.append(idx)
-            if len(bought_stocks) == top_k:
-                break
-                
-        if len(bought_stocks) > 0:
-            print(f"\n📅 Ngày {current_date}: Model ra lệnh MUA T+0")
-            for idx in bought_stocks:
-                ticker = tickers[idx]
-                weight = buy_amounts[idx] * 100
-                
-                # Lấy lợi nhuận tương lai từ dữ liệu THỰC TẾ
-                # Vì i là ngày hiện tại, i+1 là T+1
-                try:
-                    ret_t1 = returns_test.iloc[i + 1].values[idx] * 100
-                    ret_t2 = returns_test.iloc[i + 2].values[idx] * 100
-                    ret_t3 = returns_test.iloc[i + 3].values[idx] * 100
-                    
-                    # Tính tổng lợi nhuận sau 3 ngày giữ (tính theo lãi gộp đơn giản)
-                    total_ret_t3 = ((1 + ret_t1/100) * (1 + ret_t2/100) * (1 + ret_t3/100) - 1) * 100
-                    
-                    total_trades += 1
-                    if ret_t1 > 0: correct_t1 += 1
-                    if total_ret_t3 > 0: correct_t3 += 1
-                    
-                    mark_t1 = "✅" if ret_t1 > 0 else "❌"
-                    mark_t3 = "✅" if total_ret_t3 > 0 else "❌"
-                    
-                    print(f"  👉 Mã {ticker:5s} | Khối lượng: {weight:5.1f}%")
-                    print(f"      Lợi nhuận T+1: {ret_t1:6.2f}% {mark_t1} | T+2: {ret_t2:6.2f}% | T+3: {ret_t3:6.2f}%")
-                    print(f"      => TỔNG KẾT BÁN TẠI T+3: {total_ret_t3:6.2f}% {mark_t3}")
-                except IndexError:
-                    print(f"  👉 Mã {ticker:5s} | Khối lượng: {weight:5.1f}% | (Không đủ dữ liệu tương lai để soi)")
-                    
-        # Chạy step môi trường để đi đến ngày tiếp theo
-        obs, _, _, _ = test_env.step(action)
-        prev_weights = desired_weights
-        
-    print("\n" + "="*80)
-    print("🎯 TỔNG KẾT ĐỘ CHÍNH XÁC CỦA MODEL (TRÊN DỮ LIỆU QUÁ KHỨ)")
-    print("="*80)
-    if total_trades > 0:
-        print(f"Tổng số lượt ra quyết định MUA: {total_trades}")
-        print(f"Tỉ lệ dự đoán ĐÚNG xu hướng T+1 : {correct_t1 / total_trades * 100:.2f}% ({correct_t1}/{total_trades})")
-        print(f"Tỉ lệ dự đoán ĐÚNG xu hướng T+3 : {correct_t3 / total_trades * 100:.2f}% ({correct_t3}/{total_trades})")
+    if not real_alloc['allocations']:
+        print("🛡️ AI KHUYẾN NGHỊ: FULL TIỀN MẶT (Rủi ro thị trường quá lớn)")
     else:
-        print("Model không thực hiện lệnh mua nào trong khoảng thời gian này (hoặc chỉ Hold tiền mặt).")
-        
+        for item in real_alloc['allocations']:
+            print(f"  🟢 MUA / NẮM GIỮ: {item['ma_co_phieu']:5s} | Số lượng: {item['so_co_phieu']:>6,} cổ phiếu | Giá đóng cửa T: {item['gia_hien_tai']:>7,.0f} đ | Phân bổ: {item['so_tien_chi']:>10,.0f} đ")
+            
+    print(f"\n  💵 TIỀN MẶT CÒN DƯ: {real_alloc['cash_left']:,.0f} đ")
+    print("="*80)
+
 if __name__ == "__main__":
-    # Xem lại quyết định của 30 ngày giao dịch gần nhất
-    verify_predictions(days_to_test=7, top_k=3)
+    predict_live_tomorrow()

@@ -67,12 +67,12 @@ if __name__ == "__main__":
                 model = PPO.load(model_path)
 
                 test_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
-                        returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=False
+                        returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=True
                     )])
                 
                 if os.path.exists(env_path):
                     test_env = VecNormalize.load(env_path, test_env)
-                    test_env.training = False
+                    test_env.training = True  # Cho phép VecNormalize cập nhật liên tục (Rolling Online Learning)
                     test_env.norm_reward = False
 
                 obs = test_env.reset()
@@ -230,6 +230,12 @@ if __name__ == "__main__":
         print("=========================================================")
         print(results_df.to_string(index=False))
         print(f"\n📁 Đã lưu kết quả chi tiết tại: {output_csv}")
+        
+        start_date = dates_test[0]
+        end_date = dates_test[-1]
+        print(f"\n🕒 THỜI GIAN KIỂM THỬ THỰC CHIẾN:")
+        print(f"   => Đã thực hiện giao dịch từ ngày {start_date} đến ngày {end_date} (Tổng cộng {len(dates_test)} phiên).")
+
 
     except Exception as e:
         print(f"Không thể chạy đánh giá. Lỗi: {e}")

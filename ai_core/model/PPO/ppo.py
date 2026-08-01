@@ -552,11 +552,9 @@ class AdvancedPortfolioEnv(gym.Env):
             self.prev_weights = self.weights.copy()
             self.weights = action
 
-            # SỬA LỖI LOOKAHEAD BIAS: Mô hình phải ăn lợi nhuận của ngày T+3
-            # (Thị trường VN là T+2.5, làm tròn T+3 để thuận tiện dữ liệu)
-            if self.current_step + 3 < self.n_steps:
-                next_return = self.returns_arr[self.current_step + 3]
-            elif self.current_step + 1 < self.n_steps:
+            # FIX: Loại bỏ T+3 lố bịch. NAV phải biến động MỖI NGÀY theo thị trường (T+1)
+            # Sự đau đớn của việc "hàng chưa về mà giá giảm" đã được xử lý bằng hàng đợi FIFO (locked_weights) bên trên!
+            if self.current_step + 1 < self.n_steps:
                 next_return = self.returns_arr[self.current_step + 1]
             else:
                 next_return = np.zeros(self.weights_dim)
@@ -660,7 +658,7 @@ log("NEURAL NETWORK STRUCTURE")
 class AdvancedTickerExtractor(BaseFeaturesExtractor):
         def __init__(self, observation_space: spaces.Box, features_dim: int = 256):
             super().__init__(observation_space, features_dim)
-            num_tickers = observation_space.shape[0] # 46 mã
+            num_tickers = observation_space.shape[0] # 60 mã
             num_features_per_ticker = observation_space.shape[1] # 11 tính năng
             # Tầng 1 (Local): Học phân tích RIÊNG LẺ
             self.ticker_net = nn.Sequential(
@@ -906,7 +904,7 @@ def run_training_cycle():
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     old_model_name = os.path.join(save_dir, "AI_Brain.zip")
-    new_model_name = os.path.join(save_dir, f"AI_Brain_v7_Seed{seed_val}_Profit_{total_profit:.2f}.zip")
+    new_model_name = os.path.join(save_dir, f"AI_Brain_v8_Seed{seed_val}_Profit_{total_profit:.2f}.zip")
 
     if os.path.exists(old_model_name):
         shutil.copy(old_model_name, new_model_name)
@@ -972,7 +970,7 @@ if __name__ == "__main__":
     # CÔNG TẮC BẬT/TẮT AUTO TUNING
     # ==========================================
     ENABLE_AUTO_TUNING = True  # Đổi thành True để chạy N lần tự động đổi tham số
-    N_TRIALS = 15  # Số lần muốn chạy
+    N_TRIALS = 10  # Số lần muốn chạy
 
     if ENABLE_AUTO_TUNING:
         run_auto_tuning(n_trials=N_TRIALS)
