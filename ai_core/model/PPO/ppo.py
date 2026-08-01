@@ -765,15 +765,15 @@ def run_training_cycle():
 
         CONFIG.T_PLUS_SETTLEMENT = 0
         log("Giai đoạn 1: Huấn luyện với T+0 (100,000 steps)...")
-        model.learn(total_timesteps=10000, reset_num_timesteps=False)
+        model.learn(total_timesteps=100000, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 1
         log("Giai đoạn 2: Huấn luyện với T+1 (100,000 steps)...")
-        model.learn(total_timesteps=10000, reset_num_timesteps=False)
+        model.learn(total_timesteps=100000, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 3
         log("Giai đoạn 3: Huấn luyện với T+3 (300,000 steps)...")
-        model.learn(total_timesteps=30000, reset_num_timesteps=False)
+        model.learn(total_timesteps=300000, reset_num_timesteps=False)
 
         model.save(os.path.join(save_dir, "AI_Brain.zip"))
         train_env.save(os.path.join(save_dir, "vec_normalize.pkl"))
@@ -939,29 +939,54 @@ def run_training_cycle():
     df.to_csv(log_file, index=False)
 
     log(f"🎯 Đã lưu log tự động cấu hình vào Leaderboard! Lợi nhuận: {total_profit:.2f}% | Model: {new_model_name}")
+    return total_profit
+
+import optuna
+
+def objective(trial):
+    global seed_val
+    seed_val = trial.suggest_int('SEED', 1, 10000)
+    
+    th.manual_seed(seed_val)
+    np.random.seed(seed_val)
+    random.seed(seed_val)
+
+    # Optuna Suggestion
+    CONFIG.SEED = seed_val
+    CONFIG.LEARNING_RATE = trial.suggest_categorical('LEARNING_RATE', [0.00001, 0.00005, 0.0001])
+    CONFIG.ENT_COEF = trial.suggest_categorical('ENT_COEF', [0.001, 0.005, 0.01])
+    CONFIG.BATCH_SIZE = trial.suggest_categorical('BATCH_SIZE', [64, 90, 128])
+    CONFIG.N_STEPS = trial.suggest_categorical('N_STEPS', [512, 1024, 2048])
+    CONFIG.FEATURES_DIM = trial.suggest_categorical('FEATURES_DIM', [64, 128, 256, 512])
+    CONFIG.SDE_SAMPLE_FREQ = trial.suggest_int('SDE_SAMPLE_FREQ', 1, 5)
+
+    log(f"\n{'='*60}")
+    log(f"🚀 THỬ NGHIỆM TPE OPTUNA | Seed: {seed_val}")
+    log(f"{'='*60}")
+    log(f"🛠️  Params: LR={CONFIG.LEARNING_RATE} | ENT={CONFIG.ENT_COEF} | BATCH={CONFIG.BATCH_SIZE} | STEPS={CONFIG.N_STEPS} | FEATURES DIMENSION={CONFIG.FEATURES_DIM} | SDE SAMPLE FREQ={CONFIG.SDE_SAMPLE_FREQ}")
+    
+    try:
+        # Run training cycle and get the profit
+        total_profit = run_training_cycle()
+        return total_profit
+    except Exception as e:
+        log(f"❌ Lỗi ở thử nghiệm Optuna: {e}")
+        traceback.print_exc()
+        # Return a very bad score if it crashes
+        return -999.0
 
 def run_auto_tuning(n_trials=10):
-    log(f"=== BẮT ĐẦU CHẠY {n_trials} THỬ NGHIỆM (AUTO TUNING) ===")
-    for i in range(n_trials):
-        global seed_val
-        seed_val = random.randint(1, 10000)
-        log(f"\n{'='*60}")
-        log(f"🚀 THỬ NGHIỆM {i+1}/{n_trials} | Seed: {seed_val}")
-        log(f"{'='*60}")
-        th.manual_seed(seed_val)
-        np.random.seed(seed_val)
-        random.seed(seed_val)
-
-        # Thay đổi các tham số ngẫu nhiên
-        CONFIG.SEED = seed_val
-        CONFIG.LEARNING_RATE = random.choice([0.00001, 0.00005, 0.0001])
-        CONFIG.ENT_COEF = random.choice([0.001, 0.005, 0.01])
-        CONFIG.BATCH_SIZE = random.choice([64, 90, 128])
-        CONFIG.N_STEPS = random.choice([512, 1024, 2048])
-        CONFIG.FEATURES_DIM = random.choice([64 ,128 ,256, 512])
-        CONFIG.SDE_SAMPLE_FREQ = random.randint(1, 5)
-        log(f"🛠️  Params: SEED={CONFIG.SEED} | LR={CONFIG.LEARNING_RATE} | ENT={CONFIG.ENT_COEF} | BATCH={CONFIG.BATCH_SIZE} | STEPS={CONFIG.N_STEPS} | FEATURES DIMENSION={CONFIG.FEATURES_DIM} | SDE SAMPLE FREQ={CONFIG.SDE_SAMPLE_FREQ}")
-        run_training_cycle()
+    log(f"=== BẮT ĐẦU CHẠY {n_trials} THỬ NGHIỆM (OPTUNA BAYESIAN OPTIMIZATION) ===")
+    study = optuna.create_study(direction="maximize")
+    study.optimize(objective, n_trials=n_trials)
+    
+    log("\n" + "="*60)
+    log("🏆 OPTUNA TÌM THẤY BỘ SIÊU THAM SỐ TỐT NHẤT:")
+    log(f"Lợi nhuận cao nhất: {study.best_value:+.2f}%")
+    log("Cấu hình:")
+    for key, value in study.best_params.items():
+        log(f"    {key}: {value}")
+    log("="*60)
 
 if __name__ == "__main__":
     returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data()
