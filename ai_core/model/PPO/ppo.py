@@ -144,9 +144,9 @@ def allocate_portfolio_real(tickers, w, p, C, LOT_SIZE=100, tracking_err_thresho
 # ## [CẤU HÌNH CHIẾN LƯỢC ĐẦU TƯ - AI TRADING]
 class CONFIG:
     TRAINING_MODE = 'fast_split' # 'fast_split' or 'rolling_window'
-    # 1. PHÍ GIAO DỊCH (Transaction Cost): 
-    # Tỷ lệ phần trăm CTCK thu cho mỗi lần bạn mua hoặc bán cổ phiếu. (VD: 0.2% = 0.002)
-    COST_RATE = 0.0001
+    # 1. PHÍ GIAO DỊCH (Transaction Fee & Tax): 
+    # Ở VN, mua mất ~0.15%, bán mất ~0.15% phí + 0.1% thuế = 0.25%. Tổng vòng quay là 0.4%
+    COST_RATE = 0.001
 
     TURNOVER_PENALTY_RATE = 0.3
     DRAWDOWN_PENALTY_RATE = 5.0
@@ -764,16 +764,19 @@ def run_training_cycle():
         log("\n[CURRICULUM LEARNING] Bắt đầu huấn luyện theo từng cấp độ độ trễ (T+0 -> T+1 -> T+3)...")
 
         CONFIG.T_PLUS_SETTLEMENT = 0
-        log("Giai đoạn 1: Huấn luyện với T+0 (100,000 steps)...")
-        model.learn(total_timesteps=100000, reset_num_timesteps=False)
+        n_1 = 10_000
+        log(f"Giai đoạn 1: Huấn luyện với T+0 ({n_1} steps)...")
+        model.learn(total_timesteps=n_1, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 1
-        log("Giai đoạn 2: Huấn luyện với T+1 (100,000 steps)...")
-        model.learn(total_timesteps=100000, reset_num_timesteps=False)
+        n_2 = 10_000
+        log(f"Giai đoạn 2: Huấn luyện với T+1 ({n_2} steps)...")
+        model.learn(total_timesteps=n_2, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 3
-        log("Giai đoạn 3: Huấn luyện với T+3 (300,000 steps)...")
-        model.learn(total_timesteps=300000, reset_num_timesteps=False)
+        n_3 = 30_000
+        log(f"Giai đoạn 3: Huấn luyện với T+3 ({n_3} steps)...")
+        model.learn(total_timesteps=n_3, reset_num_timesteps=False)
 
         model.save(os.path.join(save_dir, "AI_Brain.zip"))
         train_env.save(os.path.join(save_dir, "vec_normalize.pkl"))
@@ -954,11 +957,11 @@ def objective(trial):
     # Optuna Suggestion
     CONFIG.SEED = seed_val
     CONFIG.LEARNING_RATE = trial.suggest_categorical('LEARNING_RATE', [0.00001, 0.00005, 0.0001])
-    CONFIG.ENT_COEF = trial.suggest_categorical('ENT_COEF', [0.001, 0.005, 0.01])
-    CONFIG.BATCH_SIZE = trial.suggest_categorical('BATCH_SIZE', [64, 90, 128])
+    CONFIG.ENT_COEF = trial.suggest_categorical('ENT_COEF', [0.001, 0.005, 0.01, 0.1])
+    CONFIG.BATCH_SIZE = trial.suggest_categorical('BATCH_SIZE', [64, 90, 128, 256])
     CONFIG.N_STEPS = trial.suggest_categorical('N_STEPS', [512, 1024, 2048])
     CONFIG.FEATURES_DIM = trial.suggest_categorical('FEATURES_DIM', [64, 128, 256, 512])
-    CONFIG.SDE_SAMPLE_FREQ = trial.suggest_int('SDE_SAMPLE_FREQ', 1, 5)
+    CONFIG.SDE_SAMPLE_FREQ = trial.suggest_int('SDE_SAMPLE_FREQ', 1, 7)
 
     log(f"\n{'='*60}")
     log(f"🚀 THỬ NGHIỆM TPE OPTUNA | Seed: {seed_val}")
@@ -995,7 +998,7 @@ if __name__ == "__main__":
     # CÔNG TẮC BẬT/TẮT AUTO TUNING
     # ==========================================
     ENABLE_AUTO_TUNING = True  # Đổi thành True để chạy N lần tự động đổi tham số
-    N_TRIALS = 10  # Số lần muốn chạy
+    N_TRIALS = 50  # Số lần muốn chạy
 
     if ENABLE_AUTO_TUNING:
         run_auto_tuning(n_trials=N_TRIALS)

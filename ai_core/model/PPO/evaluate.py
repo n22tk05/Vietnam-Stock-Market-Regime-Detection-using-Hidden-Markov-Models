@@ -137,7 +137,10 @@ if __name__ == "__main__":
                         if target_shares < cur_h["so_co_phieu"]:
                             sell_shares = min(cur_h["so_co_phieu"] - target_shares, cur_h["shares_unlocked"])
                             if sell_shares > 0:
-                                cash += sell_shares * price_dict[ticker]
+                                gross_proceeds = sell_shares * price_dict[ticker]
+                                # Phí bán = 0.1%
+                                net_proceeds = gross_proceeds * (1 - 0.001)
+                                cash += net_proceeds
                                 cur_h["so_co_phieu"] -= sell_shares
                                 cur_h["shares_unlocked"] -= sell_shares
                                 if cur_h["so_co_phieu"] == 0:
@@ -153,10 +156,11 @@ if __name__ == "__main__":
                         
                         if target_shares > current_shares:
                             buy_shares = target_shares - current_shares
-                            cost = buy_shares * price
+                            # Phí mua = 0.1%
+                            cost = buy_shares * price * (1 + 0.001)
                             if cash < cost:
-                                buy_shares = int(np.floor(cash / (price * 100))) * 100
-                                cost = buy_shares * price
+                                buy_shares = int(np.floor(cash / (price * (1 + 0.001) * 100))) * 100
+                                cost = buy_shares * price * (1 + 0.001)
                                 
                             if buy_shares > 0:
                                 cash -= cost
@@ -233,8 +237,19 @@ if __name__ == "__main__":
         
         start_date = dates_test[0]
         end_date = dates_test[-1]
+        
+        # Calculate Benchmark explicitly for the report
+        benchmark_series = returns_test.mean(axis=1)
+        bm_tot, bm_ann, bm_sharpe, bm_mdd, bm_win = calc_metrics(benchmark_series)
+        
         print(f"\n🕒 THỜI GIAN KIỂM THỬ THỰC CHIẾN:")
         print(f"   => Đã thực hiện giao dịch từ ngày {start_date} đến ngày {end_date} (Tổng cộng {len(dates_test)} phiên).")
+        print("\n🌎 TÌNH HÌNH THỊ TRƯỜNG CHUNG (BENCHMARK) TRONG GIAI ĐOẠN NÀY:")
+        print(f"   - Lợi nhuận toàn thị trường: {bm_tot*100:+.2f}%")
+        print(f"   - Tỷ lệ phiên tăng giá (Win Rate): {bm_win*100:.2f}%")
+        print(f"   - Mức sụt giảm sâu nhất (Max Drawdown): {bm_mdd*100:.2f}%")
+        print(f"   - Biến động trung bình (Độ lệch chuẩn): {benchmark_series.std()*100:.2f}% / phiên")
+        print("   => LỜI KHUYÊN: So sánh lợi nhuận của AI với Lợi nhuận toàn thị trường ở trên để thấy rõ Alpha (Giá trị vượt trội).")
 
 
     except Exception as e:
