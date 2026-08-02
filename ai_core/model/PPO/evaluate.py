@@ -6,6 +6,10 @@ import sys
 import os
 import glob
 
+# Ensure UTF-8 output for Windows console
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
+
 from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real, CONFIG
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 from stable_baselines3 import PPO
@@ -17,10 +21,8 @@ if __name__ == "__main__":
 
     try:
         total_days = len(returns_df)
-        # Sử dụng 22 phiên cuối cùng để backtest
-        n_tradings = 22
-        ratio_tradings = n_tradings / total_days
-        test_size = int(total_days * ratio_tradings)
+        # Sử dụng 20% dữ liệu cuối cùng để backtest
+        test_size = int(total_days * 0.1)
         test_start = total_days - test_size
 
         returns_test = returns_df.iloc[test_start:]
@@ -80,119 +82,38 @@ if __name__ == "__main__":
 
                 portfolio_returns = []
                 benchmark_returns = []
-
-                # --- SIMULATION STATE ---
-                C_initial = 100_000_000.0
-                cash = C_initial
-                nav = C_initial
-                prev_nav = C_initial
-                holdings = {}
+                portfolio_dates = []
 
                 step_idx = 0
                 while not done[0]:
                     action, _states = model.predict(obs, deterministic=True)
+                    
+                    # --- Lọc Top 5 và chuẩn hóa lại % phân bổ ---
+                    action_flat = action[0].copy()
+                    top_k = 5
+                    top_indices = np.argsort(action_flat)[-top_k:]
+                    filtered_action = np.zeros_like(action_flat)
+                    filtered_action[top_indices] = action_flat[top_indices]
+                    
+                    filtered_action = np.clip(filtered_action, 0, 1)
+                    action_sum = np.sum(filtered_action)
+                    if action_sum > 0:
+                        filtered_action = filtered_action / action_sum
+                        
+                    action[0] = filtered_action
+                    
                     obs, reward, done, info = test_env.step(action)
                     
-                    raw_action = np.clip(action[0], 0, 1)
-                    if np.sum(raw_action) > 1.0:
-                        raw_action = raw_action / np.sum(raw_action)
-                        
-                    strategies_live = strategies_test.iloc[[step_idx]]
-                    raw_prices = strategies_live.values[0].reshape(num_strategies_features, weights_dim).T[:, 2]
-                    current_prices_vnd = raw_prices * 1000.0
-                    price_dict = {tickers[i]: float(current_prices_vnd[i]) for i in range(weights_dim)}
+                    if 'net_return' in info[0]:
+                        portfolio_returns.append(info[0]['net_return'])
+                        portfolio_dates.append(pd.to_datetime(dates_test[step_idx], format='%d/%m/%Y'))
 
-                    # 1. Cập nhật ngày T+ và giá
-                    total_stock_val = 0.0
-                    new_holdings = {}
-                    for ticker, h in holdings.items():
-                        cur_price = price_dict.get(ticker, h["gia_hien_tai"])
-                        h["gia_hien_tai"] = cur_price
-                        h["shares_unlocked"] += h["shares_t1"]
-                        h["shares_t1"] = h["shares_t2"]
-                        h["shares_t2"] = 0
-                        h["so_co_phieu"] = h["shares_unlocked"] + h["shares_t1"] + h["shares_t2"]
-                        
-                        if h["so_co_phieu"] > 0:
-                            total_stock_val += h["so_co_phieu"] * cur_price
-                            new_holdings[ticker] = h
-                    holdings = new_holdings
-                    nav = cash + total_stock_val
+                        # Tính benchmark (Equal Weight)
+                        bm_ret = np.mean(returns_test.iloc[step_idx].values)
+                        benchmark_returns.append(bm_ret)
 
-                    # 2. Sinh lệnh mua bán dựa theo AI
-                    ai_alloc = allocate_portfolio_real(
-                        tickers=tickers,
-                        w=raw_action,
-                        p=raw_prices,
-                        C=nav,
-                        LOT_SIZE=100
-                    )
-                    
-                    target_shares_map = {rec['ma_co_phieu']: rec['so_co_phieu'] for rec in ai_alloc['allocations']}
-                    
-                    # 2a. Thực thi lệnh BÁN
-                    for ticker in list(holdings.keys()):
-                        cur_h = holdings[ticker]
-                        target_shares = target_shares_map.get(ticker, 0)
-                        if target_shares < cur_h["so_co_phieu"]:
-                            sell_shares = min(cur_h["so_co_phieu"] - target_shares, cur_h["shares_unlocked"])
-                            if sell_shares > 0:
-                                gross_proceeds = sell_shares * price_dict[ticker]
-                                # Phí bán = 0.1%
-                                net_proceeds = gross_proceeds * (1 - 0.001)
-                                cash += net_proceeds
-                                cur_h["so_co_phieu"] -= sell_shares
-                                cur_h["shares_unlocked"] -= sell_shares
-                                if cur_h["so_co_phieu"] == 0:
-                                    del holdings[ticker]
-                                    
-                    # 2b. Thực thi lệnh MUA
-                    for rec in ai_alloc['allocations']:
-                        ticker = rec['ma_co_phieu']
-                        target_shares = rec['so_co_phieu']
-                        price = rec['gia_hien_tai']
-                        cur_h = holdings.get(ticker)
-                        current_shares = cur_h["so_co_phieu"] if cur_h else 0
-                        
-                        if target_shares > current_shares:
-                            buy_shares = target_shares - current_shares
-                            # Phí mua = 0.1%
-                            cost = buy_shares * price * (1 + 0.001)
-                            if cash < cost:
-                                buy_shares = int(np.floor(cash / (price * (1 + 0.001) * 100))) * 100
-                                cost = buy_shares * price * (1 + 0.001)
-                                
-                            if buy_shares > 0:
-                                cash -= cost
-                                if not cur_h:
-                                    holdings[ticker] = {
-                                        "so_co_phieu": 0, "gia_von": price, "gia_hien_tai": price,
-                                        "shares_unlocked": 0, "shares_t1": 0, "shares_t2": 0
-                                    }
-                                    cur_h = holdings[ticker]
-                                    
-                                new_total = cur_h["so_co_phieu"] + buy_shares
-                                cur_h["gia_von"] = ((cur_h["so_co_phieu"] * cur_h["gia_von"]) + cost) / new_total
-                                cur_h["so_co_phieu"] = new_total
-                                cur_h["shares_t2"] += buy_shares
-                                cur_h["gia_hien_tai"] = price
-
-                    # 3. Tính toán NAV thật
-                    total_stock_val = sum(h["so_co_phieu"] * h["gia_hien_tai"] for h in holdings.values())
-                    nav = cash + total_stock_val
-                    
-                    if step_idx > 0:
-                        ret = (nav / prev_nav) - 1
-                        portfolio_returns.append(ret)
-                    else:
-                        portfolio_returns.append(0.0)
-                        
-                    bm_ret = np.mean(returns_test.iloc[step_idx].values)
-                    benchmark_returns.append(bm_ret)
-                    
-                    prev_nav = nav
                     step_idx += 1
-
+                
                 perf_df = pd.DataFrame({
                     'Real_Simulation': portfolio_returns,
                     'Benchmark_EQ': benchmark_returns
@@ -206,6 +127,9 @@ if __name__ == "__main__":
                 beta = cov / var if var > 0 else 1
                 alpha = ai_ann - (beta * bm_ann)
 
+                # Tính NAV giả định
+                nav = 100_000_000 * (1 + ai_tot)
+                
                 results.append({
                     "Model Name": model_name,
                     "Total Return (%)": ai_tot * 100,

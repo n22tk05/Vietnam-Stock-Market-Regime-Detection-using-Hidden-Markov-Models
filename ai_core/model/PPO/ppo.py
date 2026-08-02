@@ -641,11 +641,12 @@ class AdvancedPortfolioEnv(gym.Env):
                 reward -= (dd_increase * 3000)  # Phạt sụt giảm tài sản cực nặng (trước đây là 1000)
             self.prev_drawdown = drawdown
             force_terminate = False
-            if drawdown > 0.15: # Cháy tài khoản nếu lỗ 15% từ đỉnh (trước đây là 30%)
-                reward -= 500  # Phạt 500 điểm nếu cháy tài khoản
-                force_terminate = True
-                if getattr(self, 'is_test', False):
-                    print(f"💀 GAME OVER: Chạm ngưỡng phòng thủ! Drawdown {drawdown*100:.1f}% tại Step {self.current_step}")
+            if drawdown > 0.3: # Cháy tài khoản nếu lỗ 15% từ đỉnh (trước đây là 30%)
+                reward -= 5000  # Phạt 500 điểm nếu cháy tài khoản
+                if not getattr(self, 'is_test', False):
+                    force_terminate = True
+                else:
+                    print(f"💀 CẢNH BÁO (Internal): Chạm ngưỡng phòng thủ! Drawdown {drawdown*100:.1f}% tại Step {self.current_step}")
             # -----------------------------------------------------------
             self.current_step += 1
             done = (self.current_step >= self.n_steps - 1) or force_terminate

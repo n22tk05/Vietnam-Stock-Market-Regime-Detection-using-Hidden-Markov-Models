@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import traceback
 
+sys.stdout.reconfigure(encoding='utf-8')
+
 sys.path.append(r'C:\Users\ADMIN\Desktop\AIQUANTUM\ai_core\model\PPO')
 from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
 from stable_baselines3 import PPO
@@ -25,7 +27,7 @@ def calc_metrics(returns):
 def analyze_model_allocations():
     returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data()
     total_days = len(returns_df)
-    n_tradings = 22
+    n_tradings = 200
     ratio_tradings = n_tradings / total_days
     test_size = int(total_days * ratio_tradings)
     test_start = total_days - test_size
@@ -40,7 +42,7 @@ def analyze_model_allocations():
     model_dir = os.path.join(root_dir, "output", "ppo_model")
     
     # Target model
-    model_name = "AI_Brain_v7_Seed6445_Profit_-9.19.zip"
+    model_name = "AI_Brain_v8_Seed946_Profit_51.07.zip"
     model_path = os.path.join(model_dir, model_name)
     env_path = os.path.join(model_dir, "vec_normalize.pkl")
     
@@ -78,8 +80,22 @@ def analyze_model_allocations():
             action_history.append(action[0])
             
             raw_action = np.clip(action[0], 0, 1)
-            if np.sum(raw_action) > 1.0:
-                raw_action = raw_action / np.sum(raw_action)
+            
+            # Tính tổng tỷ trọng AI muốn giải ngân
+            intended_investment = min(1.0, np.sum(raw_action))
+            
+            # CẤU HÌNH SỐ LƯỢNG MÃ TỐI ĐA (Giả lập cho Ví thực)
+            TOP_N_STOCKS = 5
+            if TOP_N_STOCKS is not None and TOP_N_STOCKS < len(raw_action):
+                top_n_indices = np.argsort(raw_action)[-TOP_N_STOCKS:]
+                mask = np.ones(len(raw_action), dtype=bool)
+                mask[top_n_indices] = False
+                raw_action[mask] = 0.0
+                
+            # Chuẩn hóa lại tỷ trọng của Top 5 sao cho tổng bằng đúng 100% (1.0)
+            current_sum = np.sum(raw_action)
+            if current_sum > 0:
+                raw_action = raw_action / current_sum
                 
             strategies_live = strategies_test.iloc[[step_idx]]
             raw_prices = strategies_live.values[0].reshape(num_strategies_features, weights_dim).T[:, 2]
@@ -116,7 +132,9 @@ def analyze_model_allocations():
                 if target_shares < cur_h["so_co_phieu"]:
                     sell_shares = min(cur_h["so_co_phieu"] - target_shares, cur_h["shares_unlocked"])
                     if sell_shares > 0:
-                        cash += sell_shares * price_dict[ticker]
+                        gross_proceeds = sell_shares * price_dict[ticker]
+                        net_proceeds = gross_proceeds * (1 - 0.001)  # Phí bán 0.1%
+                        cash += net_proceeds
                         cur_h["so_co_phieu"] -= sell_shares
                         cur_h["shares_unlocked"] -= sell_shares
                         if cur_h["so_co_phieu"] == 0:
@@ -131,10 +149,10 @@ def analyze_model_allocations():
                 
                 if target_shares > current_shares:
                     buy_shares = target_shares - current_shares
-                    cost = buy_shares * price
+                    cost = buy_shares * price * (1 + 0.001)  # Phí mua 0.1%
                     if cash < cost:
-                        buy_shares = int(np.floor(cash / (price * 100))) * 100
-                        cost = buy_shares * price
+                        buy_shares = int(np.floor(cash / (price * (1 + 0.001) * 100))) * 100
+                        cost = buy_shares * price * (1 + 0.001)
                         
                     if buy_shares > 0:
                         cash -= cost
@@ -191,9 +209,13 @@ def analyze_model_allocations():
         print("=========================================================")
         print(mean_alloc.head(10).apply(lambda x: f"{x*100:.2f}%").to_string())
         
+        start_date_str = dates_test[0]
+        end_date_str = dates_test[len(portfolio_returns)-1]
+        
         print("\n=========================================================")
         print("💡 ĐÁNH GIÁ PHONG CÁCH & HIỆU SUẤT GIAO DỊCH (SEED 6445)")
         print("=========================================================")
+        print(f"🕒 Khoảng thời gian:      {start_date_str} đến {end_date_str} ({len(portfolio_returns)} phiên)")
         print(f"💰 Số Tiền Ban Đầu:       {C_initial:,.0f} VNĐ")
         print(f"💰 Số Tiền NAV Cuối:      {nav:,.0f} VNĐ")
         print(f"📈 Tốc độ xoay vòng vốn:  {turnover_rate*100:.2f}% / ngày")

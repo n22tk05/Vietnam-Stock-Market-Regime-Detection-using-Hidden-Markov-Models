@@ -29,7 +29,7 @@ def predict_live_tomorrow():
     model_dir = os.path.join(root_dir, "output", "ppo_model")
     
     # Tự động tìm mô hình có chữ Seed9491
-    model_file = next((f for f in os.listdir(model_dir) if "AI_Brain_v7_Seed6445_Profit_-9.19" in f and f.endswith(".zip")), None)
+    model_file = next((f for f in os.listdir(model_dir) if "AI_Brain_v7_Seed4984_Profit_58.06" in f and f.endswith(".zip")), None)
     if not model_file:
         print("❌ Không tìm thấy model Seed 6445. Vui lòng kiểm tra lại thư mục!")
         return
@@ -64,8 +64,22 @@ def predict_live_tomorrow():
     action, _ = model.predict(obs, deterministic=True)
     
     raw_action = np.clip(action[0], 0, 1)
-    if np.sum(raw_action) > 1.0:
-        raw_action = raw_action / np.sum(raw_action)
+    
+    # Tính tổng tỷ trọng AI muốn giải ngân (VD: 0.8 = 80% cổ phiếu, 20% tiền mặt)
+    intended_investment = min(1.0, np.sum(raw_action))
+    
+    # CẤU HÌNH SỐ LƯỢNG MÃ TỐI ĐA (Tập trung hỏa lực)
+    TOP_N_STOCKS = 5
+    if TOP_N_STOCKS is not None and TOP_N_STOCKS < len(raw_action):
+        top_n_indices = np.argsort(raw_action)[-TOP_N_STOCKS:]
+        mask = np.ones(len(raw_action), dtype=bool)
+        mask[top_n_indices] = False
+        raw_action[mask] = 0.0
+        
+    # Phóng to tỷ trọng của Top 5 sao cho tổng bằng đúng intended_investment
+    current_sum = np.sum(raw_action)
+    if current_sum > 0:
+        raw_action = (raw_action / current_sum) * intended_investment
         
     # Lấy giá đóng cửa ngày T để tính toán
     current_prices = latest_strategies.values[0].reshape(num_strategies_features, weights_dim).T[:, 2]
