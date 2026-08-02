@@ -65,6 +65,7 @@ def analyze_model_allocations():
         action_history = []
         portfolio_returns = []
         benchmark_returns = []
+        transaction_logs = []
 
         C_initial = 100_000_000.0
         cash = C_initial
@@ -133,7 +134,25 @@ def analyze_model_allocations():
                     sell_shares = min(cur_h["so_co_phieu"] - target_shares, cur_h["shares_unlocked"])
                     if sell_shares > 0:
                         gross_proceeds = sell_shares * price_dict[ticker]
-                        net_proceeds = gross_proceeds * (1 - 0.001)  # Phí bán 0.1%
+                        fee = gross_proceeds * 0.001
+                        net_proceeds = gross_proceeds - fee
+                        
+                        gia_von = cur_h["gia_von"]
+                        lai_lo = (price_dict[ticker] - gia_von) / gia_von if gia_von > 0 else 0
+                        loai_lenh = "CHỐT LỜI" if lai_lo > 0 else "CẮT LỖ"
+                        
+                        transaction_logs.append({
+                            "Ngày": dates_test[step_idx],
+                            "Mã CP": ticker,
+                            "Loại Lệnh": loai_lenh,
+                            "Khối Lượng": sell_shares,
+                            "Giá Khớp": price_dict[ticker],
+                            "Thành Tiền": net_proceeds,
+                            "Phí GD": fee,
+                            "Lãi/Lỗ (%)": f"{lai_lo*100:.2f}%",
+                            "Giá Vốn": gia_von
+                        })
+                        
                         cash += net_proceeds
                         cur_h["so_co_phieu"] -= sell_shares
                         cur_h["shares_unlocked"] -= sell_shares
@@ -155,6 +174,20 @@ def analyze_model_allocations():
                         cost = buy_shares * price * (1 + 0.001)
                         
                     if buy_shares > 0:
+                        fee = buy_shares * price * 0.001
+                        
+                        transaction_logs.append({
+                            "Ngày": dates_test[step_idx],
+                            "Mã CP": ticker,
+                            "Loại Lệnh": "MUA",
+                            "Khối Lượng": buy_shares,
+                            "Giá Khớp": price,
+                            "Thành Tiền": cost,
+                            "Phí GD": fee,
+                            "Lãi/Lỗ (%)": "-",
+                            "Giá Vốn": price
+                        })
+                        
                         cash -= cost
                         if not cur_h:
                             holdings[ticker] = {
@@ -230,6 +263,12 @@ def analyze_model_allocations():
         print(f"⚖️ Beta (Độ nhạy Market): {beta:.3f}")
         print("=========================================================")
         
+        if transaction_logs:
+            tx_df = pd.DataFrame(transaction_logs)
+            out_path = r"C:\Users\ADMIN\Desktop\AIQUANTUM\ai_core\output\detailed_transaction_log.csv"
+            tx_df.to_csv(out_path, index=False, encoding='utf-8-sig')
+            print(f"📁 Đã lưu nhật ký giao dịch chi tiết tại: {out_path}")
+            
     except Exception as e:
         print(f"Lỗi: {e}")
         traceback.print_exc()

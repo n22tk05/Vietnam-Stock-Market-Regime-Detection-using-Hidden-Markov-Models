@@ -90,7 +90,7 @@ if __name__ == "__main__":
                     
                     # --- Lọc Top 5 và chuẩn hóa lại % phân bổ ---
                     action_flat = action[0].copy()
-                    top_k = 5
+                    top_k = 3
                     top_indices = np.argsort(action_flat)[-top_k:]
                     filtered_action = np.zeros_like(action_flat)
                     filtered_action[top_indices] = action_flat[top_indices]
