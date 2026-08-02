@@ -12,10 +12,11 @@ AI QUANTUM là một hệ thống Giao dịch Định lượng (Quantitative Tra
 Khác biệt với các dự án nghiên cứu học thuật thông thường, AI QUANTUM được thiết kế với **Tư duy Thực chiến (Real-world Practicality)**, giải quyết triệt để các bài toán hóc búa nhất của chứng khoán Việt Nam:
 
 1. **🔒 T+2.5 Settlement Lock (Khóa Hàng):** Môi trường huấn luyện (Gym Environment) ép AI tuân thủ nghiêm ngặt luật T+2.5. Hàng mua xong bị nhốt 3 ngày, AI tuyệt đối không thể lướt sóng T+0 và bắt buộc phải học cách dự báo xu hướng dài hạn.
-2. **🧠 Cross-Ticker Attention Network:** Lõi thần kinh PPO được trang bị cơ chế Attention, cho phép AI "nhìn" toàn cảnh rổ VN100 cùng lúc để tự động phát hiện Cổ phiếu dẫn dắt (Leader) và rút vốn khỏi Cổ phiếu yếu kém (Laggard).
-3. **📊 Lọc Nhiễu Chống Rò Rỉ (No Look-ahead Bias):** Kỹ thuật `merge_asof(direction="backward")` trong xử lý dữ liệu và lùi thời gian vĩ mô (Publication Lag 1 tháng) đảm bảo AI không ăn gian bằng cách nhìn trộm tương lai.
-4. **⚠️ Kỷ Luật Rủi Ro (Drawdown Penalty):** Phạt AI cực nặng (Game Over) nếu để sụt giảm tài khoản (Drawdown) vượt ngưỡng 30%.
-5. **🧮 Trình Đi Lệnh Lô Chẵn (Lot Converter):** AI không xuất ra phần trăm (%) ảo tưởng. Module *Robo-Advisor Execution* tự động vét cạn tiền mặt (Greedy Refill) và tính toán chính xác số tiền cần đi lệnh theo lô chẵn 100 cổ phiếu.
+2. **🎯 Chiến lược Tập trung (Top 5 Stock Picking):** Thay vì dàn trải vốn, ở chế độ thực chiến (Simulation/Live), hệ thống tự động lọc ra 5 mã cổ phiếu mạnh nhất mà AI dự phóng và dồn 100% vốn vào 5 mã này. Điều này giúp tối đa hóa tỷ suất sinh lời (Alpha vượt trội) và tận dụng triệt để sức mạnh phân tích của mô hình PPO.
+3. **🧠 Cross-Ticker Attention Network:** Lõi thần kinh PPO được trang bị cơ chế Attention, cho phép AI "nhìn" toàn cảnh rổ VN100 cùng lúc để tự động phát hiện Cổ phiếu dẫn dắt (Leader) và rút vốn khỏi Cổ phiếu yếu kém (Laggard).
+4. **📊 Lọc Nhiễu Chống Rò Rỉ (No Look-ahead Bias):** Kỹ thuật `merge_asof(direction="backward")` trong xử lý dữ liệu và lùi thời gian vĩ mô (Publication Lag 1 tháng) đảm bảo AI không ăn gian bằng cách nhìn trộm tương lai.
+5. **⚠️ Kỷ Luật Rủi Ro (Drawdown Penalty):** Phạt AI cực nặng (Game Over) nếu để sụt giảm tài khoản (Drawdown) vượt ngưỡng 30% trong quá trình học. Ở chế độ kiểm thử, hệ thống tích hợp Stop-Loss để bảo vệ vốn.
+6. **🧮 Trình Đi Lệnh Lô Chẵn & Ghi Log Trực Quan:** Module *Robo-Advisor Execution* tính toán chính xác số lượng mua/bán theo lô 100 cổ phiếu. Toàn bộ lịch sử giao dịch (Mã, Số lượng, Giá, Lãi/Lỗ, Phí GD) được lưu tự động ra file CSV để dễ dàng đối soát bằng Excel.
 
 ---
 
@@ -31,6 +32,9 @@ Hệ thống vận hành liền mạch qua 4 bước khép kín (End-to-End):
     *   Train HMM xếp chồng 4 tầng: `Macro -> Market -> Sector -> Ticker`. AI sẽ nhận diện được thị trường đang ở chu kỳ Bò (Bull), Gấu (Bear) hay Đi ngang (Sideway).
 *   🔴 **Phase 4: PPO Reinforcement Learning**
     *   Mô hình AI học cách đi tiền, tối ưu hóa phần thưởng (Sharpe Ratio) và tránh Drawdown thông qua thuật toán PPO tiên tiến.
+*   🟣 **Phase 5: Evaluation & Simulation**
+    *   **`evaluate.py`**: Chạy Backtest diện rộng trên toàn bộ các Seed Models để lọc ra cấu hình tạo mức sinh lời cao nhất.
+    *   **`analyze_seed.py`**: Đi sâu bóc tách hành vi của 1 mô hình cụ thể (Tốc độ xoay vòng vốn, % Tiền mặt, Alpha/Beta) và kết xuất tệp `detailed_transaction_log.csv`.
 
 *Chi tiết thuật toán vui lòng xem tại: [ai_quantum_pipeline.md](./ai_quantum_pipeline.md)*
 
