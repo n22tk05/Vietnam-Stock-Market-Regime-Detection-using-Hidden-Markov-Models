@@ -11,6 +11,9 @@ from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 
+sys.path.append(r'C:\Users\ADMIN\Desktop\AIQUANTUM')
+from ai_core.helper.circuit_breaker import get_circuit_breaker_flags
+
 def calc_metrics(returns):
     cum_ret = (1 + returns).cumprod()
     total_return = cum_ret.iloc[-1] - 1
@@ -36,6 +39,8 @@ def analyze_model_allocations():
     ai_test = ai_features_df.iloc[test_start:]
     strategies_test = strategies_features_df.iloc[test_start:]
     dates_test = dates[test_start:]
+    
+    circuit_breaker_flags = get_circuit_breaker_flags(dates_test)
 
     script_dir = r"C:\Users\ADMIN\Desktop\AIQUANTUM\ai_core\model\PPO"
     root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
@@ -82,21 +87,23 @@ def analyze_model_allocations():
             
             raw_action = np.clip(action[0], 0, 1)
             
-            # Tính tổng tỷ trọng AI muốn giải ngân
-            intended_investment = min(1.0, np.sum(raw_action))
-            
-            # CẤU HÌNH SỐ LƯỢNG MÃ TỐI ĐA (Giả lập cho Ví thực)
-            TOP_N_STOCKS = 5
-            if TOP_N_STOCKS is not None and TOP_N_STOCKS < len(raw_action):
-                top_n_indices = np.argsort(raw_action)[-TOP_N_STOCKS:]
-                mask = np.ones(len(raw_action), dtype=bool)
-                mask[top_n_indices] = False
-                raw_action[mask] = 0.0
-                
-            # Chuẩn hóa lại tỷ trọng của Top 5 sao cho tổng bằng đúng 100% (1.0)
-            current_sum = np.sum(raw_action)
-            if current_sum > 0:
-                raw_action = raw_action / current_sum
+            # --- Áp dụng Circuit Breaker (Kill-switch) ---
+            hold_cash_today = circuit_breaker_flags[step_idx]
+            if hold_cash_today:
+                raw_action = np.zeros_like(raw_action)
+            else:
+                # CẤU HÌNH SỐ LƯỢNG MÃ TỐI ĐA (Giả lập cho Ví thực)
+                TOP_N_STOCKS = 5
+                if TOP_N_STOCKS is not None and TOP_N_STOCKS < len(raw_action):
+                    top_n_indices = np.argsort(raw_action)[-TOP_N_STOCKS:]
+                    mask = np.ones(len(raw_action), dtype=bool)
+                    mask[top_n_indices] = False
+                    raw_action[mask] = 0.0
+                    
+                # Chuẩn hóa lại tỷ trọng của Top 5 sao cho tổng bằng đúng 100% (1.0)
+                current_sum = np.sum(raw_action)
+                if current_sum > 0:
+                    raw_action = raw_action / current_sum
                 
             strategies_live = strategies_test.iloc[[step_idx]]
             raw_prices = strategies_live.values[0].reshape(num_strategies_features, weights_dim).T[:, 2]

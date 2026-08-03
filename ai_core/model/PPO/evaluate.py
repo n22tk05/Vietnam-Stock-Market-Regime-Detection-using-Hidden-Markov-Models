@@ -14,6 +14,11 @@ from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real, CONFIG
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 from stable_baselines3 import PPO
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
+sys.path.append(root_dir)
+from helper.circuit_breaker import get_circuit_breaker_flags
+
 warnings.filterwarnings('ignore')
 
 if __name__ == "__main__":
@@ -29,6 +34,9 @@ if __name__ == "__main__":
         ai_test = ai_features_df.iloc[test_start:]
         strategies_test = strategies_features_df.iloc[test_start:]
         dates_test = dates[test_start:]
+        
+        # Lấy cờ Circuit Breaker cho tập test
+        circuit_breaker_flags = get_circuit_breaker_flags(dates_test)
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
         root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
@@ -88,14 +96,21 @@ if __name__ == "__main__":
                 while not done[0]:
                     action, _states = model.predict(obs, deterministic=True)
                     
-                    # --- Lọc Top 5 và chuẩn hóa lại % phân bổ ---
-                    action_flat = action[0].copy()
-                    top_k = 3
-                    top_indices = np.argsort(action_flat)[-top_k:]
-                    filtered_action = np.zeros_like(action_flat)
-                    filtered_action[top_indices] = action_flat[top_indices]
+                    # --- Áp dụng Circuit Breaker (Kill-switch) ---
+                    hold_cash_today = circuit_breaker_flags[step_idx]
                     
-                    filtered_action = np.clip(filtered_action, 0, 1)
+                    if hold_cash_today:
+                        # Ép 100% tiền mặt, bỏ qua AI
+                        filtered_action = np.zeros_like(action_flat)
+                    else:
+                        # --- Lọc Top 5 và chuẩn hóa lại % phân bổ ---
+                        top_k = 5
+                        top_indices = np.argsort(action_flat)[-top_k:]
+                        filtered_action = np.zeros_like(action_flat)
+                        filtered_action[top_indices] = action_flat[top_indices]
+                        
+                        filtered_action = np.clip(filtered_action, 0, 1)
+                    
                     action_sum = np.sum(filtered_action)
                     if action_sum > 0:
                         filtered_action = filtered_action / action_sum
