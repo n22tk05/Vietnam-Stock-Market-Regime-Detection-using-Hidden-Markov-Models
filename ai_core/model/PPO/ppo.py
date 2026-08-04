@@ -195,7 +195,7 @@ class CONFIG:
 # ## Hàm này nạp dữ liệu từ file Parquet (đã chạy HMM) và chế biến thêm các chỉ báo để tạo thành 
 
 
-def load_data():
+def load_data(macro_mode=50):
     # 1. Nạp dữ liệu thô
     log("Loading Master DRL")
     raw_df = pd.read_csv(os.path.join(root_dir,"output","hmm_model" ,"master_ticker_hmm_results.csv"))
@@ -395,8 +395,51 @@ def load_data():
         return nqt.replace([np.inf, -np.inf], 0).fillna(0)
 
     # BẢNG 1: Dành cho Mạng Nơ-ron (Đã qua NQT Cross-Sectional)
+
+# NẠP DỮ LIỆU VĨ MÔ (MACRO) & DÒNG TIỀN VÀO AI
+    macro_features = []
+    
+    if macro_mode >= 47:
+        # 1. Dữ liệu Hằng ngày (Daily)
+        daily_macro_files = {
+            'fnb': 'm4_foreign_net_buy_sell.csv',
+            'vix': 'm2_vix.csv',
+            'dxy': 'g1_dxy.csv'
+        }
+        for name, filename in daily_macro_files.items():
+            filepath = os.path.join(root_dir, 'data', 'processed', filename)
+            if os.path.exists(filepath):
+                df_macro = pd.read_csv(filepath)
+                df_macro['time'] = pd.to_datetime(df_macro['time'])
+                df_macro = df_macro.set_index('time')
+                val_col = 'fnb_ratio' if name == 'fnb' else 'close'
+                series_macro = df_macro[val_col].reindex(returns_df.index).ffill().fillna(0)
+                broadcasted_df = pd.DataFrame(np.tile(series_macro.values.reshape(-1, 1), (1, weights_dim)), index=returns_df.index, columns=returns_df.columns)
+                macro_features.append(broadcasted_df)
+
+    if macro_mode >= 50:
+        # 2. Dữ liệu Hàng tháng (Monthly)
+        monthly_macro_files = {
+            'cpi': ('e8_cpi_vietnam.csv', 'cpi_yoy'),
+            'm2': ('e6_m2_vietnam.csv', 'm2_growth_yoy'),
+            'pmi': ('s3_pmi_vietnam.csv', 'pmi_vn')
+        }
+        for name, (filename, val_col) in monthly_macro_files.items():
+            filepath = os.path.join(root_dir, 'data', 'processed', filename)
+            if os.path.exists(filepath):
+                df_macro = pd.read_csv(filepath)
+                df_macro['time'] = pd.to_datetime(df_macro['time'])
+                df_macro['time'] = df_macro['time'] + pd.Timedelta(days=30)
+                df_macro = df_macro.set_index('time')
+                if val_col in df_macro.columns:
+                    series_macro = df_macro[val_col].reindex(returns_df.index).ffill().fillna(0)
+                    broadcasted_df = pd.DataFrame(np.tile(series_macro.values.reshape(-1, 1), (1, weights_dim)), index=returns_df.index, columns=returns_df.columns)
+                    macro_features.append(broadcasted_df)
+
     core_list = [prob0_df, prob1_df, prob2_df, vol_20d_df, ret_20d_df, vol_ratio_df, mkt_ret5_df, mkt_ret20_df, mkt_vol_df, dist_ma20_df, momentum_3d_df]
+    core_list.extend(macro_features)
     ai_features_df = pd.concat([apply_nqt(df) for df in core_list], axis=1).fillna(0)
+
 
     # BẢNG 2: Kho vũ khí cho kịch bản của con người (AI không được thấy)
 
@@ -432,7 +475,6 @@ def load_data():
     return returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates
 
 
-# ## LUẬT 1, 3, 5, 6: MÔI TRƯỜNG ĐẦU TƯ (GYM ENVIRONMENT)
 
 # ## Lớp này mô phỏng lại Sàn chứng khoán. Nơi AI sẽ thử nghiệm các lệnh Mua/Bán và nhận Phạt/Thưởng (Reward).
 
@@ -908,7 +950,7 @@ def run_training_cycle():
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     old_model_name = os.path.join(save_dir, "AI_Brain.zip")
-    new_model_name = os.path.join(save_dir, f"AI_Brain_v8_Seed{seed_val}_Profit_{total_profit:.2f}.zip")
+    new_model_name = os.path.join(save_dir, f"AI_Brain_v9_Seed{seed_val}_Profit_{total_profit:.2f}.zip")
 
     if os.path.exists(old_model_name):
         shutil.copy(old_model_name, new_model_name)
@@ -995,13 +1037,29 @@ def run_auto_tuning(n_trials=10):
 if __name__ == "__main__":
     returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data()
 
-    # ==========================================
-    # CÔNG TẮC BẬT/TẮT AUTO TUNING
-    # ==========================================
-    ENABLE_AUTO_TUNING = True  # Đổi thành True để chạy N lần tự động đổi tham số
-    N_TRIALS = 50  # Số lần muốn chạy
+    import argparse
+    parser = argparse.ArgumentParser(description="AIQUANTUM PPO Training")
+    parser.add_argument('--optuna', action='store_true', help='Bật Optuna Bayesian Optimization')
+    args = parser.parse_args()
+
+    ENABLE_AUTO_TUNING = args.optuna
+    N_TRIALS = 50
 
     if ENABLE_AUTO_TUNING:
         run_auto_tuning(n_trials=N_TRIALS)
     else:
-        run_training_cycle()
+        # CHẠY 10 LẦN NGẪU NHIÊN NẾU KHÔNG DÙNG OPTUNA
+        N_RANDOM_RUNS = N_TRIALS
+        for i in range(N_RANDOM_RUNS):
+            # Cấp phát 1 seed ngẫu nhiên mới hoàn toàn cho mỗi vòng
+            seed_val = random.randint(1, 10000)
+            CONFIG.SEED = seed_val
+            th.manual_seed(seed_val)
+            np.random.seed(seed_val)
+            random.seed(seed_val)
+            
+            log(f"\n" + "="*50)
+            log(f"🎲 BẮT ĐẦU CHẠY RANDOM LẦN {i+1}/{N_RANDOM_RUNS} | SEED: {seed_val}")
+            log("="*50)
+            
+            run_training_cycle()
