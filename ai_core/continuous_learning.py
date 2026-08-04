@@ -79,6 +79,7 @@ def run_continuous_learning():
         prev_nav = C_initial
         holdings = {}
 
+        transaction_logs = []
         step_idx = 0
         update_frequency = 5 # Cứ 20 ngày giao dịch (1 tháng) thì học lại 1 lần
         
@@ -139,7 +140,25 @@ def run_continuous_learning():
                     if sell_shares > 0:
                         gross_proceeds = sell_shares * price_dict[ticker]
                         fee = gross_proceeds * 0.001
-                        cash += (gross_proceeds - fee)
+                        net_proceeds = gross_proceeds - fee
+                        
+                        gia_von = cur_h["gia_von"]
+                        lai_lo = (price_dict[ticker] - gia_von) / gia_von if gia_von > 0 else 0
+                        loai_lenh = "CHỐT LỜI" if lai_lo > 0 else "CẮT LỖ"
+                        
+                        transaction_logs.append({
+                            "Ngày": dates_test[step_idx],
+                            "Mã CP": ticker,
+                            "Loại Lệnh": loai_lenh,
+                            "Khối Lượng": sell_shares,
+                            "Giá Khớp": price_dict[ticker],
+                            "Thành Tiền": net_proceeds,
+                            "Phí GD": fee,
+                            "Lãi/Lỗ (%)": f"{lai_lo*100:.2f}%",
+                            "Giá Vốn": gia_von
+                        })
+                        
+                        cash += net_proceeds
                         cur_h["so_co_phieu"] -= sell_shares
                         cur_h["shares_unlocked"] -= sell_shares
                         if cur_h["so_co_phieu"] == 0:
@@ -159,12 +178,29 @@ def run_continuous_learning():
                     if cash < cost:
                         buy_shares = int(np.floor(cash / (price * 1.001 * 100))) * 100
                         cost = buy_shares * price * 1.001
+                        
                     if buy_shares > 0:
+                        fee = buy_shares * price * 0.001
+                        transaction_logs.append({
+                            "Ngày": dates_test[step_idx],
+                            "Mã CP": ticker,
+                            "Loại Lệnh": "MUA",
+                            "Khối Lượng": buy_shares,
+                            "Giá Khớp": price,
+                            "Thành Tiền": cost,
+                            "Phí GD": fee,
+                            "Lãi/Lỗ (%)": "-",
+                            "Giá Vốn": price
+                        })
+                        
                         cash -= cost
                         if not cur_h:
                             holdings[ticker] = {"so_co_phieu": 0, "gia_von": price, "gia_hien_tai": price, "shares_unlocked": 0, "shares_t1": 0, "shares_t2": 0}
                             cur_h = holdings[ticker]
-                        cur_h["so_co_phieu"] += buy_shares
+                        
+                        new_total = cur_h["so_co_phieu"] + buy_shares
+                        cur_h["gia_von"] = ((cur_h["so_co_phieu"] * cur_h["gia_von"]) + cost) / new_total
+                        cur_h["so_co_phieu"] = new_total
                         cur_h["shares_t2"] += buy_shares
                         cur_h["gia_hien_tai"] = price
 
@@ -236,6 +272,76 @@ def run_continuous_learning():
         print("---------------------------------------------------------")
         print(f"⚖️ Alpha (Năng lực AI):   {alpha*100:.2f}%")
         print("=========================================================")
+        
+        # LƯU FILE LOG CHI TIẾT
+        if transaction_logs:
+            output_dir = os.path.join(root_dir, 'output')
+            os.makedirs(output_dir, exist_ok=True)
+            tx_df = pd.DataFrame(transaction_logs)
+            tx_file = os.path.join(output_dir, "continuous_transaction_log.csv")
+            tx_df.to_csv(tx_file, index=False, encoding='utf-8-sig')
+            print(f"✅ Đã lưu chi tiết giao dịch tại: {tx_file}")
+            
+        # Xuất dữ liệu NAV hằng ngày để vẽ biểu đồ
+        nav_df = pd.DataFrame({
+            'Date': dates_test[:len(portfolio_returns)],
+            'AI_Return': portfolio_returns,
+            'Benchmark_Return': benchmark_returns
+        })
+        nav_df['AI_Cum_Return (%)'] = ((1 + nav_df['AI_Return']).cumprod() - 1) * 100
+        nav_df['Benchmark_Cum_Return (%)'] = ((1 + nav_df['Benchmark_Return']).cumprod() - 1) * 100
+        output_dir = os.path.join(root_dir, 'output')
+        os.makedirs(output_dir, exist_ok=True)
+        nav_out_path = os.path.join(output_dir, "continuous_daily_nav_log.csv")
+        nav_df.to_csv(nav_out_path, index=False)
+        print(f"📁 Đã lưu dữ liệu NAV hằng ngày tại: {nav_out_path}")
+        
+        # === VẼ BIỂU ĐỒ SPLINE ===
+        try:
+            import matplotlib.pyplot as plt
+            import matplotlib.ticker as mtick
+            from scipy.interpolate import make_interp_spline
+            
+            nav_df['Date'] = pd.to_datetime(nav_df['Date'])
+            x = np.arange(len(nav_df))
+            y_ai = nav_df['AI_Cum_Return (%)'].values
+            y_bm = nav_df['Benchmark_Cum_Return (%)'].values
+            
+            x_smooth = np.linspace(x.min(), x.max(), 300)
+            spl_ai = make_interp_spline(x, y_ai, k=3)
+            y_ai_smooth = spl_ai(x_smooth)
+            spl_bm = make_interp_spline(x, y_bm, k=3)
+            y_bm_smooth = spl_bm(x_smooth)
+            
+            plt.style.use('dark_background')
+            fig, ax = plt.subplots(figsize=(14, 7))
+            
+            ax.plot(x_smooth, y_ai_smooth, color='#00FFCC', linewidth=2.5, label='AI Model')
+            ax.plot(x_smooth, y_bm_smooth, color='#FF3333', linewidth=2.5, label='VN-Index Benchmark')
+            ax.fill_between(x_smooth, y_ai_smooth, 0, color='#00FFCC', alpha=0.3)
+            ax.fill_between(x_smooth, y_bm_smooth, 0, color='#FF3333', alpha=0.3)
+            
+            num_ticks = 10
+            tick_indices = np.linspace(0, len(nav_df)-1, num_ticks, dtype=int)
+            tick_dates = nav_df['Date'].iloc[tick_indices].dt.strftime('%d-%m-%Y')
+            
+            ax.set_xticks(tick_indices)
+            ax.set_xticklabels(tick_dates, rotation=45)
+            ax.set_title('SPLINE AREA: SỰ THỐNG TRỊ CỦA AI TRONG KHỦNG HOẢNG', fontsize=18, fontweight='bold', color='gold')
+            ax.set_ylabel('Lợi nhuận tích lũy (%)', fontsize=12)
+            ax.set_xlabel('Thời gian', fontsize=12)
+            ax.yaxis.set_major_formatter(mtick.PercentFormatter(decimals=0))
+            ax.axhline(0, color='white', linewidth=1.5, linestyle='--')
+            ax.legend(loc='upper left', fontsize=12)
+            plt.grid(color='#333333', linestyle='-.', linewidth=0.5, alpha=0.5)
+            plt.tight_layout()
+            
+            plot_file = os.path.join(output_dir, "continuous_spline_nav_chart.png")
+            plt.savefig(plot_file, dpi=300)
+            import sys
+            sys.stdout.buffer.write(f"📁 Đã lưu biểu đồ Spline Area tại: {plot_file}\n".encode('utf-8'))
+        except Exception as plot_e:
+            print(f"Lỗi khi vẽ biểu đồ: {plot_e}")
             
     except Exception as e:
         print(f"Lỗi: {e}")

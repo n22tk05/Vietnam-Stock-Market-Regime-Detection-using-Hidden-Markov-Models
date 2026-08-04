@@ -3,13 +3,16 @@ ai_core/data/raw/
 data/
 
 # Ignore Output Checkpoints & Temporary Files
-ai_core/output/ppo_model/AI_Brain_v7_Seed*.zip
+ai_core/output/ppo_model/*
 ai_core/output/training_leaderboard.csv
+ai_core/cleanup_models.py
+ai_core/analyze_seed.py
+ai_core/continuos_learning.py
+ai_core/extract_history.py
+ai_core/export_model.py
 output/
 
 # Unignore Essential Production Assets
-!ai_core/output/ppo_model/AI_Brain.zip
-!ai_core/output/ppo_model/AI_Brain_v7_Seed4984_Profit_58.06.zip
 !ai_core/output/ppo_model/vec_normalize.pkl
 !ai_core/output/hmm_model/
 !ai_core/output/hmm_model/*
