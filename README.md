@@ -5,6 +5,8 @@
 
 AI QUANTUM là một hệ thống Giao dịch Định lượng (Quantitative Trading) hoàn chỉnh, được thiết kế chuyên biệt cho thị trường chứng khoán Việt Nam (VNINDEX / VN100). Hệ thống kết hợp giữa Mô hình học không giám sát (**Hidden Markov Model**) để phân tích rủi ro thị trường và Học tăng cường sâu (**Proximal Policy Optimization - PPO**) để tối ưu hóa quyết định phân bổ vốn.
 
+> **Trạng thái hiện tại:** Hệ thống đang sử dụng model chính thức là `AI_Brain_v8_Seed946_Profit_51.07.zip` (Tự động thích nghi - Học Lì lợm, Profit vượt trội).
+
 ---
 
 ## 🌟 TÍNH NĂNG NỔI BẬT ĐỘC QUYỀN
