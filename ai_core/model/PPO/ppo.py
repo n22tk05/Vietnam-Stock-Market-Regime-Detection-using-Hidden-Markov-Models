@@ -807,17 +807,17 @@ def run_training_cycle():
         log("\n[CURRICULUM LEARNING] Bắt đầu huấn luyện theo từng cấp độ độ trễ (T+0 -> T+1 -> T+3)...")
 
         CONFIG.T_PLUS_SETTLEMENT = 0
-        n_1 = 10_000
+        n_1 = 100_000
         log(f"Giai đoạn 1: Huấn luyện với T+0 ({n_1} steps)...")
         model.learn(total_timesteps=n_1, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 1
-        n_2 = 10_000
+        n_2 = 100_000
         log(f"Giai đoạn 2: Huấn luyện với T+1 ({n_2} steps)...")
         model.learn(total_timesteps=n_2, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 3
-        n_3 = 30_000
+        n_3 = 300_000
         log(f"Giai đoạn 3: Huấn luyện với T+3 ({n_3} steps)...")
         model.learn(total_timesteps=n_3, reset_num_timesteps=False)
 
@@ -1043,7 +1043,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     ENABLE_AUTO_TUNING = args.optuna
-    N_TRIALS = 50
+    N_TRIALS = 75
 
     if ENABLE_AUTO_TUNING:
         run_auto_tuning(n_trials=N_TRIALS)
