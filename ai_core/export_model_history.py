@@ -1,14 +1,29 @@
 import sys
 import os
+import glob
 import pandas as pd
 import numpy as np
 
-sys.path.append(r'C:\Users\ADMIN\Desktop\AIQUANTUM\ai_core\model\PPO')
-from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+ppo_dir = os.path.join(current_dir, "model", "PPO")
+if ppo_dir not in sys.path:
+    sys.path.append(ppo_dir)
+if current_dir not in sys.path:
+    sys.path.append(current_dir)
+
+try:
+    import ppo
+    from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+except ImportError:
+    from ai_core.model.PPO import ppo, load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 
-def export_trade_history():
+def export_trade_history(target_model=None):
     returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data()
     total_days = len(returns_df)
     test_ratio = 0.15
@@ -20,16 +35,26 @@ def export_trade_history():
     strategies_test = strategies_features_df.iloc[test_start:]
     dates_test = dates[test_start:]
 
-    script_dir = r"C:\Users\ADMIN\Desktop\AIQUANTUM\ai_core\model\PPO"
-    root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
+    root_dir = current_dir
     model_dir = os.path.join(root_dir, "output", "ppo_model")
     
-    model_name = "AI_Brain_v7_Seed6445_Profit_-9.19.zip"
+    # Tự động chọn model khả dụng
+    if target_model:
+        model_name = target_model
+    else:
+        preferred = ["AI_Brain_v7_Seed4984_Profit_58.06.zip", "AI_Brain.zip"]
+        available_models = [os.path.basename(p) for p in glob.glob(os.path.join(model_dir, "*.zip"))]
+        model_name = next((m for m in preferred if m in available_models), available_models[0] if available_models else None)
+
+    if not model_name:
+        raise FileNotFoundError("Không tìm thấy model .zip nào trong thư mục output/ppo_model!")
+
     model_path = os.path.join(model_dir, model_name)
     env_path = os.path.join(model_dir, "vec_normalize.pkl")
     
     print(f"🔄 Đang kết xuất lịch sử giao dịch chi tiết cho {model_name}...")
     
+    sys.modules['__main__'].AdvancedTickerExtractor = ppo.AdvancedTickerExtractor
     model = PPO.load(model_path)
     test_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
             returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=True
@@ -164,7 +189,7 @@ def export_trade_history():
         step_idx += 1
 
     df_history = pd.DataFrame(history_records)
-    out_file = os.path.join(root_dir, "output", "Seed6445_Detailed_History.csv")
+    out_file = os.path.join(root_dir, "output", f"{os.path.splitext(model_name)[0]}_Detailed_History.csv")
     df_history.to_csv(out_file, index=False, encoding='utf-8-sig')
     print(f"✅ Đã xuất lịch sử chi tiết tại: {out_file}")
 

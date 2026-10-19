@@ -5,12 +5,22 @@ import numpy as np
 import traceback
 
 sys.stdout.reconfigure(encoding='utf-8')
-sys.path.append(r'C:\Users\ADMIN\Desktop\AIQUANTUM\ai_core\model\PPO')
-from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+script_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.abspath(os.path.join(script_dir, ".."))
+ppo_dir = os.path.join(script_dir, "model", "PPO")
+
+for p in [root_dir, script_dir, ppo_dir]:
+    if p not in sys.path:
+        sys.path.append(p)
+
+try:
+    import ppo
+    from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+except ImportError:
+    from ai_core.model.PPO import ppo, load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv
-
-sys.path.append(r'C:\Users\ADMIN\Desktop\AIQUANTUM')
 from ai_core.helper.circuit_breaker import get_circuit_breaker_flags
 
 def calc_metrics(returns):
@@ -57,13 +67,15 @@ def run_continuous_learning():
         dates_test = dates[test_start:]
         circuit_breaker_flags = get_circuit_breaker_flags(dates_test)
 
+        C_initial = 20_000_000.0
+
         test_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
-                returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=True
+                returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=True, initial_capital=C_initial
             )])
 
         print(f"🚀 BẮT ĐẦU MÔ PHỎNG CONTINUOUS LEARNING VỚI MODEL: {model_name}")
         print("Cơ chế: Mỗi 20 ngày (1 tháng), AI sẽ dừng lại, đọc lại dữ liệu 200 ngày gần nhất và tự cập nhật não bộ (Retraining).")
-        
+        print(f'Số tiền ban đầu: {C_initial}')
         # Load lại model tươi mới để chạy
         model = PPO.load(model_path)
         
@@ -73,7 +85,6 @@ def run_continuous_learning():
         portfolio_returns = []
         benchmark_returns = []
 
-        C_initial = 100_000_000.0
         cash = C_initial
         nav = C_initial
         prev_nav = C_initial
@@ -327,7 +338,7 @@ def run_continuous_learning():
             
             ax.set_xticks(tick_indices)
             ax.set_xticklabels(tick_dates, rotation=45)
-            ax.set_title('SPLINE AREA: SỰ THỐNG TRỊ CỦA AI TRONG KHỦNG HOẢNG', fontsize=18, fontweight='bold', color='gold')
+            ax.set_title('SPLINE AREA', fontsize=18, fontweight='bold', color='gold')
             ax.set_ylabel('Lợi nhuận tích lũy (%)', fontsize=12)
             ax.set_xlabel('Thời gian', fontsize=12)
             ax.yaxis.set_major_formatter(mtick.PercentFormatter(decimals=0))

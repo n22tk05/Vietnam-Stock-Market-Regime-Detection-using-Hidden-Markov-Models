@@ -16,7 +16,14 @@ output/
 !ai_core/output/ppo_model/vec_normalize.pkl
 !ai_core/output/hmm_model/
 !ai_core/output/hmm_model/*
-
+_bmad/
+_bmad-output/
+.agent
+.agents
+.claude
+.cursor
+.gemini
+.github
 
 # Python cache & Environment files
 __pycache__/
@@ -28,6 +35,7 @@ env/
 venv/
 .venv/
 node_modules/
+
 
 # IDE/OS files
 .vscode/

@@ -25,7 +25,7 @@ def main():
 
     # BƯỚC 1: CRAWL DỮ LIỆU
     if not args.skip_crawl:
-        target_date = args.date if args.date else "2026-05-04"
+        target_date = args.date if args.date else "2026-10-10"
         print(f"\n🚀 [1/4] CHẠY CRAWL DỮ LIỆU ĐẾN NGÀY {target_date}...")
         run_cmd(f"pipeline.py --date {target_date}", cwd=os.path.join(script_dir, "crawl"))
     else:

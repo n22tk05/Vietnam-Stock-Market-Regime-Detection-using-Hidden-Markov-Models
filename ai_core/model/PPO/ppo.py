@@ -11,6 +11,9 @@ import random
 import shutil
 import os
 
+if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 seed_val = random.randint(1, 100)
 print(f"🎲 Random Seed: {seed_val}")
 th.manual_seed(seed_val)
@@ -23,8 +26,6 @@ import warnings
 import matplotlib.ticker as mtick
 
 warnings.filterwarnings('ignore') # Tắt các cảnh báo không cần thiết để Log sạch đẹp hơn
-
-sys.stdout.reconfigure(encoding='utf-8')
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
@@ -480,7 +481,7 @@ def load_data(macro_mode=50):
 
 log("Create Gym Environment")
 class AdvancedPortfolioEnv(gym.Env):
-        def __init__(self, returns_df, ai_features_df, script_features_df, weights_dim, num_script_features, tickers=None, step_size=1, cost_rate=CONFIG.COST_RATE, is_test=False, dates=None):
+        def __init__(self, returns_df, ai_features_df, script_features_df, weights_dim, num_script_features, tickers=None, step_size=1, cost_rate=CONFIG.COST_RATE, is_test=False, dates=None, initial_capital=100_000_000):
 
             super().__init__()
             self.returns_arr = np.exp(returns_df.values) - 1.0 
@@ -515,7 +516,7 @@ class AdvancedPortfolioEnv(gym.Env):
             self.weight_unlocked = np.zeros(self.weights_dim)
             self.locked_weights = np.zeros((3, self.weights_dim)) # FIFO Queue
             self.avg_entry_prices = np.zeros(self.weights_dim)
-            self.initial_capital = 100_000_000 # Giả lập vốn 100 triệu
+            self.initial_capital = initial_capital # Vốn giả lập ban đầu
             self.current_capital = self.initial_capital
             self.peak_nav = self.initial_capital
             self.prev_drawdown = 0.0
@@ -665,7 +666,6 @@ class AdvancedPortfolioEnv(gym.Env):
                         LOT_SIZE=100, 
                         tracking_err_threshold=0.3
                     )
-                    
                     if real_alloc['warning_flag']:
                         print(f"      ⚠️ CẢNH BÁO: {real_alloc['warning_msg']}")
                         
@@ -683,7 +683,7 @@ class AdvancedPortfolioEnv(gym.Env):
                 reward -= (dd_increase * 3000)  # Phạt sụt giảm tài sản cực nặng (trước đây là 1000)
             self.prev_drawdown = drawdown
             force_terminate = False
-            if drawdown > 0.3: # Cháy tài khoản nếu lỗ 15% từ đỉnh (trước đây là 30%)
+            if drawdown > 0.4: # Cháy tài khoản nếu lỗ 15% từ đỉnh (trước đây là 30%)
                 reward -= 5000  # Phạt 500 điểm nếu cháy tài khoản
                 if not getattr(self, 'is_test', False):
                     force_terminate = True
@@ -807,17 +807,17 @@ def run_training_cycle():
         log("\n[CURRICULUM LEARNING] Bắt đầu huấn luyện theo từng cấp độ độ trễ (T+0 -> T+1 -> T+3)...")
 
         CONFIG.T_PLUS_SETTLEMENT = 0
-        n_1 = 100_000
+        n_1 = 10_000
         log(f"Giai đoạn 1: Huấn luyện với T+0 ({n_1} steps)...")
         model.learn(total_timesteps=n_1, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 1
-        n_2 = 100_000
+        n_2 = 10_000
         log(f"Giai đoạn 2: Huấn luyện với T+1 ({n_2} steps)...")
         model.learn(total_timesteps=n_2, reset_num_timesteps=False)
 
         CONFIG.T_PLUS_SETTLEMENT = 3
-        n_3 = 300_000
+        n_3 = 30_000
         log(f"Giai đoạn 3: Huấn luyện với T+3 ({n_3} steps)...")
         model.learn(total_timesteps=n_3, reset_num_timesteps=False)
 

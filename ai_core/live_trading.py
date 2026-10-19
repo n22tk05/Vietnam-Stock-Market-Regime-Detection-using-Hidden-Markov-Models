@@ -49,13 +49,29 @@ def daily_live_trading(run_crawl=False, target_date=None):
     if ppo_dir not in sys.path:
         sys.path.append(ppo_dir)
         
-    import ppo
-    from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+    try:
+        import ppo
+        from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real, AdvancedTickerExtractor
+    except ImportError:
+        from ai_core.model.PPO import ppo, load_data, AdvancedPortfolioEnv, allocate_portfolio_real, AdvancedTickerExtractor
+
     from stable_baselines3 import PPO
     from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
     
-    # Nạp dữ liệu mới nhất đã được HMM tổng hợp
-    returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data()
+    # Định tuyến tới thư mục chứa Model
+    save_dir = os.path.join(script_dir, "output", "ppo_model")
+    vec_norm_path = os.path.join(save_dir, "vec_normalize.pkl")
+    model_path = os.path.join(save_dir, "AI_Brain.zip")
+    if not os.path.exists(model_path):
+        model_path = os.path.join(save_dir, "AI_Brain_v8_Seed946_Profit_51.07.zip")
+        
+    # Tải Model Trí tuệ AI
+    sys.modules['__main__'].AdvancedTickerExtractor = ppo.AdvancedTickerExtractor
+    model = PPO.load(model_path)
+    expected_dim = model.observation_space.shape[1]
+
+    # Nạp dữ liệu mới nhất đã được HMM tổng hợp (tự động khớp 44, 47, hay 50 features)
+    returns_df, ai_features_df, strategies_features_df, weights_dim, tickers, num_strategies_features, dates = load_data(macro_mode=expected_dim)
     
     # Trích xuất dòng cuối cùng
     idx = -1
@@ -71,24 +87,18 @@ def daily_live_trading(run_crawl=False, target_date=None):
         returns_live, ai_live, strategies_live, weights_dim, num_strategies_features, tickers=tickers, dates=dates_live, is_test=True
     )])
     
-    # Định tuyến tới thư mục chứa Model
-    save_dir = os.path.join(script_dir, "output", "ppo_model")
-    vec_norm_path = os.path.join(save_dir, "vec_normalize.pkl")
-    model_path = os.path.join(save_dir, "AI_Brain_v7_Seed4984_Profit_58.06.zip")
-    
     # BẮT BUỘC: Nạp lại chuẩn hóa (VecNormalize) của quá trình huấn luyện
     if os.path.exists(vec_norm_path):
-        live_env = VecNormalize.load(vec_norm_path, live_env)
-        live_env.training = False
-        live_env.norm_reward = False
+        try:
+            live_env = VecNormalize.load(vec_norm_path, live_env)
+            live_env.training = False
+            live_env.norm_reward = False
+        except (AssertionError, ValueError) as e:
+            print(f"⚠️ CẢNH BÁO: VecNormalize shape không khớp với model shape ({e}), bỏ qua chuẩn hóa môi trường.")
     else:
         print("⚠️ CẢNH BÁO: Không tìm thấy file vec_normalize.pkl! Model dự đoán sẽ bị sai lệch tỷ lệ.")
         
     obs = live_env.reset()
-    
-    # Tải Model Trí tuệ AI
-    sys.modules['__main__'].AdvancedTickerExtractor = ppo.AdvancedTickerExtractor
-    model = PPO.load(model_path)
     
     # Dự đoán tỷ trọng
     action, _states = model.predict(obs, deterministic=True)

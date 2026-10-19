@@ -6,12 +6,22 @@ import traceback
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-sys.path.append(r'C:\Users\ADMIN\Desktop\AIQUANTUM\ai_core\model\PPO')
-from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+script_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.abspath(os.path.join(script_dir, ".."))
+ppo_dir = os.path.join(script_dir, "model", "PPO")
+
+for p in [root_dir, script_dir, ppo_dir]:
+    if p not in sys.path:
+        sys.path.append(p)
+
+try:
+    import ppo
+    from ppo import load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+except ImportError:
+    from ai_core.model.PPO import ppo, load_data, AdvancedPortfolioEnv, allocate_portfolio_real
+
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
-
-sys.path.append(r'C:\Users\ADMIN\Desktop\AIQUANTUM')
 from ai_core.helper.circuit_breaker import get_circuit_breaker_flags
 
 def calc_metrics(returns):
