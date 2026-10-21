@@ -1,0 +1,228 @@
+{
+  "createdAt": "2026-07-28T16:01:26.504081+00:00",
+  "files": {
+    ".gitignore": {
+      "sha256": "8570c5839818256894ce4e2fb320b1b3053b5e86254cb30ed49b05e6e29fa1b9",
+      "size": 606
+    },
+    "PPO_Documentation.md": {
+      "sha256": "f24de1ef1c628f00b9775f48e4cba8ed89545516cab662223757b60cc5bd855c",
+      "size": 8790
+    },
+    "README.md": {
+      "sha256": "2408f44d2e7073dbfbc56d02499ed70f97d1e1f3391e29b844d209eee1c91a67",
+      "size": 4460
+    },
+    "ai_core/__pycache__/ai_server.cpython-314.pyc": {
+      "sha256": "de305db6d0b469e5aa0d76468243677b4f3cd9afbc93a872b3f24637f374f925",
+      "size": 9403
+    },
+    "ai_core/__pycache__/extract_history.cpython-314.pyc": {
+      "sha256": "9f26784684f829a6c967b2f4855b1dc7e406ee0d35d178d6cfec65b9a4107332",
+      "size": 10105
+    },
+    "ai_core/__pycache__/live_trading.cpython-314.pyc": {
+      "sha256": "58df09ae3c0c4c178ac56ebd05e74e9d3f9d0066fd7aa0740e2450f90deed65f",
+      "size": 8022
+    },
+    "ai_core/__pycache__/main.cpython-314.pyc": {
+      "sha256": "928b307a89801c1f739981e1bddbe1d6e510e0af915473b03c88d162f7ad3f22",
+      "size": 3230
+    },
+    "ai_core/__pycache__/user_simulator.cpython-314.pyc": {
+      "sha256": "7f7e254b1aad6887b0ca70c189cd4437c79f7eabddeb0e419811eb1900104b0f",
+      "size": 17212
+    },
+    "ai_core/ai_server.py": {
+      "sha256": "26d115f770f96b79b7abd4804b12273ec459e85bd804e9d25d77431e0451c6cf",
+      "size": 6665
+    },
+    "ai_core/crawl/crawl_industry.py": {
+      "sha256": "9d5b331191456084c1200c3e7e56d24417f478dff4d5cf5bae3a891ba752d33a",
+      "size": 913
+    },
+    "ai_core/crawl/crawl_marco.py": {
+      "sha256": "66e3ce61250f58c6983ce573e5b3494885cfd80013b94c4198cf534da1b25292",
+      "size": 31457
+    },
+    "ai_core/crawl/crawl_stock.py": {
+      "sha256": "befa7658dd5a75d85c87acb1fd2eca76a33040b113c9e9dc328a80717fe06923",
+      "size": 7751
+    },
+    "ai_core/crawl/pipeline.py": {
+      "sha256": "1df97e1ca9395ec4fbe191b712ea5d26db0e4ec9916a7266a26c3a00c336284a",
+      "size": 1095
+    },
+    "ai_core/data_processing.py": {
+      "sha256": "eb2571e0451fa211c298e491bcdc0c5a9b526697a414125fd1d64da318899926",
+      "size": 901
+    },
+    "ai_core/data_processing/align_daily_features.py": {
+      "sha256": "46a6cd049c103a03e56c27794d5ef9bbe7cc785c689f60a4016261d3fa401dd9",
+      "size": 2761
+    },
+    "ai_core/data_processing/derived_variable.py": {
+      "sha256": "f4434cd2ea9db65a2e33dda9ff22d353bd290ae64440b9c11100462b6ae4c66a",
+      "size": 12504
+    },
+    "ai_core/data_processing/industry_variable.py": {
+      "sha256": "75c580b4ad095fb1c88160fe39c46262b3b7e012e6abb8272db5239fa711426d",
+      "size": 2763
+    },
+    "ai_core/data_processing/m1.py": {
+      "sha256": "9db6596cee990d3735b7dc39ef5ec123de4035de9ad27aebf7d8aecd7a7542f9",
+      "size": 2745
+    },
+    "ai_core/data_processing/map_icb.py": {
+      "sha256": "408cad93508fea62ca01a95eff0424cb91c5cfed72217ee82b9d5b12deb754bf",
+      "size": 1494
+    },
+    "ai_core/data_processing/mapping_macro.py": {
+      "sha256": "36a45114a541bebfde74c0bb119244c4fb0a3057cc2630e53389a15cae479e5f",
+      "size": 1691
+    },
+    "ai_core/data_processing/market/create.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "ai_core/data_processing/market_variable.py": {
+      "sha256": "70bdc69fd9fcf040703553e24a2fff8b01cfaa991dc933116466f0e42cd57b3a",
+      "size": 2721
+    },
+    "ai_core/data_processing/normalization/market.py": {
+      "sha256": "a36ea735c4fa9624ba3c1361c30af09a2712c5f5d09433007320d22a95ee69b5",
+      "size": 1721
+    },
+    "ai_core/data_processing/normalization/sector.py": {
+      "sha256": "64083fb0663559217d057fb997af2032610941ffec541f16a6ee06b832e39c13",
+      "size": 1915
+    },
+    "ai_core/data_processing/normalization/ticker.py": {
+      "sha256": "be30b343fe2a090ee57ca95eba26f75089efdee1b79814a36f1f62daad0d6a64",
+      "size": 1532
+    },
+    "ai_core/data_processing/pipeline.py": {
+      "sha256": "6264543309b0aba781bb208b6033c5fe85eefb71e16538812c1a3e06e7e252a4",
+      "size": 1491
+    },
+    "ai_core/data_processing/process_pipeline.py": {
+      "sha256": "a4065b25bc028ff14da69d5940b468d545fdd26fc105ce6ec2bad353953c02a3",
+      "size": 5075
+    },
+    "ai_core/data_processing/slit_date.py": {
+      "sha256": "fa0d4719d7a2e73028b79a5f61b8537a9649017fa64f3e26ccf9935d8efd6f5e",
+      "size": 1639
+    },
+    "ai_core/extract_history.py": {
+      "sha256": "1e54a05005d0cd97be8932c8eeba3c40782b2c41e50f7a5707e3431be4fbd776",
+      "size": 7139
+    },
+    "ai_core/helper/__init__.py": {
+      "sha256": "8957d9666f07494a6015c257a16e283239d090c9a23b9d483786524d2967bc76",
+      "size": 233
+    },
+    "ai_core/helper/model_helper.py": {
+      "sha256": "3883a6919a2fcc6232cde7d932dd7f36df8ef951417c0f08dcd6506579677121",
+      "size": 4664
+    },
+    "ai_core/helper/normalization.py": {
+      "sha256": "491b91316ede4d3f90e688a8905437f6bff77a80c000b7f8479b9c0aa55153b2",
+      "size": 1543
+    },
+    "ai_core/helper/statinonarity.py": {
+      "sha256": "6cde26e4a9fb4d13d07b28a4080faba3fa392804114165ef32361461cd643159",
+      "size": 1048
+    },
+    "ai_core/history.csv": {
+      "sha256": "c7098519e0b29b678c2218b799bf340f26911174ab7f9e11bc6473e1418b96a9",
+      "size": 35157
+    },
+    "ai_core/history.json": {
+      "sha256": "89cc9efc0f8c2bffde59d752f63792a2421aa0c848280b8db6c16b3a7a45c5c8",
+      "size": 105926
+    },
+    "ai_core/icb_mapping.json": {
+      "sha256": "4b0e935d3400bfc34fc089c7c762e462a2b3d3af0c3d29158ef9742fd00e60a3",
+      "size": 2207
+    },
+    "ai_core/live_trading.py": {
+      "sha256": "3481e79e4af82a20e6f955fb0bdc11f261a73ac7bddf3371b3ebf2adc84ad86b",
+      "size": 6346
+    },
+    "ai_core/main.py": {
+      "sha256": "e8dbe80844fbe750dd4224887d3f5387e0fa6ba6d18ff205a8955652d33d2561",
+      "size": 1993
+    },
+    "ai_core/model/HMM/b.py": {
+      "sha256": "a5c9208e3cbc5ae29a5044ec44bb01cca0af847b9e047f67bb2c31e3f1275707",
+      "size": 5628
+    },
+    "ai_core/model/HMM/hmm.py": {
+      "sha256": "6d5ec51b55671d46dbd864b1091ad4a836b49480cb2da3c17150354a3c409627",
+      "size": 24747
+    },
+    "ai_core/model/PPO/evaluate.py": {
+      "sha256": "b6f99904c7bda5f2c6e28ff926890826c79d97a226ee9faabacf1b7c7d4592fa",
+      "size": 9223
+    },
+    "ai_core/model/PPO/ppo.py": {
+      "sha256": "5742f60dce4a21bd05bd7a2675f38453328892c8dd5fdc4c92bfbcd66e90f397",
+      "size": 46558
+    },
+    "ai_core/model/PPO/verify_predictions.py": {
+      "sha256": "4a6c79a3a7cb535aaeb355a62227cfde1cbc03ab27880308cd85de9913e4bf88",
+      "size": 6171
+    },
+    "ai_core/output/hmm_model/macro_hmm_results.csv": {
+      "sha256": "e39227dc044cd0f97a367f4a240ab91e52dffb6f6a7961dc086d4b201b9f9e20",
+      "size": 39915
+    },
+    "ai_core/output/hmm_model/market_hmm_results.csv": {
+      "sha256": "38b2cba261c989069969ce59e1e9e25868ee14301986ce73c88408eec0d974ea",
+      "size": 184689
+    },
+    "ai_core/output/hmm_model/master_meta_predictions.csv": {
+      "sha256": "c0b80dfe85fbf1bb9170506540e4e203f704059bff134ffbea19810d2f580d56",
+      "size": 82112891
+    },
+    "ai_core/output/hmm_model/master_ticker_hmm_results.csv": {
+      "sha256": "f09e75924736d527d55d3a7384611e08f7bdcc7b6c62c141c7f28b2f0330d732",
+      "size": 79775940
+    },
+    "ai_core/output/hmm_model/sector_hmm_results.csv": {
+      "sha256": "9d071e948f7b9c07704fc45d886bc5ee155741e6ed91aa6406b407c54913d547",
+      "size": 26373617
+    },
+    "ai_core/output/ppo_model/AI_Brain.zip": {
+      "sha256": "a9fe7602d6459dee05e462ad1af0d24d5ee6e6e9e58248aee98776e66a80ded7",
+      "size": 3648342
+    },
+    "ai_core/output/ppo_model/AI_Brain_v7_Seed4984_Profit_58.06.zip": {
+      "sha256": "a9fe7602d6459dee05e462ad1af0d24d5ee6e6e9e58248aee98776e66a80ded7",
+      "size": 3648342
+    },
+    "ai_core/simulated_users.json": {
+      "sha256": "5a614370d96ffeb9843e948b87772a58ad7f94d4c1cc0dfed5ffbf76b1d48c49",
+      "size": 147474
+    },
+    "ai_core/success_tickers.txt": {
+      "sha256": "14e299cb8adb6aacda00cb1f968dd0f2976f74297e972709e1afed7f61b5cfee",
+      "size": 300
+    },
+    "ai_core/user_simulator.py": {
+      "sha256": "93dc7c917a5597f81f9b34879f8f0c3e489dc5fefae31f02544bf09b8ff92e3c",
+      "size": 16148
+    },
+    "ai_core/user_trade_history.csv": {
+      "sha256": "eeed3b842bc20ccc9eca8db57e5d3db636f0de96058d51c6151740ea8f1add39",
+      "size": 23081
+    },
+    "ai_quantum_pipeline.md": {
+      "sha256": "3b252f03c7eab2a49e2e25dd0dfb5caada9d8bd1792dcc0ef5b9a257c0a01cb7",
+      "size": 11163
+    }
+  },
+  "ignorePatterns": [],
+  "rootName": "Vietnam-Stock-Market-Regime-Detection-using-Hidden-Markov-Models",
+  "version": 1
+}

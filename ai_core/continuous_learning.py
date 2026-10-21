@@ -67,7 +67,7 @@ def run_continuous_learning():
         dates_test = dates[test_start:]
         circuit_breaker_flags = get_circuit_breaker_flags(dates_test)
 
-        C_initial = 20_000_000.0
+        C_initial = 2_000_000.0
 
         test_env = DummyVecEnv([lambda: AdvancedPortfolioEnv(
                 returns_test, ai_test, strategies_test, weights_dim, num_strategies_features, tickers=tickers, dates=dates_test, is_test=True, initial_capital=C_initial

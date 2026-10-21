@@ -13,7 +13,7 @@ data_dir = os.path.join(script_dir, "data", "stocks")
 
 # 1. Định nghĩa khoảng thời gian cần đánh giá
 start_date_str = '2025-08-13'
-end_date_str = '2026-07-28'
+end_date_str = '2026-10-10'
 
 print(f"🔄 Đang trích xuất dữ liệu thị trường từ {start_date_str} đến {end_date_str}...")
 

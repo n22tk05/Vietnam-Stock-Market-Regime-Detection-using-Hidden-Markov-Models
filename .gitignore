@@ -24,7 +24,7 @@ _bmad-output/
 .cursor
 .gemini
 .github
-plans/
+plans/w
 # Python cache & Environment files
 __pycache__/
 *.pyc
@@ -37,8 +37,11 @@ venv/
 node_modules/
 
 
-# IDE/OS files
-.vscode/
-.idea/
-.DS_Store
+# Environment files & local databases
+backend/.env
+backend/*.db
+backend/*.sqlite
+backend/runtime/output/*
+frontend/dist/
+frontend/.env.local
 

@@ -1,0 +1,11 @@
+.env
+.git
+.gitignore
+.mypy_cache
+.pytest_cache
+.ruff_cache
+__pycache__
+*.py[cod]
+runtime/input/*
+runtime/output/*
+tests/

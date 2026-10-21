@@ -1,0 +1,96 @@
+x-app-environment: &app-environment
+  APP_NAME: Astera API
+  APP_ENV: development
+  APP_HOST: 0.0.0.0
+  APP_PORT: 8000
+  API_PREFIX: /api/v1
+  DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://postgres:postgres@postgres:5432/astera_db}
+  REDIS_URL: redis://redis:6379/0
+  JWT_SECRET_KEY: ${JWT_SECRET_KEY:-local-compose-secret-change-before-deployment}
+  JWT_ALGORITHM: HS256
+  JWT_ACCESS_TOKEN_EXPIRE_MINUTES: 30
+  JWT_REFRESH_TOKEN_EXPIRE_DAYS: 30
+  FRONTEND_URL: http://localhost:5173
+  CORS_ORIGINS: http://localhost:5173
+  AI_CORE_PATH: /opt/ai-core
+  AI_CORE_INTEGRATION_MODE: auto
+  AI_CORE_TIMEOUT_SECONDS: 60
+  AI_CORE_DISABLE_BYTECODE: "true"
+  RECOMMENDATION_EXPIRE_HOURS: 24
+  MARKET_REGIME_STALE_HOURS: 24
+  MINIMUM_INVESTMENT_CAPITAL: 1000000
+  EMAIL_ENABLED: "false"
+
+x-app-service: &app-service
+  build:
+    context: .
+  environment: *app-environment
+  volumes:
+    - ../Vietnam-Stock-Market-Regime-Detection-using-Hidden-Markov-Models:/opt/ai-core:ro
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+  restart: unless-stopped
+
+services:
+  api:
+    <<: *app-service
+    command: ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: astera_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d astera_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  celery-worker:
+    <<: *app-service
+    command: ["celery", "-A", "app.jobs.celery_app:celery_app", "worker", "--loglevel=INFO"]
+
+  celery-beat:
+    <<: *app-service
+    command: ["celery", "-A", "app.jobs.celery_app:celery_app", "beat", "--loglevel=INFO"]
+
+volumes:
+  postgres-data:
+  redis-data:

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-base: #FFFFFF;
+    --bg-subtle: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --border-color: #E2E8F0;
+    --border-hover: #CBD5E1;
+    
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --text-muted: #94A3B8;
+    
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --primary-light: #EFF6FF;
+    --primary-border: #BFDBFE;
+    
+    --success: #059669;
+    --success-light: #ECFDF5;
+    --success-border: #A7F3D0;
+    
+    --warning: #D97706;
+    --warning-light: #FFFBEB;
+    --warning-border: #FDE68A;
+    
+    --danger: #DC2626;
+    --danger-light: #FEF2F2;
+    --danger-border: #FECACA;
+
+    --purple: #7C3AED;
+    --purple-light: #F5F3FF;
+    --purple-border: #DDD6FE;
+    
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.mono-num {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+@keyframes shimmerPulse {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #F1F5F9 25%, #E2E8F0 50%, #F1F5F9 75%);
+  background-size: 200% 100%;
+  animation: shimmerPulse 1.2s infinite ease-in-out;
+  border-radius: 6px;
+  color: transparent !important;
+  user-select: none;
+}
