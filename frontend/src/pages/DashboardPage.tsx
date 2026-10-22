@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
 import { 
   ArrowLeft, 
   RotateCcw, 
@@ -10,7 +11,9 @@ import {
   Sparkles, 
   HelpCircle,
   Clock,
-  Layers
+  Layers,
+  User,
+  LogOut
 } from 'lucide-react';
 import { MetricsGrid } from '@/components/dashboard/MetricsGrid';
 import { ForecastTable } from '@/components/dashboard/ForecastTable';
@@ -27,6 +30,7 @@ import {
 
 export const DashboardPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const { user, isAuthenticated, logout } = useAuth();
 
   // Initialize Capital State from URL param or LocalStorage or default 500M VND
   const getInitialCapital = () => {
@@ -151,6 +155,29 @@ export const DashboardPage: React.FC = () => {
               <Sparkles className="w-4 h-4" />
               <span>Khảo Sát Khẩu Vị Rủi Ro</span>
             </button>
+
+            {isAuthenticated ? (
+              <div className="flex items-center gap-2">
+                <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-xs font-bold text-slate-700 border border-slate-200">
+                  <User className="w-3.5 h-3.5 text-blue-600" />
+                  <span>{user?.fullName || user?.email?.split('@')[0] || 'Nhà đầu tư'}</span>
+                </div>
+                <button
+                  onClick={logout}
+                  title="Đăng xuất"
+                  className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-xs font-bold text-blue-600 hover:bg-blue-50 border border-blue-200 transition-colors"
+              >
+                Đăng Nhập
+              </Link>
+            )}
 
             <Link
               to="/"

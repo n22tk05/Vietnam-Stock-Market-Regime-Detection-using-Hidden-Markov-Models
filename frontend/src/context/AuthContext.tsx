@@ -10,6 +10,7 @@ export type OnboardingStep = 'CHECKING' | 'UNAUTHENTICATED' | 'NEED_PROFILE' | '
 
 interface AuthContextType {
   user: UserRead | null;
+  isAuthenticated: boolean;
   profile: InvestmentProfileRead | null;
   portfolio: PortfolioResponse | null;
   onboardingStep: OnboardingStep;
@@ -129,7 +130,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, [refreshAuthState]);
 
-  const login = async (_: { user: UserRead }) => {
+  const login = async (tokenData: { user: UserRead }) => {
+    setUser(tokenData.user);
     await refreshAuthState();
   };
 
@@ -145,10 +147,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const isAuthenticated = !!user;
+
   return (
     <AuthContext.Provider
       value={{
         user,
+        isAuthenticated,
         profile,
         portfolio,
         onboardingStep,

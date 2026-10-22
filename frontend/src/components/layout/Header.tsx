@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
+import { User, LogOut } from 'lucide-react';
 
 interface HeaderProps {
   onOpenAssessment?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenAssessment }) => {
+  const { user, isAuthenticated, logout } = useAuth();
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-[1280px] mx-auto px-6 h-[72px] flex items-center justify-between">
@@ -51,6 +54,29 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAssessment }) => {
               <span className="bg-blue-600 text-white text-[10px] px-1.5 py-0.2 rounded-full">4 bước</span>
             </button>
           )}
+          {isAuthenticated ? (
+            <div className="flex items-center gap-2">
+              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700">
+                <User className="w-3.5 h-3.5 text-blue-600" />
+                <span>{user?.fullName || user?.email?.split('@')[0] || 'Nhà đầu tư'}</span>
+              </div>
+              <button
+                onClick={logout}
+                title="Đăng xuất"
+                className="p-2 rounded-full text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="text-xs font-bold text-slate-600 hover:text-blue-600 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition-colors"
+            >
+              Đăng Nhập
+            </Link>
+          )}
+
           <Link
             to="/dashboard"
             className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold text-sm bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-500/20 transition-all hover:scale-[1.02]"

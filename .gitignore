@@ -45,3 +45,6 @@ backend/runtime/output/*
 frontend/dist/
 frontend/.env.local
 
+
+/plans
+*.db
