@@ -42,9 +42,15 @@ backend/.env
 backend/*.db
 backend/*.sqlite
 backend/runtime/output/*
+backend/dist/
+dist/
+*.tsbuildinfo
+frontend/*.tsbuildinfo
 frontend/dist/
 frontend/.env.local
 
 
 /plans
 *.db
+frontend/test-results/
+.vscode/

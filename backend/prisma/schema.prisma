@@ -1,0 +1,304 @@
+// ==============================================================================
+// AI QUANTUM - PRISMA SCHEMA DEFINITION (POSTGRESQL ENTERPRISE)
+// ==============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------------------------
+// Model 1: User (Người dùng)
+// ------------------------------------------------------------------------------
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  passwordHash    String           @map("password_hash")
+  fullName        String?          @map("full_name")
+  role            String           @default("USER") // USER, ADMIN, ANALYST
+  status          String           @default("ACTIVE") // ACTIVE, INACTIVE, SUSPENDED
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+
+  // Quan hệ (Relations)
+  portfolios         Portfolio[]
+  recommendations    Recommendation[]
+  refreshTokens      RefreshToken[]
+  investmentProfiles InvestmentProfile[]
+  notifications      Notification[]
+
+  @@map("users")
+}
+
+// ------------------------------------------------------------------------------
+// Model 2: RefreshToken (Xoay vòng và thu hồi phiên xác thực)
+// ------------------------------------------------------------------------------
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  tokenHash String   @unique @map("token_hash")
+  isRevoked Boolean  @default(false) @map("is_revoked")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+// ------------------------------------------------------------------------------
+// Model 3: InvestmentProfile (Hồ sơ rủi ro và vốn đầu tư)
+// ------------------------------------------------------------------------------
+model InvestmentProfile {
+  id                String   @id @default(uuid())
+  userId            String   @map("user_id")
+  capital           Float    @default(10000000.0) // Tối thiểu 1.000.000 đ
+  riskAppetite      String   @default("MEDIUM") @map("risk_appetite") // LOW, MEDIUM, HIGH
+  investmentHorizon String   @default("MEDIUM_TERM") @map("investment_horizon") // SHORT_TERM, MEDIUM_TERM, LONG_TERM
+  expectedReturn    Float    @default(15.0) @map("expected_return")
+  maximumDrawdown   Float    @default(10.0) @map("maximum_drawdown")
+  isActive          Boolean  @default(true) @map("is_active")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("investment_profiles")
+}
+
+// ------------------------------------------------------------------------------
+// Model 4: Portfolio (Danh mục tài sản người dùng)
+// ------------------------------------------------------------------------------
+model Portfolio {
+  id             String             @id @default(uuid())
+  userId         String             @map("user_id")
+  initialCapital Float              @default(10000000.0) @map("initial_capital")
+  currentValue   Float              @default(10000000.0) @map("current_value")
+  cashBalance    Float              @default(0.0) @map("cash_balance")
+  status         String             @default("ACTIVE") // ACTIVE, FROZEN, CLOSED
+  createdAt      DateTime           @default(now()) @map("created_at")
+  updatedAt      DateTime           @updatedAt @map("updated_at")
+
+  // Quan hệ (Relations)
+  user            User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recommendations Recommendation[]
+  holdings        PortfolioHolding[]
+  versions        PortfolioVersion[]
+  navHistories    NavHistory[]
+  orders          OrderTransaction[]
+
+  @@map("portfolios")
+}
+
+// ------------------------------------------------------------------------------
+// Model 5: PortfolioVersion (Snapshot danh mục bất biến khi tái cơ cấu)
+// ------------------------------------------------------------------------------
+model PortfolioVersion {
+  id               String    @id @default(uuid())
+  portfolioId      String    @map("portfolio_id")
+  versionNumber    Int       @map("version_number")
+  currentValue     Float     @map("current_value")
+  cashBalance      Float     @map("cash_balance")
+  changeType       String    @default("REBALANCE") @map("change_type") // INITIAL, REBALANCE, MANUAL
+  holdingsSnapshot String    @map("holdings_snapshot") // JSON string of snapshot
+  createdAt        DateTime  @default(now()) @map("created_at")
+
+  portfolio        Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([portfolioId])
+  @@map("portfolio_versions")
+}
+
+// ------------------------------------------------------------------------------
+// Model 6: Stock (Cổ phiếu niêm yết)
+// ------------------------------------------------------------------------------
+model Stock {
+  id           String                     @id @default(uuid())
+  symbol       String                     @unique
+  companyName  String                     @map("company_name")
+  exchange     String                     @default("HOSE") // HOSE, HNX, UPCOM
+  currentPrice Float                      @default(0.0) @map("current_price")
+  createdAt    DateTime                   @default(now()) @map("created_at")
+  updatedAt    DateTime                   @updatedAt @map("updated_at")
+
+  // Quan hệ (Relations)
+  allocations  RecommendationAllocation[]
+  holdings     PortfolioHolding[]
+  orders       OrderTransaction[]
+
+  @@map("stocks")
+}
+
+// ------------------------------------------------------------------------------
+// Model 7: MarketRegime (Trạng thái thị trường HMM)
+// ------------------------------------------------------------------------------
+model MarketRegime {
+  id              String           @id @default(uuid())
+  code            String           // BULL, BEAR, SIDEWAY, UNKNOWN
+  description     String?
+  probability     Float            @default(0.0)
+  isCurrent       Boolean          @default(false) @map("is_current")
+  detectedAt      DateTime         @default(now()) @map("detected_at")
+  createdAt       DateTime         @default(now()) @map("created_at")
+
+  recommendations Recommendation[]
+
+  @@map("market_regimes")
+}
+
+// ------------------------------------------------------------------------------
+// Model 8: AIEngine (Mô hình Trí tuệ nhân tạo HMM & PPO)
+// ------------------------------------------------------------------------------
+model AIEngine {
+  id              String           @id @default(uuid())
+  hmmModelVersion String           @map("hmm_model_version")
+  ppoModelVersion String           @map("ppo_model_version")
+  isActive        Boolean          @default(true) @map("is_active")
+  lastRunAt       DateTime?        @map("last_run_at")
+  createdAt       DateTime         @default(now()) @map("created_at")
+
+  recommendations Recommendation[]
+
+  @@map("ai_engines")
+}
+
+// ------------------------------------------------------------------------------
+// Model 9: Recommendation (Khuyến nghị đầu tư)
+// ------------------------------------------------------------------------------
+model Recommendation {
+  id             String                     @id @default(uuid())
+  userId         String                     @map("user_id")
+  portfolioId    String                     @map("portfolio_id")
+  aiEngineId     String?                    @map("ai_engine_id")
+  marketRegimeId String?                    @map("market_regime_id")
+  type           String                     @default("REBALANCE") // INITIAL, REBALANCE, RISK_OFF
+  status         String                     @default("PENDING") // PENDING, APPLIED, REJECTED, EXPIRED
+  totalWeight    Float                      @default(1.0) @map("total_weight")
+  cashWeight     Float                      @default(0.0) @map("cash_weight")
+  cashAmount     Float                      @default(0.0) @map("cash_amount")
+  explanation    String?
+  expiresAt      DateTime                   @map("expires_at")
+  createdAt      DateTime                   @default(now()) @map("created_at")
+  appliedAt      DateTime?                  @map("applied_at")
+
+  user           User                       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  portfolio      Portfolio                  @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  aiEngine       AIEngine?                  @relation(fields: [aiEngineId], references: [id], onDelete: SetNull)
+  marketRegime   MarketRegime?              @relation(fields: [marketRegimeId], references: [id], onDelete: SetNull)
+  allocations    RecommendationAllocation[]
+
+  @@map("recommendations")
+}
+
+// ------------------------------------------------------------------------------
+// Model 10: RecommendationAllocation (Phân bổ cổ phiếu trong khuyến nghị)
+// ------------------------------------------------------------------------------
+model RecommendationAllocation {
+  id               String         @id @default(uuid())
+  recommendationId String         @map("recommendation_id")
+  stockId          String         @map("stock_id")
+  targetWeight     Float          @map("target_weight")
+  targetPrice      Float          @default(0.0) @map("target_price")
+  action           String         @default("BUY") // BUY, SELL, HOLD
+  sharesAllocated  Int            @default(0) @map("shares_allocated")
+  reason           String?
+  createdAt        DateTime       @default(now()) @map("created_at")
+
+  recommendation   Recommendation @relation(fields: [recommendationId], references: [id], onDelete: Cascade)
+  stock            Stock          @relation(fields: [stockId], references: [id], onDelete: Restrict)
+
+  @@map("recommendation_allocations")
+}
+
+// ------------------------------------------------------------------------------
+// Model 11: PortfolioHolding (Cổ phiếu thực tế đang nắm giữ & vòng quay T+)
+// ------------------------------------------------------------------------------
+model PortfolioHolding {
+  id             String    @id @default(uuid())
+  portfolioId    String    @map("portfolio_id")
+  stockId        String    @map("stock_id")
+  quantity       Int       @default(0)
+  costPrice      Float     @default(0.0) @map("cost_price")
+  sharesUnlocked Int       @default(0) @map("shares_unlocked") // Khả dụng
+  sharesT1       Int       @default(0) @map("shares_t1") // Chờ về T+1
+  sharesT2       Int       @default(0) @map("shares_t2") // Chờ về T+2
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  portfolio      Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  stock          Stock     @relation(fields: [stockId], references: [id], onDelete: Restrict)
+
+  @@unique([portfolioId, stockId])
+  @@map("portfolio_holdings")
+}
+
+// ------------------------------------------------------------------------------
+// Model 12: Notification (Thông báo In-App)
+// ------------------------------------------------------------------------------
+model Notification {
+  id        String    @id @default(uuid())
+  userId    String    @map("user_id")
+  title     String
+  message   String
+  type      String    @default("RECOMMENDATION") // RECOMMENDATION, SETTLEMENT_T, REGIME_CHANGE, SYSTEM
+  status    String    @default("UNREAD") // UNREAD, READ, APPLIED, DISMISSED
+  metadata  String?   // JSON string of metadata
+  readAt    DateTime? @map("read_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("notifications")
+}
+
+// ------------------------------------------------------------------------------
+// Model 13: NavHistory (Lịch sử biến động NAV tài sản theo ngày)
+// ------------------------------------------------------------------------------
+model NavHistory {
+  id             String    @id @default(uuid())
+  portfolioId    String    @map("portfolio_id")
+  date           String    // DD/MM/YYYY
+  nav            Float
+  cash           Float
+  stockValue     Float     @map("stock_value")
+  dailyChange    Float     @default(0.0) @map("daily_change")
+  dailyChangePct Float     @default(0.0) @map("daily_change_pct")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  portfolio      Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@unique([portfolioId, date])
+  @@map("nav_histories")
+}
+
+// ------------------------------------------------------------------------------
+// Model 14: OrderTransaction (Sổ lệnh giao dịch Mua / Bán thực tế của người dùng)
+// ------------------------------------------------------------------------------
+model OrderTransaction {
+  id          String    @id @default(uuid())
+  portfolioId String    @map("portfolio_id")
+  stockId     String    @map("stock_id")
+  action      String    // "BUY" | "SELL"
+  quantity    Int       // Khối lượng cổ phiếu (bội số 100)
+  price       Float     // Giá khớp (VNĐ)
+  totalValue  Float     @map("total_value")
+  realizedPnl Float?    @map("realized_pnl")
+  status      String    @default("COMPLETED") // COMPLETED, CANCELLED
+  notes       String?
+  orderDate   DateTime  @default(now()) @map("order_date")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  stock       Stock     @relation(fields: [stockId], references: [id], onDelete: Restrict)
+
+  @@index([portfolioId])
+  @@index([stockId])
+  @@map("order_transactions")
+}
