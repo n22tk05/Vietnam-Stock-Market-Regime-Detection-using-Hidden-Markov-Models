@@ -84,13 +84,13 @@ export const TradingViewAreaChart: React.FC<TradingViewAreaChartProps> = ({
       },
     });
 
-    // AI Quantum NAV Series (Smooth Blue Area)
+    // Wealth4ward NAV Series (Smooth Blue Area)
     const aiSeries: ISeriesApi<'Area'> = chart.addAreaSeries({
       topColor: 'rgba(37, 99, 235, 0.35)',
       bottomColor: 'rgba(37, 99, 235, 0.01)',
       lineColor: '#2563eb',
       lineWidth: 3,
-      title: 'AI QUANTUM (PPO)',
+      title: 'Wealth4ward (PPO)',
       priceFormat: {
         type: 'price',
         precision: 0,

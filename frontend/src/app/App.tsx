@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from '@/context/AuthContext';
+import { ProtectedRoute } from '@/components/common/ProtectedRoute';
 import LandingPage from '@/features/landing/LandingPage';
 import DashboardPage from '@/pages/DashboardPage';
 import { MarketPage } from '@/pages/app/MarketPage';
@@ -19,13 +20,48 @@ export const App: React.FC = () => {
         <Routes>
           {/* Main App & Dashboard */}
           <Route path="/" element={<LandingPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route 
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            } 
+          />
 
           {/* Market & Deep-dive */}
-          <Route path="/market" element={<MarketPage />} />
-          <Route path="/market/:symbol" element={<StockDetailPage />} />
-          <Route path="/history" element={<HistoryPage />} />
-          <Route path="/notifications" element={<NotificationsPage />} />
+          <Route 
+            path="/market" 
+            element={
+              <ProtectedRoute>
+                <MarketPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/market/:symbol" 
+            element={
+              <ProtectedRoute>
+                <StockDetailPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/history" 
+            element={
+              <ProtectedRoute>
+                <HistoryPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/notifications" 
+            element={
+              <ProtectedRoute>
+                <NotificationsPage />
+              </ProtectedRoute>
+            } 
+          />
 
           {/* Authentication */}
           <Route path="/login" element={<LoginPage />} />

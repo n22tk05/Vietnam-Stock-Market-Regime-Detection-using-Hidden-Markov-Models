@@ -14,8 +14,8 @@ import {
 import { PasswordInput } from '@/components/common/PasswordInput';
 
 export const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('user100m@aiquantum.vn');
+  const [password, setPassword] = useState('123456');
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,7 +61,7 @@ export const LoginPage: React.FC = () => {
           <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
             <Cpu className="w-4 h-4" />
           </div>
-          <span className="font-black text-slate-900 tracking-tight text-base">AI QUANTUM</span>
+          <span className="font-black text-slate-900 tracking-tight text-base">Wealth4ward</span>
           <span className="text-[10px] font-mono font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-2 py-0.5 rounded-md border border-blue-200">
             Terminal v7.0
           </span>
@@ -93,7 +93,7 @@ export const LoginPage: React.FC = () => {
                 Đầu tư kỷ luật. <br />
                 Định vị tương lai cùng{' '}
                 <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  AI QUANTUM.
+                  Wealth4ward.
                 </span>
               </h1>
               <p className="text-sm text-slate-600 leading-relaxed max-w-lg">
@@ -154,7 +154,7 @@ export const LoginPage: React.FC = () => {
                   Đăng Nhập Hệ Thống
                 </h2>
                 <p className="text-xs text-slate-600 font-medium">
-                  Truy cập không gian điều hành khuyến nghị AI QUANTUM
+                  Truy cập không gian điều hành khuyến nghị Wealth4ward
                 </p>
               </div>
 
@@ -236,24 +236,6 @@ export const LoginPage: React.FC = () => {
                 </button>
               </form>
 
-              {/* Divider */}
-              <div className="relative flex items-center justify-center">
-                <div className="border-t border-slate-200 w-full" />
-                <span className="bg-white px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                  Hoặc
-                </span>
-              </div>
-
-              {/* 1-Click Demo Entry Button */}
-              <button
-                type="button"
-                onClick={handleQuickDemo}
-                className="w-full py-3 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-700 font-bold text-xs border border-slate-200 hover:border-blue-200 transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-amber-500" />
-                <span>Trải Nghiệm Bản Demo (1-Click Vào Dashboard)</span>
-              </button>
-
               {/* Register Link Footer */}
               <p className="text-center text-xs text-slate-600 font-medium pt-2">
                 Chưa có tài khoản?{' '}
@@ -271,7 +253,7 @@ export const LoginPage: React.FC = () => {
 
       {/* Footer Info */}
       <footer className="px-6 py-4 border-t border-slate-200/80 bg-white/60 text-center text-xs text-slate-600">
-        Bản quyền &copy; 2026 AI QUANTUM. Nền tảng nghiên cứu &amp; khuyến nghị định lượng chứng khoán Việt Nam.
+        Bản quyền &copy; 2026 Wealth4ward. Nền tảng nghiên cứu &amp; khuyến nghị định lượng chứng khoán Việt Nam.
       </footer>
     </div>
   );

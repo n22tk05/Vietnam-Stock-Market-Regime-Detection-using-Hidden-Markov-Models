@@ -282,12 +282,12 @@ export const AssessmentModal: React.FC<AssessmentModalProps> = ({ isOpen, onClos
                   <span className="text-[10px] font-extrabold text-blue-600 uppercase tracking-wider block">Chiến Lược Đề Xuất</span>
                   <div className="text-base font-extrabold text-slate-900">
                     {answers.risk === 'conservative'
-                      ? 'AI Quantum Bảo Toàn Vốn (Conservative)'
+                      ? 'Wealth4ward Bảo Toàn Vốn (Conservative)'
                       : answers.risk === 'balanced'
-                      ? 'AI Quantum Cân Bằng (Balanced)'
+                      ? 'Wealth4ward Cân Bằng (Balanced)'
                       : answers.risk === 'growth'
-                      ? 'AI Quantum Tăng Trưởng (Growth)'
-                      : 'AI Quantum Bứt Phá (Aggressive Alpha)'}
+                      ? 'Wealth4ward Tăng Trưởng (Growth)'
+                      : 'Wealth4ward Bứt Phá (Aggressive Alpha)'}
                   </div>
                 </div>
                 <span className="text-xs font-extrabold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">

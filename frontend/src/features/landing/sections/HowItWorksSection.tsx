@@ -35,7 +35,7 @@ export const HowItWorksSection: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Quy trình công nghệ</span>
           <h2 className="text-3xl font-extrabold text-slate-900 mt-2">
-            Hệ thống AI QUANTUM vận hành như thế nào?
+            Hệ thống Wealth4ward vận hành như thế nào?
           </h2>
           <p className="text-sm text-slate-600 mt-3">
             Quy trình khép kín 5 bước kết hợp phân tích vĩ mô và định lượng học máy hiện đại nhất.

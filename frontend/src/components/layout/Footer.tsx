@@ -10,7 +10,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAssessment }) => {
     <footer className="border-t border-slate-200 bg-white py-6">
       <div className="max-w-[1280px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div>
-          <strong className="text-slate-800">AI QUANTUM Trading Intelligence</strong> • Nền tảng phân tích định lượng chứng khoán Việt Nam
+          <strong className="text-slate-800">Wealth4ward Trading Intelligence</strong> • Nền tảng phân tích định lượng chứng khoán Việt Nam
         </div>
         <div className="flex items-center gap-3">
           {onOpenAssessment && (

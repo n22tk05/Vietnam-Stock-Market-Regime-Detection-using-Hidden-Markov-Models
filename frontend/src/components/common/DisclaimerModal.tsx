@@ -53,7 +53,7 @@ export const DisclaimerModal: React.FC<DisclaimerModalProps> = ({ isOpen, onClos
           <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-2.5">
             <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
             <p>
-              AI QUANTUM là hệ thống công nghệ thông tin nghiên cứu định lượng độc lập, không phải công ty chứng khoán, không quản lý quỹ ủy thác và không cung cấp dịch vụ đặt lệnh môi giới.
+              Wealth4ward là hệ thống công nghệ thông tin nghiên cứu định lượng độc lập, không phải công ty chứng khoán, không quản lý quỹ ủy thác và không cung cấp dịch vụ đặt lệnh môi giới.
             </p>
           </div>
 

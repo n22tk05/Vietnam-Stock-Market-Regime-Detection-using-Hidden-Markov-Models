@@ -1,0 +1,25 @@
+{
+  "name": "aiquantum-database",
+  "version": "1.0.0",
+  "description": "AI QUANTUM Database Management with Prisma ORM",
+  "main": "prisma/seed.js",
+  "scripts": {
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "node prisma/seed.js"
+  },
+  "keywords": [
+    "prisma",
+    "aiquantum",
+    "database"
+  ],
+  "author": "AI QUANTUM",
+  "license": "MIT",
+  "devDependencies": {
+    "prisma": "^6.4.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.4.0"
+  }
+}

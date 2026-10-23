@@ -16,7 +16,7 @@ export const LandingPage: React.FC = () => {
   const closeAssessment = () => setIsAssessmentOpen(false);
 
   return (
-    <div className="min-h-screen bg-[#070b14] text-slate-100 flex flex-col font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-blue-500/20 selection:text-blue-700">
       <Header onOpenAssessment={openAssessment} />
 
       <main className="flex-1">

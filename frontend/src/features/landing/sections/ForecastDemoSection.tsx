@@ -123,7 +123,7 @@ export const ForecastDemoSection: React.FC = () => {
             Nguyên Tắc Cố Vấn Khách Quan (Pure Recommendation)
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
-            AI QUANTUM là nền tảng phân tích định lượng độc lập. Chúng tôi không giữ tiền của bạn, không tự động đặt lệnh và không can thiệp vào tài khoản chứng khoán của bạn. Quyết định giao dịch cuối cùng hoàn toàn thuộc về bạn với sự hỗ trợ của những dữ liệu định lượng đáng tin cậy nhất.
+            Wealth4ward là nền tảng phân tích định lượng độc lập. Chúng tôi không giữ tiền của bạn, không tự động đặt lệnh và không can thiệp vào tài khoản chứng khoán của bạn. Quyết định giao dịch cuối cùng hoàn toàn thuộc về bạn với sự hỗ trợ của những dữ liệu định lượng đáng tin cậy nhất.
           </p>
         </div>
       </div>

@@ -8,7 +8,7 @@ export const FinalCtaBanner: React.FC = () => {
         <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 rounded-3xl p-10 sm:p-14 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
           <div className="max-w-xl text-center md:text-left">
             <h2 className="text-3xl font-black mb-3 leading-tight">
-              Sẵn sàng đầu tư kỷ luật cùng AI QUANTUM?
+              Sẵn sàng đầu tư kỷ luật cùng Wealth4ward?
             </h2>
             <p className="text-sm text-blue-100">
               Xem ngay dự báo biến động giá và vùng an toàn cho phiên giao dịch ngày mai.
