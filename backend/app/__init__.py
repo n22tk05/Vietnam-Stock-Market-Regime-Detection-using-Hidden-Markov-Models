@@ -1,1 +1,0 @@
-"""Astera backend application."""

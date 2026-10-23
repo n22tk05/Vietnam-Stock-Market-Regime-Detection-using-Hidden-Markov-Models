@@ -1,1 +1,0 @@
-"""Versioned simulated portfolio domain."""
