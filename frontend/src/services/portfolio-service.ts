@@ -1,4 +1,4 @@
-﻿import { apiRequest } from './api-client';
+import { apiRequest } from './api-client';
 import type {
   PortfolioPerformanceResponse,
   PortfolioResponse,
@@ -43,5 +43,22 @@ export const portfolioService = {
     return apiRequest<RecommendationResponse>('/portfolios/current/rebalance', {
       method: 'POST',
     });
+  },
+
+  async createOrder(portfolioId: string, orderData: {
+    symbol: string;
+    action: 'BUY' | 'SELL';
+    quantity: number;
+    price: number;
+    notes?: string;
+  }) {
+    return apiRequest(`/portfolios/${portfolioId}/orders`, {
+      method: 'POST',
+      body: JSON.stringify(orderData),
+    });
+  },
+
+  async getOrders(portfolioId: string) {
+    return apiRequest(`/portfolios/${portfolioId}/orders`);
   },
 };

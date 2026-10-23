@@ -25,11 +25,141 @@ export interface StockItem {
   history?: StockPricePoint[];
 }
 
+export interface SimulatedHolding {
+  ma_co_phieu: string;
+  name?: string;
+  so_co_phieu: number;
+  gia_von: number;
+  gia_hien_tai: number;
+  status: 'UNLOCKED' | 'LOCKED_T1' | 'LOCKED_T2';
+  shares_unlocked: number;
+  shares_t1: number;
+  shares_t2: number;
+}
+
+export interface SimulatedHistoryPoint {
+  date: string;
+  nav: number;
+  cash: number;
+  stock_value: number;
+  daily_change?: number;
+  daily_change_pct?: number;
+  delta_from_start?: number;
+  delta_pct_from_start?: number;
+}
+
+export interface SimulatedUserPortfolio {
+  user_tier: string;
+  initial_capital: number;
+  current_nav: number;
+  cash_left: number;
+  pnl_cash: number;
+  pnl_pct: number;
+  holdings: SimulatedHolding[];
+  history?: SimulatedHistoryPoint[];
+}
+
+export const SIMULATED_USER_10M: SimulatedUserPortfolio = {
+  user_tier: "10M",
+  initial_capital: 10000000,
+  current_nav: 9379000.0,
+  cash_left: 164000.0,
+  pnl_cash: -621000.0,
+  pnl_pct: -6.21,
+  holdings: [
+    {
+      ma_co_phieu: "VND",
+      name: "Chứng khoán VNDirect",
+      so_co_phieu: 100,
+      gia_von: 13900.0,
+      gia_hien_tai: 13200.0,
+      status: "UNLOCKED",
+      shares_unlocked: 100,
+      shares_t1: 0,
+      shares_t2: 0
+    },
+    {
+      ma_co_phieu: "DIG",
+      name: "Tổng Công ty Đầu tư Phát triển Xây dựng",
+      so_co_phieu: 100,
+      gia_von: 9250.0,
+      gia_hien_tai: 9400.0,
+      status: "UNLOCKED",
+      shares_unlocked: 100,
+      shares_t1: 0,
+      shares_t2: 0
+    },
+    {
+      ma_co_phieu: "VSC",
+      name: "Container Việt Nam",
+      so_co_phieu: 100,
+      gia_von: 12950.0,
+      gia_hien_tai: 13150.0,
+      status: "UNLOCKED",
+      shares_unlocked: 100,
+      shares_t1: 0,
+      shares_t2: 0
+    },
+    {
+      ma_co_phieu: "DPM",
+      name: "Phân bón & Hóa chất Dầu khí",
+      so_co_phieu: 100,
+      gia_von: 22150.0,
+      gia_hien_tai: 21900.0,
+      status: "LOCKED_T1",
+      shares_unlocked: 0,
+      shares_t1: 100,
+      shares_t2: 0
+    },
+    {
+      ma_co_phieu: "GEX",
+      name: "Tập đoàn GELEX",
+      so_co_phieu: 100,
+      gia_von: 21800.0,
+      gia_hien_tai: 22250.0,
+      status: "LOCKED_T1",
+      shares_unlocked: 0,
+      shares_t1: 100,
+      shares_t2: 0
+    },
+    {
+      ma_co_phieu: "HT1",
+      name: "Xi măng Vicem Hà Tiên",
+      so_co_phieu: 100,
+      gia_von: 12300.0,
+      gia_hien_tai: 12250.0,
+      status: "LOCKED_T1",
+      shares_unlocked: 0,
+      shares_t1: 100,
+      shares_t2: 0
+    }
+  ]
+};
+
 export interface ChartDataPoint {
   date: string;
   aiPct: number;
   bmPct: number;
 }
+
+export interface PersonalNavDataPoint {
+  date: string; // "17/10/2025"
+  nav: number; // e.g. 10000000 -> 9379000
+  initialCapital: number; // 10000000
+  benchmarkNav: number; // VN-Index benchmark equivalent
+  pnlPct: number; // e.g. 0.0, -0.80, -1.90, -3.20, -5.50, -6.60, -6.21
+  event?: string;
+}
+
+export const USER_PERSONAL_NAV_HISTORY: PersonalNavDataPoint[] = [
+  { date: "17/10/2025", nav: 10000000, initialCapital: 10000000, benchmarkNav: 10000000, pnlPct: 0.0, event: "Nạp vốn ban đầu 10.000.000 đ" },
+  { date: "18/10/2025", nav: 9920000, initialCapital: 10000000, benchmarkNav: 9970000, pnlPct: -0.80, event: "Khớp lệnh mua 6 mã danh mục" },
+  { date: "19/10/2025", nav: 9810000, initialCapital: 10000000, benchmarkNav: 9940000, pnlPct: -1.90 },
+  { date: "20/10/2025", nav: 9680000, initialCapital: 10000000, benchmarkNav: 9890000, pnlPct: -3.20 },
+  { date: "21/10/2025", nav: 9450000, initialCapital: 10000000, benchmarkNav: 9810000, pnlPct: -5.50, event: "Áp lực điều chỉnh nhóm chứng khoán" },
+  { date: "22/10/2025", nav: 9340000, initialCapital: 10000000, benchmarkNav: 9800000, pnlPct: -6.60, event: "Chạm đáy ngắn hạn (-6,60%)" },
+  { date: "23/10/2025", nav: 9379000, initialCapital: 10000000, benchmarkNav: 9820000, pnlPct: -6.21, event: "Hồi phục kỹ thuật (+39.000 đ)" }
+];
 
 export interface MetricCardData {
   nav: number;
@@ -288,3 +418,180 @@ export const INITIAL_TOP_STOCKS: StockItem[] = [
     attention: "0.035"
   }
 ];
+
+export const USER_PORTFOLIO_STOCK_ITEMS: Record<string, StockItem> = {
+  VND: {
+    ticker: "VND",
+    name: "Chứng khoán VNDirect",
+    price: 13200,
+    predictedPrice: 14000,
+    expectedPct: "+6.1%",
+    stopLoss: 12600,
+    category: "hold",
+    isPositive: true,
+    targetWeight: 0.141,
+    actionText: "THEO DÕI / NẮM GIỮ",
+    actionClass: "status-hold",
+    reason: "Thị trường thanh khoản ổn định; Cổ phiếu đã về khả dụng, giữ vị thế chờ nhịp hồi phục",
+    sector: "Dịch vụ Tài chính • Sàn HOSE",
+    dayRange: "13,100 - 13,350 đ",
+    pe: "11.2x",
+    roe: "14.8%",
+    rsi: "44.5",
+    attention: "0.220",
+    history: [
+      { date: "17/10", price: 13900 },
+      { date: "18/10", price: 13600 },
+      { date: "19/10", price: 13400 },
+      { date: "20/10", price: 13300 },
+      { date: "21/10", price: 13200 },
+      { date: "22/10", price: 13150 },
+      { date: "23/10", price: 13200 }
+    ]
+  },
+  DIG: {
+    ticker: "DIG",
+    name: "Tổng Công ty Đầu tư Phát triển Xây dựng",
+    price: 9400,
+    predictedPrice: 10200,
+    expectedPct: "+8.5%",
+    stopLoss: 8900,
+    category: "hold",
+    isPositive: true,
+    targetWeight: 0.100,
+    actionText: "THEO DÕI / NẮM GIỮ",
+    actionClass: "status-hold",
+    reason: "Đang có lãi +1.62%, vùng hỗ trợ 9.000 đ vững chắc; Cổ phiếu đã khả dụng giao dịch",
+    sector: "Bất động sản dân cư • Sàn HOSE",
+    dayRange: "9,250 - 9,500 đ",
+    pe: "18.5x",
+    roe: "9.2%",
+    rsi: "52.1",
+    attention: "0.190",
+    history: [
+      { date: "17/10", price: 9250 },
+      { date: "18/10", price: 9300 },
+      { date: "19/10", price: 9200 },
+      { date: "20/10", price: 9350 },
+      { date: "21/10", price: 9400 },
+      { date: "22/10", price: 9380 },
+      { date: "23/10", price: 9400 }
+    ]
+  },
+  VSC: {
+    ticker: "VSC",
+    name: "Container Việt Nam",
+    price: 13150,
+    predictedPrice: 14500,
+    expectedPct: "+10.3%",
+    stopLoss: 12500,
+    category: "hold",
+    isPositive: true,
+    targetWeight: 0.140,
+    actionText: "THEO DÕI / NẮM GIỮ",
+    actionClass: "status-hold",
+    reason: "Dòng tiền logistic cảng biển duy trì tốt, đang lãi nhẹ +1.54%; Cổ phiếu khả dụng",
+    sector: "Cảng biển & Vận tải • Sàn HOSE",
+    dayRange: "12,950 - 13,250 đ",
+    pe: "10.8x",
+    roe: "16.5%",
+    rsi: "61.4",
+    attention: "0.240",
+    history: [
+      { date: "17/10", price: 12950 },
+      { date: "18/10", price: 13000 },
+      { date: "19/10", price: 13050 },
+      { date: "20/10", price: 13100 },
+      { date: "21/10", price: 13150 },
+      { date: "22/10", price: 13100 },
+      { date: "23/10", price: 13150 }
+    ]
+  },
+  DPM: {
+    ticker: "DPM",
+    name: "Phân bón & Hóa chất Dầu khí",
+    price: 21900,
+    predictedPrice: 23500,
+    expectedPct: "+7.3%",
+    stopLoss: 21200,
+    category: "hold",
+    isPositive: true,
+    targetWeight: 0.234,
+    actionText: "CHỜ KHỚP T+1",
+    actionClass: "status-hold",
+    reason: "Lỗ nhẹ -1.13%, giá vốn 22.150 đ; Cổ phiếu đang chờ về T+1 phiên ngày mai",
+    sector: "Hóa chất & Phân bón • Sàn HOSE",
+    dayRange: "21,700 - 22,200 đ",
+    pe: "12.3x",
+    roe: "15.1%",
+    rsi: "49.8",
+    attention: "0.175",
+    history: [
+      { date: "17/10", price: 22150 },
+      { date: "18/10", price: 22000 },
+      { date: "19/10", price: 21850 },
+      { date: "20/10", price: 21950 },
+      { date: "21/10", price: 22000 },
+      { date: "22/10", price: 21800 },
+      { date: "23/10", price: 21900 }
+    ]
+  },
+  GEX: {
+    ticker: "GEX",
+    name: "Tập đoàn GELEX",
+    price: 22250,
+    predictedPrice: 23800,
+    expectedPct: "+7.0%",
+    stopLoss: 21400,
+    category: "hold",
+    isPositive: true,
+    targetWeight: 0.237,
+    actionText: "CHỜ KHỚP T+1",
+    actionClass: "status-hold",
+    reason: "Lãi nhẹ +2.06%, giá vốn 21.800 đ; Cổ phiếu đang chờ về T+1 phiên ngày mai",
+    sector: "Thiết bị điện & Đa ngành • Sàn HOSE",
+    dayRange: "21,900 - 22,400 đ",
+    pe: "14.2x",
+    roe: "13.4%",
+    rsi: "56.6",
+    attention: "0.210",
+    history: [
+      { date: "17/10", price: 21800 },
+      { date: "18/10", price: 21900 },
+      { date: "19/10", price: 22000 },
+      { date: "20/10", price: 22100 },
+      { date: "21/10", price: 22150 },
+      { date: "22/10", price: 22200 },
+      { date: "23/10", price: 22250 }
+    ]
+  },
+  HT1: {
+    ticker: "HT1",
+    name: "Xi măng Vicem Hà Tiên",
+    price: 12250,
+    predictedPrice: 13200,
+    expectedPct: "+7.8%",
+    stopLoss: 11800,
+    category: "hold",
+    isPositive: true,
+    targetWeight: 0.131,
+    actionText: "CHỜ KHỚP T+1",
+    actionClass: "status-hold",
+    reason: "Lỗ nhẹ -0.41%, giá vốn 12.300 đ; Tỷ lệ an toàn cao, chờ nhịp kỹ thuật T+1",
+    sector: "Vật liệu xây dựng • Sàn HOSE",
+    dayRange: "12,100 - 12,350 đ",
+    pe: "15.0x",
+    roe: "7.8%",
+    rsi: "48.5",
+    attention: "0.130",
+    history: [
+      { date: "17/10", price: 12300 },
+      { date: "18/10", price: 12250 },
+      { date: "19/10", price: 12200 },
+      { date: "20/10", price: 12150 },
+      { date: "21/10", price: 12200 },
+      { date: "22/10", price: 12200 },
+      { date: "23/10", price: 12250 }
+    ]
+  }
+};
