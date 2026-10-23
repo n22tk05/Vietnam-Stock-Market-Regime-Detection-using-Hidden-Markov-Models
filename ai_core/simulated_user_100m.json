@@ -1,0 +1,3933 @@
+{
+  "user_tier": "100M",
+  "initial_capital": 100000000,
+  "current_nav": 123195898.0,
+  "cash_left": 835898.0,
+  "pnl_cash": 23195898.0,
+  "pnl_pct": 23.2,
+  "holdings": [
+    {
+      "ma_co_phieu": "PVD",
+      "so_co_phieu": 2600,
+      "gia_von": 19040.3,
+      "gia_hien_tai": 18250.0,
+      "status": "UNLOCKED",
+      "shares_unlocked": 2600,
+      "shares_t1": 0,
+      "shares_t2": 0
+    },
+    {
+      "ma_co_phieu": "VIC",
+      "so_co_phieu": 100,
+      "gia_von": 192617.19,
+      "gia_hien_tai": 228000.0,
+      "status": "UNLOCKED",
+      "shares_unlocked": 100,
+      "shares_t1": 0,
+      "shares_t2": 0
+    },
+    {
+      "ma_co_phieu": "VNM",
+      "so_co_phieu": 900,
+      "gia_von": 60316.15,
+      "gia_hien_tai": 57900.0,
+      "status": "UNLOCKED",
+      "shares_unlocked": 900,
+      "shares_t1": 0,
+      "shares_t2": 0
+    }
+  ],
+  "history": [
+    {
+      "date": "17/12/2025",
+      "nav": 99900515.0,
+      "cash": 415515.0,
+      "stock_value": 99485000.0,
+      "daily_change": -99485.0,
+      "daily_change_pct": -0.1,
+      "delta_from_start": -99485.0,
+      "delta_pct_from_start": -0.1
+    },
+    {
+      "date": "18/12/2025",
+      "nav": 100495515.0,
+      "cash": 415515.0,
+      "stock_value": 100080000.0,
+      "daily_change": 595000.0,
+      "daily_change_pct": 0.6,
+      "delta_from_start": 495515.0,
+      "delta_pct_from_start": 0.5
+    },
+    {
+      "date": "19/12/2025",
+      "nav": 102450515.0,
+      "cash": 415515.0,
+      "stock_value": 102035000.0,
+      "daily_change": 1955000.0,
+      "daily_change_pct": 1.95,
+      "delta_from_start": 2450515.0,
+      "delta_pct_from_start": 2.45
+    },
+    {
+      "date": "22/12/2025",
+      "nav": 104575515.0,
+      "cash": 415515.0,
+      "stock_value": 104160000.0,
+      "daily_change": 2125000.0,
+      "daily_change_pct": 2.07,
+      "delta_from_start": 4575515.0,
+      "delta_pct_from_start": 4.58
+    },
+    {
+      "date": "23/12/2025",
+      "nav": 105796459.0,
+      "cash": 305459.0,
+      "stock_value": 105491000.0,
+      "daily_change": 1220944.0,
+      "daily_change_pct": 1.17,
+      "delta_from_start": 5796459.0,
+      "delta_pct_from_start": 5.8
+    },
+    {
+      "date": "24/12/2025",
+      "nav": 105360875.0,
+      "cash": 956875.0,
+      "stock_value": 104404000.0,
+      "daily_change": -435584.0,
+      "daily_change_pct": -0.41,
+      "delta_from_start": 5360875.0,
+      "delta_pct_from_start": 5.36
+    },
+    {
+      "date": "25/12/2025",
+      "nav": 102337665.0,
+      "cash": 1357665.0,
+      "stock_value": 100980000.0,
+      "daily_change": -3023210.0,
+      "daily_change_pct": -2.87,
+      "delta_from_start": 2337665.0,
+      "delta_pct_from_start": 2.34
+    },
+    {
+      "date": "26/12/2025",
+      "nav": 103096791.0,
+      "cash": 300791.0,
+      "stock_value": 102796000.0,
+      "daily_change": 759126.0,
+      "daily_change_pct": 0.74,
+      "delta_from_start": 3096791.0,
+      "delta_pct_from_start": 3.1
+    },
+    {
+      "date": "29/12/2025",
+      "nav": 105891652.0,
+      "cash": 1186652.0,
+      "stock_value": 104705000.0,
+      "daily_change": 2794861.0,
+      "daily_change_pct": 2.71,
+      "delta_from_start": 5891652.0,
+      "delta_pct_from_start": 5.89
+    },
+    {
+      "date": "30/12/2025",
+      "nav": 106331652.0,
+      "cash": 1186652.0,
+      "stock_value": 105145000.0,
+      "daily_change": 440000.0,
+      "daily_change_pct": 0.42,
+      "delta_from_start": 6331652.0,
+      "delta_pct_from_start": 6.33
+    },
+    {
+      "date": "31/12/2025",
+      "nav": 107200627.0,
+      "cash": 338627.0,
+      "stock_value": 106862000.0,
+      "daily_change": 868975.0,
+      "daily_change_pct": 0.82,
+      "delta_from_start": 7200627.0,
+      "delta_pct_from_start": 7.2
+    },
+    {
+      "date": "05/01/2026",
+      "nav": 108334400.0,
+      "cash": 697400.0,
+      "stock_value": 107637000.0,
+      "daily_change": 1133773.0,
+      "daily_change_pct": 1.06,
+      "delta_from_start": 8334400.0,
+      "delta_pct_from_start": 8.33
+    },
+    {
+      "date": "06/01/2026",
+      "nav": 109433987.0,
+      "cash": 455987.0,
+      "stock_value": 108978000.0,
+      "daily_change": 1099587.0,
+      "daily_change_pct": 1.01,
+      "delta_from_start": 9433987.0,
+      "delta_pct_from_start": 9.43
+    },
+    {
+      "date": "07/01/2026",
+      "nav": 111166892.0,
+      "cash": 1125892.0,
+      "stock_value": 110041000.0,
+      "daily_change": 1732905.0,
+      "daily_change_pct": 1.58,
+      "delta_from_start": 11166892.0,
+      "delta_pct_from_start": 11.17
+    },
+    {
+      "date": "08/01/2026",
+      "nav": 112534892.0,
+      "cash": 1125892.0,
+      "stock_value": 111409000.0,
+      "daily_change": 1368000.0,
+      "daily_change_pct": 1.23,
+      "delta_from_start": 12534892.0,
+      "delta_pct_from_start": 12.53
+    },
+    {
+      "date": "09/01/2026",
+      "nav": 110196892.0,
+      "cash": 1125892.0,
+      "stock_value": 109071000.0,
+      "daily_change": -2338000.0,
+      "daily_change_pct": -2.08,
+      "delta_from_start": 10196892.0,
+      "delta_pct_from_start": 10.2
+    },
+    {
+      "date": "12/01/2026",
+      "nav": 108596968.0,
+      "cash": 277968.0,
+      "stock_value": 108319000.0,
+      "daily_change": -1599924.0,
+      "daily_change_pct": -1.45,
+      "delta_from_start": 8596968.0,
+      "delta_pct_from_start": 8.6
+    },
+    {
+      "date": "13/01/2026",
+      "nav": 112481968.0,
+      "cash": 277968.0,
+      "stock_value": 112204000.0,
+      "daily_change": 3885000.0,
+      "daily_change_pct": 3.58,
+      "delta_from_start": 12481968.0,
+      "delta_pct_from_start": 12.48
+    },
+    {
+      "date": "14/01/2026",
+      "nav": 112600968.0,
+      "cash": 277968.0,
+      "stock_value": 112323000.0,
+      "daily_change": 119000.0,
+      "daily_change_pct": 0.11,
+      "delta_from_start": 12600968.0,
+      "delta_pct_from_start": 12.6
+    },
+    {
+      "date": "15/01/2026",
+      "nav": 112183968.0,
+      "cash": 277968.0,
+      "stock_value": 111906000.0,
+      "daily_change": -417000.0,
+      "daily_change_pct": -0.37,
+      "delta_from_start": 12183968.0,
+      "delta_pct_from_start": 12.18
+    },
+    {
+      "date": "16/01/2026",
+      "nav": 112540968.0,
+      "cash": 277968.0,
+      "stock_value": 112263000.0,
+      "daily_change": 357000.0,
+      "daily_change_pct": 0.32,
+      "delta_from_start": 12540968.0,
+      "delta_pct_from_start": 12.54
+    },
+    {
+      "date": "19/01/2026",
+      "nav": 114094968.0,
+      "cash": 277968.0,
+      "stock_value": 113817000.0,
+      "daily_change": 1554000.0,
+      "daily_change_pct": 1.38,
+      "delta_from_start": 14094968.0,
+      "delta_pct_from_start": 14.09
+    },
+    {
+      "date": "20/01/2026",
+      "nav": 114416968.0,
+      "cash": 277968.0,
+      "stock_value": 114139000.0,
+      "daily_change": 322000.0,
+      "daily_change_pct": 0.28,
+      "delta_from_start": 14416968.0,
+      "delta_pct_from_start": 14.42
+    },
+    {
+      "date": "21/01/2026",
+      "nav": 114241968.0,
+      "cash": 277968.0,
+      "stock_value": 113964000.0,
+      "daily_change": -175000.0,
+      "daily_change_pct": -0.15,
+      "delta_from_start": 14241968.0,
+      "delta_pct_from_start": 14.24
+    },
+    {
+      "date": "22/01/2026",
+      "nav": 113812968.0,
+      "cash": 277968.0,
+      "stock_value": 113535000.0,
+      "daily_change": -429000.0,
+      "daily_change_pct": -0.38,
+      "delta_from_start": 13812968.0,
+      "delta_pct_from_start": 13.81
+    },
+    {
+      "date": "23/01/2026",
+      "nav": 110448968.0,
+      "cash": 277968.0,
+      "stock_value": 110171000.0,
+      "daily_change": -3364000.0,
+      "daily_change_pct": -2.96,
+      "delta_from_start": 10448968.0,
+      "delta_pct_from_start": 10.45
+    },
+    {
+      "date": "26/01/2026",
+      "nav": 110062968.0,
+      "cash": 277968.0,
+      "stock_value": 109785000.0,
+      "daily_change": -386000.0,
+      "daily_change_pct": -0.35,
+      "delta_from_start": 10062968.0,
+      "delta_pct_from_start": 10.06
+    },
+    {
+      "date": "27/01/2026",
+      "nav": 110208968.0,
+      "cash": 277968.0,
+      "stock_value": 109931000.0,
+      "daily_change": 146000.0,
+      "daily_change_pct": 0.13,
+      "delta_from_start": 10208968.0,
+      "delta_pct_from_start": 10.21
+    },
+    {
+      "date": "28/01/2026",
+      "nav": 109764968.0,
+      "cash": 277968.0,
+      "stock_value": 109487000.0,
+      "daily_change": -444000.0,
+      "daily_change_pct": -0.4,
+      "delta_from_start": 9764968.0,
+      "delta_pct_from_start": 9.76
+    },
+    {
+      "date": "29/01/2026",
+      "nav": 111048968.0,
+      "cash": 277968.0,
+      "stock_value": 110771000.0,
+      "daily_change": 1284000.0,
+      "daily_change_pct": 1.17,
+      "delta_from_start": 11048968.0,
+      "delta_pct_from_start": 11.05
+    },
+    {
+      "date": "30/01/2026",
+      "nav": 112140968.0,
+      "cash": 277968.0,
+      "stock_value": 111863000.0,
+      "daily_change": 1092000.0,
+      "daily_change_pct": 0.98,
+      "delta_from_start": 12140968.0,
+      "delta_pct_from_start": 12.14
+    },
+    {
+      "date": "02/02/2026",
+      "nav": 114311968.0,
+      "cash": 277968.0,
+      "stock_value": 114034000.0,
+      "daily_change": 2171000.0,
+      "daily_change_pct": 1.94,
+      "delta_from_start": 14311968.0,
+      "delta_pct_from_start": 14.31
+    },
+    {
+      "date": "03/02/2026",
+      "nav": 113522968.0,
+      "cash": 277968.0,
+      "stock_value": 113245000.0,
+      "daily_change": -789000.0,
+      "daily_change_pct": -0.69,
+      "delta_from_start": 13522968.0,
+      "delta_pct_from_start": 13.52
+    },
+    {
+      "date": "04/02/2026",
+      "nav": 112626968.0,
+      "cash": 277968.0,
+      "stock_value": 112349000.0,
+      "daily_change": -896000.0,
+      "daily_change_pct": -0.79,
+      "delta_from_start": 12626968.0,
+      "delta_pct_from_start": 12.63
+    },
+    {
+      "date": "05/02/2026",
+      "nav": 112709968.0,
+      "cash": 277968.0,
+      "stock_value": 112432000.0,
+      "daily_change": 83000.0,
+      "daily_change_pct": 0.07,
+      "delta_from_start": 12709968.0,
+      "delta_pct_from_start": 12.71
+    },
+    {
+      "date": "06/02/2026",
+      "nav": 111923968.0,
+      "cash": 277968.0,
+      "stock_value": 111646000.0,
+      "daily_change": -786000.0,
+      "daily_change_pct": -0.7,
+      "delta_from_start": 11923968.0,
+      "delta_pct_from_start": 11.92
+    },
+    {
+      "date": "09/02/2026",
+      "nav": 114058968.0,
+      "cash": 277968.0,
+      "stock_value": 113781000.0,
+      "daily_change": 2135000.0,
+      "daily_change_pct": 1.91,
+      "delta_from_start": 14058968.0,
+      "delta_pct_from_start": 14.06
+    },
+    {
+      "date": "10/02/2026",
+      "nav": 113063968.0,
+      "cash": 277968.0,
+      "stock_value": 112786000.0,
+      "daily_change": -995000.0,
+      "daily_change_pct": -0.87,
+      "delta_from_start": 13063968.0,
+      "delta_pct_from_start": 13.06
+    },
+    {
+      "date": "11/02/2026",
+      "nav": 115538968.0,
+      "cash": 277968.0,
+      "stock_value": 115261000.0,
+      "daily_change": 2475000.0,
+      "daily_change_pct": 2.19,
+      "delta_from_start": 15538968.0,
+      "delta_pct_from_start": 15.54
+    },
+    {
+      "date": "12/02/2026",
+      "nav": 117877968.0,
+      "cash": 277968.0,
+      "stock_value": 117600000.0,
+      "daily_change": 2339000.0,
+      "daily_change_pct": 2.02,
+      "delta_from_start": 17877968.0,
+      "delta_pct_from_start": 17.88
+    },
+    {
+      "date": "13/02/2026",
+      "nav": 119745968.0,
+      "cash": 277968.0,
+      "stock_value": 119468000.0,
+      "daily_change": 1868000.0,
+      "daily_change_pct": 1.58,
+      "delta_from_start": 19745968.0,
+      "delta_pct_from_start": 19.75
+    },
+    {
+      "date": "23/02/2026",
+      "nav": 124052382.0,
+      "cash": 2164382.0,
+      "stock_value": 121888000.0,
+      "daily_change": 4306414.0,
+      "daily_change_pct": 3.6,
+      "delta_from_start": 24052382.0,
+      "delta_pct_from_start": 24.05
+    },
+    {
+      "date": "24/02/2026",
+      "nav": 124469382.0,
+      "cash": 2164382.0,
+      "stock_value": 122305000.0,
+      "daily_change": 417000.0,
+      "daily_change_pct": 0.34,
+      "delta_from_start": 24469382.0,
+      "delta_pct_from_start": 24.47
+    },
+    {
+      "date": "25/02/2026",
+      "nav": 124445607.0,
+      "cash": 387607.0,
+      "stock_value": 124058000.0,
+      "daily_change": -23775.0,
+      "daily_change_pct": -0.02,
+      "delta_from_start": 24445607.0,
+      "delta_pct_from_start": 24.45
+    },
+    {
+      "date": "26/02/2026",
+      "nav": 126726045.0,
+      "cash": 252045.0,
+      "stock_value": 126474000.0,
+      "daily_change": 2280438.0,
+      "daily_change_pct": 1.83,
+      "delta_from_start": 26726045.0,
+      "delta_pct_from_start": 26.73
+    },
+    {
+      "date": "27/02/2026",
+      "nav": 127155045.0,
+      "cash": 252045.0,
+      "stock_value": 126903000.0,
+      "daily_change": 429000.0,
+      "daily_change_pct": 0.34,
+      "delta_from_start": 27155045.0,
+      "delta_pct_from_start": 27.16
+    },
+    {
+      "date": "02/03/2026",
+      "nav": 128350045.0,
+      "cash": 252045.0,
+      "stock_value": 128098000.0,
+      "daily_change": 1195000.0,
+      "daily_change_pct": 0.94,
+      "delta_from_start": 28350045.0,
+      "delta_pct_from_start": 28.35
+    },
+    {
+      "date": "03/03/2026",
+      "nav": 127260045.0,
+      "cash": 252045.0,
+      "stock_value": 127008000.0,
+      "daily_change": -1090000.0,
+      "daily_change_pct": -0.85,
+      "delta_from_start": 27260045.0,
+      "delta_pct_from_start": 27.26
+    },
+    {
+      "date": "04/03/2026",
+      "nav": 129322045.0,
+      "cash": 252045.0,
+      "stock_value": 129070000.0,
+      "daily_change": 2062000.0,
+      "daily_change_pct": 1.62,
+      "delta_from_start": 29322045.0,
+      "delta_pct_from_start": 29.32
+    },
+    {
+      "date": "05/03/2026",
+      "nav": 126693327.0,
+      "cash": 1706327.0,
+      "stock_value": 124987000.0,
+      "daily_change": -2628718.0,
+      "daily_change_pct": -2.03,
+      "delta_from_start": 26693327.0,
+      "delta_pct_from_start": 26.69
+    },
+    {
+      "date": "06/03/2026",
+      "nav": 124460327.0,
+      "cash": 1706327.0,
+      "stock_value": 122754000.0,
+      "daily_change": -2233000.0,
+      "daily_change_pct": -1.76,
+      "delta_from_start": 24460327.0,
+      "delta_pct_from_start": 24.46
+    },
+    {
+      "date": "09/03/2026",
+      "nav": 116096327.0,
+      "cash": 1706327.0,
+      "stock_value": 114390000.0,
+      "daily_change": -8364000.0,
+      "daily_change_pct": -6.72,
+      "delta_from_start": 16096327.0,
+      "delta_pct_from_start": 16.1
+    },
+    {
+      "date": "10/03/2026",
+      "nav": 118470202.0,
+      "cash": 604202.0,
+      "stock_value": 117866000.0,
+      "daily_change": 2373875.0,
+      "daily_change_pct": 2.04,
+      "delta_from_start": 18470202.0,
+      "delta_pct_from_start": 18.47
+    },
+    {
+      "date": "11/03/2026",
+      "nav": 121906202.0,
+      "cash": 604202.0,
+      "stock_value": 121302000.0,
+      "daily_change": 3436000.0,
+      "daily_change_pct": 2.9,
+      "delta_from_start": 21906202.0,
+      "delta_pct_from_start": 21.91
+    },
+    {
+      "date": "12/03/2026",
+      "nav": 120800819.0,
+      "cash": 2033819.0,
+      "stock_value": 118767000.0,
+      "daily_change": -1105383.0,
+      "daily_change_pct": -0.91,
+      "delta_from_start": 20800819.0,
+      "delta_pct_from_start": 20.8
+    },
+    {
+      "date": "13/03/2026",
+      "nav": 120605819.0,
+      "cash": 2033819.0,
+      "stock_value": 118572000.0,
+      "daily_change": -195000.0,
+      "daily_change_pct": -0.16,
+      "delta_from_start": 20605819.0,
+      "delta_pct_from_start": 20.61
+    },
+    {
+      "date": "16/03/2026",
+      "nav": 116749146.0,
+      "cash": 1326146.0,
+      "stock_value": 115423000.0,
+      "daily_change": -3856673.0,
+      "daily_change_pct": -3.2,
+      "delta_from_start": 16749146.0,
+      "delta_pct_from_start": 16.75
+    },
+    {
+      "date": "17/03/2026",
+      "nav": 113866146.0,
+      "cash": 1326146.0,
+      "stock_value": 112540000.0,
+      "daily_change": -2883000.0,
+      "daily_change_pct": -2.47,
+      "delta_from_start": 13866146.0,
+      "delta_pct_from_start": 13.87
+    },
+    {
+      "date": "18/03/2026",
+      "nav": 116826146.0,
+      "cash": 1326146.0,
+      "stock_value": 115500000.0,
+      "daily_change": 2960000.0,
+      "daily_change_pct": 2.6,
+      "delta_from_start": 16826146.0,
+      "delta_pct_from_start": 16.83
+    },
+    {
+      "date": "19/03/2026",
+      "nav": 115790146.0,
+      "cash": 1326146.0,
+      "stock_value": 114464000.0,
+      "daily_change": -1036000.0,
+      "daily_change_pct": -0.89,
+      "delta_from_start": 15790146.0,
+      "delta_pct_from_start": 15.79
+    },
+    {
+      "date": "20/03/2026",
+      "nav": 110071146.0,
+      "cash": 1326146.0,
+      "stock_value": 108745000.0,
+      "daily_change": -5719000.0,
+      "daily_change_pct": -4.94,
+      "delta_from_start": 10071146.0,
+      "delta_pct_from_start": 10.07
+    },
+    {
+      "date": "23/03/2026",
+      "nav": 108790146.0,
+      "cash": 1326146.0,
+      "stock_value": 107464000.0,
+      "daily_change": -1281000.0,
+      "daily_change_pct": -1.16,
+      "delta_from_start": 8790146.0,
+      "delta_pct_from_start": 8.79
+    },
+    {
+      "date": "24/03/2026",
+      "nav": 107783146.0,
+      "cash": 1326146.0,
+      "stock_value": 106457000.0,
+      "daily_change": -1007000.0,
+      "daily_change_pct": -0.93,
+      "delta_from_start": 7783146.0,
+      "delta_pct_from_start": 7.78
+    },
+    {
+      "date": "25/03/2026",
+      "nav": 110832146.0,
+      "cash": 1326146.0,
+      "stock_value": 109506000.0,
+      "daily_change": 3049000.0,
+      "daily_change_pct": 2.83,
+      "delta_from_start": 10832146.0,
+      "delta_pct_from_start": 10.83
+    },
+    {
+      "date": "26/03/2026",
+      "nav": 110290146.0,
+      "cash": 1326146.0,
+      "stock_value": 108964000.0,
+      "daily_change": -542000.0,
+      "daily_change_pct": -0.49,
+      "delta_from_start": 10290146.0,
+      "delta_pct_from_start": 10.29
+    },
+    {
+      "date": "27/03/2026",
+      "nav": 112406146.0,
+      "cash": 1326146.0,
+      "stock_value": 111080000.0,
+      "daily_change": 2116000.0,
+      "daily_change_pct": 1.92,
+      "delta_from_start": 12406146.0,
+      "delta_pct_from_start": 12.41
+    },
+    {
+      "date": "30/03/2026",
+      "nav": 111697146.0,
+      "cash": 1326146.0,
+      "stock_value": 110371000.0,
+      "daily_change": -709000.0,
+      "daily_change_pct": -0.63,
+      "delta_from_start": 11697146.0,
+      "delta_pct_from_start": 11.7
+    },
+    {
+      "date": "31/03/2026",
+      "nav": 111067146.0,
+      "cash": 1326146.0,
+      "stock_value": 109741000.0,
+      "daily_change": -630000.0,
+      "daily_change_pct": -0.56,
+      "delta_from_start": 11067146.0,
+      "delta_pct_from_start": 11.07
+    },
+    {
+      "date": "01/04/2026",
+      "nav": 112813146.0,
+      "cash": 1326146.0,
+      "stock_value": 111487000.0,
+      "daily_change": 1746000.0,
+      "daily_change_pct": 1.57,
+      "delta_from_start": 12813146.0,
+      "delta_pct_from_start": 12.81
+    },
+    {
+      "date": "02/04/2026",
+      "nav": 111830146.0,
+      "cash": 1326146.0,
+      "stock_value": 110504000.0,
+      "daily_change": -983000.0,
+      "daily_change_pct": -0.87,
+      "delta_from_start": 11830146.0,
+      "delta_pct_from_start": 11.83
+    },
+    {
+      "date": "03/04/2026",
+      "nav": 110491146.0,
+      "cash": 1326146.0,
+      "stock_value": 109165000.0,
+      "daily_change": -1339000.0,
+      "daily_change_pct": -1.2,
+      "delta_from_start": 10491146.0,
+      "delta_pct_from_start": 10.49
+    },
+    {
+      "date": "06/04/2026",
+      "nav": 109720146.0,
+      "cash": 1326146.0,
+      "stock_value": 108394000.0,
+      "daily_change": -771000.0,
+      "daily_change_pct": -0.7,
+      "delta_from_start": 9720146.0,
+      "delta_pct_from_start": 9.72
+    },
+    {
+      "date": "07/04/2026",
+      "nav": 110030146.0,
+      "cash": 1326146.0,
+      "stock_value": 108704000.0,
+      "daily_change": 310000.0,
+      "daily_change_pct": 0.28,
+      "delta_from_start": 10030146.0,
+      "delta_pct_from_start": 10.03
+    },
+    {
+      "date": "08/04/2026",
+      "nav": 113955146.0,
+      "cash": 1326146.0,
+      "stock_value": 112629000.0,
+      "daily_change": 3925000.0,
+      "daily_change_pct": 3.57,
+      "delta_from_start": 13955146.0,
+      "delta_pct_from_start": 13.96
+    },
+    {
+      "date": "09/04/2026",
+      "nav": 111909146.0,
+      "cash": 1326146.0,
+      "stock_value": 110583000.0,
+      "daily_change": -2046000.0,
+      "daily_change_pct": -1.8,
+      "delta_from_start": 11909146.0,
+      "delta_pct_from_start": 11.91
+    },
+    {
+      "date": "10/04/2026",
+      "nav": 114888146.0,
+      "cash": 1326146.0,
+      "stock_value": 113562000.0,
+      "daily_change": 2979000.0,
+      "daily_change_pct": 2.66,
+      "delta_from_start": 14888146.0,
+      "delta_pct_from_start": 14.89
+    },
+    {
+      "date": "13/04/2026",
+      "nav": 116788146.0,
+      "cash": 1326146.0,
+      "stock_value": 115462000.0,
+      "daily_change": 1900000.0,
+      "daily_change_pct": 1.65,
+      "delta_from_start": 16788146.0,
+      "delta_pct_from_start": 16.79
+    },
+    {
+      "date": "14/04/2026",
+      "nav": 116329146.0,
+      "cash": 1326146.0,
+      "stock_value": 115003000.0,
+      "daily_change": -459000.0,
+      "daily_change_pct": -0.39,
+      "delta_from_start": 16329146.0,
+      "delta_pct_from_start": 16.33
+    },
+    {
+      "date": "15/04/2026",
+      "nav": 117673146.0,
+      "cash": 1326146.0,
+      "stock_value": 116347000.0,
+      "daily_change": 1344000.0,
+      "daily_change_pct": 1.16,
+      "delta_from_start": 17673146.0,
+      "delta_pct_from_start": 17.67
+    },
+    {
+      "date": "16/04/2026",
+      "nav": 120041312.0,
+      "cash": 1322312.0,
+      "stock_value": 118719000.0,
+      "daily_change": 2368166.0,
+      "daily_change_pct": 2.01,
+      "delta_from_start": 20041312.0,
+      "delta_pct_from_start": 20.04
+    },
+    {
+      "date": "17/04/2026",
+      "nav": 120421386.0,
+      "cash": 1354386.0,
+      "stock_value": 119067000.0,
+      "daily_change": 380074.0,
+      "daily_change_pct": 0.32,
+      "delta_from_start": 20421386.0,
+      "delta_pct_from_start": 20.42
+    },
+    {
+      "date": "20/04/2026",
+      "nav": 120622522.0,
+      "cash": 1398522.0,
+      "stock_value": 119224000.0,
+      "daily_change": 201136.0,
+      "daily_change_pct": 0.17,
+      "delta_from_start": 20622522.0,
+      "delta_pct_from_start": 20.62
+    },
+    {
+      "date": "21/04/2026",
+      "nav": 120739522.0,
+      "cash": 1398522.0,
+      "stock_value": 119341000.0,
+      "daily_change": 117000.0,
+      "daily_change_pct": 0.1,
+      "delta_from_start": 20739522.0,
+      "delta_pct_from_start": 20.74
+    },
+    {
+      "date": "22/04/2026",
+      "nav": 122683013.0,
+      "cash": 287013.0,
+      "stock_value": 122396000.0,
+      "daily_change": 1943491.0,
+      "daily_change_pct": 1.61,
+      "delta_from_start": 22683013.0,
+      "delta_pct_from_start": 22.68
+    },
+    {
+      "date": "23/04/2026",
+      "nav": 123218013.0,
+      "cash": 287013.0,
+      "stock_value": 122931000.0,
+      "daily_change": 535000.0,
+      "daily_change_pct": 0.44,
+      "delta_from_start": 23218013.0,
+      "delta_pct_from_start": 23.22
+    },
+    {
+      "date": "24/04/2026",
+      "nav": 122072013.0,
+      "cash": 287013.0,
+      "stock_value": 121785000.0,
+      "daily_change": -1146000.0,
+      "daily_change_pct": -0.93,
+      "delta_from_start": 22072013.0,
+      "delta_pct_from_start": 22.07
+    },
+    {
+      "date": "28/04/2026",
+      "nav": 121891013.0,
+      "cash": 287013.0,
+      "stock_value": 121604000.0,
+      "daily_change": -181000.0,
+      "daily_change_pct": -0.15,
+      "delta_from_start": 21891013.0,
+      "delta_pct_from_start": 21.89
+    },
+    {
+      "date": "29/04/2026",
+      "nav": 121230013.0,
+      "cash": 287013.0,
+      "stock_value": 120943000.0,
+      "daily_change": -661000.0,
+      "daily_change_pct": -0.54,
+      "delta_from_start": 21230013.0,
+      "delta_pct_from_start": 21.23
+    },
+    {
+      "date": "04/05/2026",
+      "nav": 122155013.0,
+      "cash": 287013.0,
+      "stock_value": 121868000.0,
+      "daily_change": 925000.0,
+      "daily_change_pct": 0.76,
+      "delta_from_start": 22155013.0,
+      "delta_pct_from_start": 22.16
+    },
+    {
+      "date": "05/05/2026",
+      "nav": 124951013.0,
+      "cash": 287013.0,
+      "stock_value": 124664000.0,
+      "daily_change": 2796000.0,
+      "daily_change_pct": 2.29,
+      "delta_from_start": 24951013.0,
+      "delta_pct_from_start": 24.95
+    },
+    {
+      "date": "06/05/2026",
+      "nav": 124552013.0,
+      "cash": 287013.0,
+      "stock_value": 124265000.0,
+      "daily_change": -399000.0,
+      "daily_change_pct": -0.32,
+      "delta_from_start": 24552013.0,
+      "delta_pct_from_start": 24.55
+    },
+    {
+      "date": "07/05/2026",
+      "nav": 123652013.0,
+      "cash": 287013.0,
+      "stock_value": 123365000.0,
+      "daily_change": -900000.0,
+      "daily_change_pct": -0.72,
+      "delta_from_start": 23652013.0,
+      "delta_pct_from_start": 23.65
+    },
+    {
+      "date": "08/05/2026",
+      "nav": 122130013.0,
+      "cash": 287013.0,
+      "stock_value": 121843000.0,
+      "daily_change": -1522000.0,
+      "daily_change_pct": -1.23,
+      "delta_from_start": 22130013.0,
+      "delta_pct_from_start": 22.13
+    },
+    {
+      "date": "11/05/2026",
+      "nav": 122394013.0,
+      "cash": 287013.0,
+      "stock_value": 122107000.0,
+      "daily_change": 264000.0,
+      "daily_change_pct": 0.22,
+      "delta_from_start": 22394013.0,
+      "delta_pct_from_start": 22.39
+    },
+    {
+      "date": "12/05/2026",
+      "nav": 122603013.0,
+      "cash": 287013.0,
+      "stock_value": 122316000.0,
+      "daily_change": 209000.0,
+      "daily_change_pct": 0.17,
+      "delta_from_start": 22603013.0,
+      "delta_pct_from_start": 22.6
+    },
+    {
+      "date": "13/05/2026",
+      "nav": 124885013.0,
+      "cash": 287013.0,
+      "stock_value": 124598000.0,
+      "daily_change": 2282000.0,
+      "daily_change_pct": 1.86,
+      "delta_from_start": 24885013.0,
+      "delta_pct_from_start": 24.89
+    },
+    {
+      "date": "14/05/2026",
+      "nav": 125483013.0,
+      "cash": 287013.0,
+      "stock_value": 125196000.0,
+      "daily_change": 598000.0,
+      "daily_change_pct": 0.48,
+      "delta_from_start": 25483013.0,
+      "delta_pct_from_start": 25.48
+    },
+    {
+      "date": "15/05/2026",
+      "nav": 125717013.0,
+      "cash": 287013.0,
+      "stock_value": 125430000.0,
+      "daily_change": 234000.0,
+      "daily_change_pct": 0.19,
+      "delta_from_start": 25717013.0,
+      "delta_pct_from_start": 25.72
+    },
+    {
+      "date": "18/05/2026",
+      "nav": 129141718.0,
+      "cash": 843718.0,
+      "stock_value": 128298000.0,
+      "daily_change": 3424705.0,
+      "daily_change_pct": 2.72,
+      "delta_from_start": 29141718.0,
+      "delta_pct_from_start": 29.14
+    },
+    {
+      "date": "19/05/2026",
+      "nav": 125181938.0,
+      "cash": 641938.0,
+      "stock_value": 124540000.0,
+      "daily_change": -3959780.0,
+      "daily_change_pct": -3.07,
+      "delta_from_start": 25181938.0,
+      "delta_pct_from_start": 25.18
+    },
+    {
+      "date": "20/05/2026",
+      "nav": 124888938.0,
+      "cash": 641938.0,
+      "stock_value": 124247000.0,
+      "daily_change": -293000.0,
+      "daily_change_pct": -0.23,
+      "delta_from_start": 24888938.0,
+      "delta_pct_from_start": 24.89
+    },
+    {
+      "date": "21/05/2026",
+      "nav": 123012334.0,
+      "cash": 798334.0,
+      "stock_value": 122214000.0,
+      "daily_change": -1876604.0,
+      "daily_change_pct": -1.5,
+      "delta_from_start": 23012334.0,
+      "delta_pct_from_start": 23.01
+    },
+    {
+      "date": "22/05/2026",
+      "nav": 121676898.0,
+      "cash": 882898.0,
+      "stock_value": 120794000.0,
+      "daily_change": -1335436.0,
+      "daily_change_pct": -1.09,
+      "delta_from_start": 21676898.0,
+      "delta_pct_from_start": 21.68
+    },
+    {
+      "date": "25/05/2026",
+      "nav": 119239898.0,
+      "cash": 882898.0,
+      "stock_value": 118357000.0,
+      "daily_change": -2437000.0,
+      "daily_change_pct": -2.0,
+      "delta_from_start": 19239898.0,
+      "delta_pct_from_start": 19.24
+    },
+    {
+      "date": "26/05/2026",
+      "nav": 118884898.0,
+      "cash": 882898.0,
+      "stock_value": 118002000.0,
+      "daily_change": -355000.0,
+      "daily_change_pct": -0.3,
+      "delta_from_start": 18884898.0,
+      "delta_pct_from_start": 18.88
+    },
+    {
+      "date": "27/05/2026",
+      "nav": 118394898.0,
+      "cash": 882898.0,
+      "stock_value": 117512000.0,
+      "daily_change": -490000.0,
+      "daily_change_pct": -0.41,
+      "delta_from_start": 18394898.0,
+      "delta_pct_from_start": 18.39
+    },
+    {
+      "date": "28/05/2026",
+      "nav": 118349898.0,
+      "cash": 882898.0,
+      "stock_value": 117467000.0,
+      "daily_change": -45000.0,
+      "daily_change_pct": -0.04,
+      "delta_from_start": 18349898.0,
+      "delta_pct_from_start": 18.35
+    },
+    {
+      "date": "29/05/2026",
+      "nav": 119320898.0,
+      "cash": 882898.0,
+      "stock_value": 118438000.0,
+      "daily_change": 971000.0,
+      "daily_change_pct": 0.82,
+      "delta_from_start": 19320898.0,
+      "delta_pct_from_start": 19.32
+    },
+    {
+      "date": "01/06/2026",
+      "nav": 117849898.0,
+      "cash": 882898.0,
+      "stock_value": 116967000.0,
+      "daily_change": -1471000.0,
+      "daily_change_pct": -1.23,
+      "delta_from_start": 17849898.0,
+      "delta_pct_from_start": 17.85
+    },
+    {
+      "date": "02/06/2026",
+      "nav": 116283898.0,
+      "cash": 882898.0,
+      "stock_value": 115401000.0,
+      "daily_change": -1566000.0,
+      "daily_change_pct": -1.33,
+      "delta_from_start": 16283898.0,
+      "delta_pct_from_start": 16.28
+    },
+    {
+      "date": "03/06/2026",
+      "nav": 116417898.0,
+      "cash": 882898.0,
+      "stock_value": 115535000.0,
+      "daily_change": 134000.0,
+      "daily_change_pct": 0.12,
+      "delta_from_start": 16417898.0,
+      "delta_pct_from_start": 16.42
+    },
+    {
+      "date": "04/06/2026",
+      "nav": 118063898.0,
+      "cash": 882898.0,
+      "stock_value": 117181000.0,
+      "daily_change": 1646000.0,
+      "daily_change_pct": 1.41,
+      "delta_from_start": 18063898.0,
+      "delta_pct_from_start": 18.06
+    },
+    {
+      "date": "05/06/2026",
+      "nav": 118497898.0,
+      "cash": 882898.0,
+      "stock_value": 117615000.0,
+      "daily_change": 434000.0,
+      "daily_change_pct": 0.37,
+      "delta_from_start": 18497898.0,
+      "delta_pct_from_start": 18.5
+    },
+    {
+      "date": "08/06/2026",
+      "nav": 116496898.0,
+      "cash": 882898.0,
+      "stock_value": 115614000.0,
+      "daily_change": -2001000.0,
+      "daily_change_pct": -1.69,
+      "delta_from_start": 16496898.0,
+      "delta_pct_from_start": 16.5
+    },
+    {
+      "date": "09/06/2026",
+      "nav": 116502898.0,
+      "cash": 882898.0,
+      "stock_value": 115620000.0,
+      "daily_change": 6000.0,
+      "daily_change_pct": 0.01,
+      "delta_from_start": 16502898.0,
+      "delta_pct_from_start": 16.5
+    },
+    {
+      "date": "10/06/2026",
+      "nav": 116929898.0,
+      "cash": 882898.0,
+      "stock_value": 116047000.0,
+      "daily_change": 427000.0,
+      "daily_change_pct": 0.37,
+      "delta_from_start": 16929898.0,
+      "delta_pct_from_start": 16.93
+    },
+    {
+      "date": "11/06/2026",
+      "nav": 117265898.0,
+      "cash": 882898.0,
+      "stock_value": 116383000.0,
+      "daily_change": 336000.0,
+      "daily_change_pct": 0.29,
+      "delta_from_start": 17265898.0,
+      "delta_pct_from_start": 17.27
+    },
+    {
+      "date": "12/06/2026",
+      "nav": 116819898.0,
+      "cash": 882898.0,
+      "stock_value": 115937000.0,
+      "daily_change": -446000.0,
+      "daily_change_pct": -0.38,
+      "delta_from_start": 16819898.0,
+      "delta_pct_from_start": 16.82
+    },
+    {
+      "date": "15/06/2026",
+      "nav": 115979058.0,
+      "cash": 165058.0,
+      "stock_value": 115814000.0,
+      "daily_change": -840840.0,
+      "daily_change_pct": -0.72,
+      "delta_from_start": 15979058.0,
+      "delta_pct_from_start": 15.98
+    },
+    {
+      "date": "16/06/2026",
+      "nav": 116948978.0,
+      "cash": 846978.0,
+      "stock_value": 116102000.0,
+      "daily_change": 969920.0,
+      "daily_change_pct": 0.84,
+      "delta_from_start": 16948978.0,
+      "delta_pct_from_start": 16.95
+    },
+    {
+      "date": "17/06/2026",
+      "nav": 116771094.0,
+      "cash": 293094.0,
+      "stock_value": 116478000.0,
+      "daily_change": -177884.0,
+      "daily_change_pct": -0.15,
+      "delta_from_start": 16771094.0,
+      "delta_pct_from_start": 16.77
+    },
+    {
+      "date": "18/06/2026",
+      "nav": 120550780.0,
+      "cash": 17780.0,
+      "stock_value": 120533000.0,
+      "daily_change": 3779686.0,
+      "daily_change_pct": 3.24,
+      "delta_from_start": 20550780.0,
+      "delta_pct_from_start": 20.55
+    },
+    {
+      "date": "19/06/2026",
+      "nav": 120389780.0,
+      "cash": 17780.0,
+      "stock_value": 120372000.0,
+      "daily_change": -161000.0,
+      "daily_change_pct": -0.13,
+      "delta_from_start": 20389780.0,
+      "delta_pct_from_start": 20.39
+    },
+    {
+      "date": "22/06/2026",
+      "nav": 123173323.0,
+      "cash": 105323.0,
+      "stock_value": 123068000.0,
+      "daily_change": 2783543.0,
+      "daily_change_pct": 2.31,
+      "delta_from_start": 23173323.0,
+      "delta_pct_from_start": 23.17
+    },
+    {
+      "date": "23/06/2026",
+      "nav": 122247323.0,
+      "cash": 105323.0,
+      "stock_value": 122142000.0,
+      "daily_change": -926000.0,
+      "daily_change_pct": -0.75,
+      "delta_from_start": 22247323.0,
+      "delta_pct_from_start": 22.25
+    },
+    {
+      "date": "24/06/2026",
+      "nav": 123677323.0,
+      "cash": 105323.0,
+      "stock_value": 123572000.0,
+      "daily_change": 1430000.0,
+      "daily_change_pct": 1.17,
+      "delta_from_start": 23677323.0,
+      "delta_pct_from_start": 23.68
+    },
+    {
+      "date": "25/06/2026",
+      "nav": 122644323.0,
+      "cash": 105323.0,
+      "stock_value": 122539000.0,
+      "daily_change": -1033000.0,
+      "daily_change_pct": -0.84,
+      "delta_from_start": 22644323.0,
+      "delta_pct_from_start": 22.64
+    },
+    {
+      "date": "26/06/2026",
+      "nav": 122744323.0,
+      "cash": 105323.0,
+      "stock_value": 122639000.0,
+      "daily_change": 100000.0,
+      "daily_change_pct": 0.08,
+      "delta_from_start": 22744323.0,
+      "delta_pct_from_start": 22.74
+    },
+    {
+      "date": "29/06/2026",
+      "nav": 122913323.0,
+      "cash": 105323.0,
+      "stock_value": 122808000.0,
+      "daily_change": 169000.0,
+      "daily_change_pct": 0.14,
+      "delta_from_start": 22913323.0,
+      "delta_pct_from_start": 22.91
+    },
+    {
+      "date": "30/06/2026",
+      "nav": 122100323.0,
+      "cash": 105323.0,
+      "stock_value": 121995000.0,
+      "daily_change": -813000.0,
+      "daily_change_pct": -0.66,
+      "delta_from_start": 22100323.0,
+      "delta_pct_from_start": 22.1
+    },
+    {
+      "date": "01/07/2026",
+      "nav": 123107323.0,
+      "cash": 105323.0,
+      "stock_value": 123002000.0,
+      "daily_change": 1007000.0,
+      "daily_change_pct": 0.82,
+      "delta_from_start": 23107323.0,
+      "delta_pct_from_start": 23.11
+    },
+    {
+      "date": "02/07/2026",
+      "nav": 122761323.0,
+      "cash": 105323.0,
+      "stock_value": 122656000.0,
+      "daily_change": -346000.0,
+      "daily_change_pct": -0.28,
+      "delta_from_start": 22761323.0,
+      "delta_pct_from_start": 22.76
+    },
+    {
+      "date": "03/07/2026",
+      "nav": 121885323.0,
+      "cash": 105323.0,
+      "stock_value": 121780000.0,
+      "daily_change": -876000.0,
+      "daily_change_pct": -0.71,
+      "delta_from_start": 21885323.0,
+      "delta_pct_from_start": 21.89
+    },
+    {
+      "date": "06/07/2026",
+      "nav": 120905323.0,
+      "cash": 105323.0,
+      "stock_value": 120800000.0,
+      "daily_change": -980000.0,
+      "daily_change_pct": -0.8,
+      "delta_from_start": 20905323.0,
+      "delta_pct_from_start": 20.91
+    },
+    {
+      "date": "07/07/2026",
+      "nav": 122154323.0,
+      "cash": 105323.0,
+      "stock_value": 122049000.0,
+      "daily_change": 1249000.0,
+      "daily_change_pct": 1.03,
+      "delta_from_start": 22154323.0,
+      "delta_pct_from_start": 22.15
+    },
+    {
+      "date": "08/07/2026",
+      "nav": 122725323.0,
+      "cash": 105323.0,
+      "stock_value": 122620000.0,
+      "daily_change": 571000.0,
+      "daily_change_pct": 0.47,
+      "delta_from_start": 22725323.0,
+      "delta_pct_from_start": 22.73
+    },
+    {
+      "date": "09/07/2026",
+      "nav": 123790323.0,
+      "cash": 105323.0,
+      "stock_value": 123685000.0,
+      "daily_change": 1065000.0,
+      "daily_change_pct": 0.87,
+      "delta_from_start": 23790323.0,
+      "delta_pct_from_start": 23.79
+    },
+    {
+      "date": "10/07/2026",
+      "nav": 123786323.0,
+      "cash": 105323.0,
+      "stock_value": 123681000.0,
+      "daily_change": -4000.0,
+      "daily_change_pct": -0.0,
+      "delta_from_start": 23786323.0,
+      "delta_pct_from_start": 23.79
+    },
+    {
+      "date": "13/07/2026",
+      "nav": 120435323.0,
+      "cash": 105323.0,
+      "stock_value": 120330000.0,
+      "daily_change": -3351000.0,
+      "daily_change_pct": -2.71,
+      "delta_from_start": 20435323.0,
+      "delta_pct_from_start": 20.44
+    },
+    {
+      "date": "14/07/2026",
+      "nav": 123775323.0,
+      "cash": 105323.0,
+      "stock_value": 123670000.0,
+      "daily_change": 3340000.0,
+      "daily_change_pct": 2.77,
+      "delta_from_start": 23775323.0,
+      "delta_pct_from_start": 23.78
+    },
+    {
+      "date": "15/07/2026",
+      "nav": 123200323.0,
+      "cash": 105323.0,
+      "stock_value": 123095000.0,
+      "daily_change": -575000.0,
+      "daily_change_pct": -0.46,
+      "delta_from_start": 23200323.0,
+      "delta_pct_from_start": 23.2
+    },
+    {
+      "date": "16/07/2026",
+      "nav": 124375323.0,
+      "cash": 105323.0,
+      "stock_value": 124270000.0,
+      "daily_change": 1175000.0,
+      "daily_change_pct": 0.95,
+      "delta_from_start": 24375323.0,
+      "delta_pct_from_start": 24.38
+    },
+    {
+      "date": "17/07/2026",
+      "nav": 126058558.0,
+      "cash": 128558.0,
+      "stock_value": 125930000.0,
+      "daily_change": 1683235.0,
+      "daily_change_pct": 1.35,
+      "delta_from_start": 26058558.0,
+      "delta_pct_from_start": 26.06
+    },
+    {
+      "date": "20/07/2026",
+      "nav": 124958558.0,
+      "cash": 128558.0,
+      "stock_value": 124830000.0,
+      "daily_change": -1100000.0,
+      "daily_change_pct": -0.87,
+      "delta_from_start": 24958558.0,
+      "delta_pct_from_start": 24.96
+    },
+    {
+      "date": "21/07/2026",
+      "nav": 122518558.0,
+      "cash": 128558.0,
+      "stock_value": 122390000.0,
+      "daily_change": -2440000.0,
+      "daily_change_pct": -1.95,
+      "delta_from_start": 22518558.0,
+      "delta_pct_from_start": 22.52
+    },
+    {
+      "date": "22/07/2026",
+      "nav": 119028558.0,
+      "cash": 128558.0,
+      "stock_value": 118900000.0,
+      "daily_change": -3490000.0,
+      "daily_change_pct": -2.85,
+      "delta_from_start": 19028558.0,
+      "delta_pct_from_start": 19.03
+    },
+    {
+      "date": "23/07/2026",
+      "nav": 121648558.0,
+      "cash": 128558.0,
+      "stock_value": 121520000.0,
+      "daily_change": 2620000.0,
+      "daily_change_pct": 2.2,
+      "delta_from_start": 21648558.0,
+      "delta_pct_from_start": 21.65
+    },
+    {
+      "date": "24/07/2026",
+      "nav": 123848558.0,
+      "cash": 128558.0,
+      "stock_value": 123720000.0,
+      "daily_change": 2200000.0,
+      "daily_change_pct": 1.81,
+      "delta_from_start": 23848558.0,
+      "delta_pct_from_start": 23.85
+    },
+    {
+      "date": "27/07/2026",
+      "nav": 121168558.0,
+      "cash": 128558.0,
+      "stock_value": 121040000.0,
+      "daily_change": -2680000.0,
+      "daily_change_pct": -2.16,
+      "delta_from_start": 21168558.0,
+      "delta_pct_from_start": 21.17
+    },
+    {
+      "date": "28/07/2026",
+      "nav": 122858558.0,
+      "cash": 128558.0,
+      "stock_value": 122730000.0,
+      "daily_change": 1690000.0,
+      "daily_change_pct": 1.39,
+      "delta_from_start": 22858558.0,
+      "delta_pct_from_start": 22.86
+    },
+    {
+      "date": "29/07/2026",
+      "nav": 123908558.0,
+      "cash": 128558.0,
+      "stock_value": 123780000.0,
+      "daily_change": 1050000.0,
+      "daily_change_pct": 0.85,
+      "delta_from_start": 23908558.0,
+      "delta_pct_from_start": 23.91
+    },
+    {
+      "date": "30/07/2026",
+      "nav": 126348558.0,
+      "cash": 128558.0,
+      "stock_value": 126220000.0,
+      "daily_change": 2440000.0,
+      "daily_change_pct": 1.97,
+      "delta_from_start": 26348558.0,
+      "delta_pct_from_start": 26.35
+    },
+    {
+      "date": "31/07/2026",
+      "nav": 123538558.0,
+      "cash": 128558.0,
+      "stock_value": 123410000.0,
+      "daily_change": -2810000.0,
+      "daily_change_pct": -2.22,
+      "delta_from_start": 23538558.0,
+      "delta_pct_from_start": 23.54
+    },
+    {
+      "date": "03/08/2026",
+      "nav": 122758558.0,
+      "cash": 128558.0,
+      "stock_value": 122630000.0,
+      "daily_change": -780000.0,
+      "daily_change_pct": -0.63,
+      "delta_from_start": 22758558.0,
+      "delta_pct_from_start": 22.76
+    },
+    {
+      "date": "04/08/2026",
+      "nav": 122538558.0,
+      "cash": 128558.0,
+      "stock_value": 122410000.0,
+      "daily_change": -220000.0,
+      "daily_change_pct": -0.18,
+      "delta_from_start": 22538558.0,
+      "delta_pct_from_start": 22.54
+    },
+    {
+      "date": "05/08/2026",
+      "nav": 121408558.0,
+      "cash": 128558.0,
+      "stock_value": 121280000.0,
+      "daily_change": -1130000.0,
+      "daily_change_pct": -0.92,
+      "delta_from_start": 21408558.0,
+      "delta_pct_from_start": 21.41
+    },
+    {
+      "date": "06/08/2026",
+      "nav": 121258558.0,
+      "cash": 128558.0,
+      "stock_value": 121130000.0,
+      "daily_change": -150000.0,
+      "daily_change_pct": -0.12,
+      "delta_from_start": 21258558.0,
+      "delta_pct_from_start": 21.26
+    },
+    {
+      "date": "07/08/2026",
+      "nav": 124358558.0,
+      "cash": 128558.0,
+      "stock_value": 124230000.0,
+      "daily_change": 3100000.0,
+      "daily_change_pct": 2.56,
+      "delta_from_start": 24358558.0,
+      "delta_pct_from_start": 24.36
+    },
+    {
+      "date": "10/08/2026",
+      "nav": 124318558.0,
+      "cash": 128558.0,
+      "stock_value": 124190000.0,
+      "daily_change": -40000.0,
+      "daily_change_pct": -0.03,
+      "delta_from_start": 24318558.0,
+      "delta_pct_from_start": 24.32
+    },
+    {
+      "date": "11/08/2026",
+      "nav": 124098558.0,
+      "cash": 128558.0,
+      "stock_value": 123970000.0,
+      "daily_change": -220000.0,
+      "daily_change_pct": -0.18,
+      "delta_from_start": 24098558.0,
+      "delta_pct_from_start": 24.1
+    },
+    {
+      "date": "12/08/2026",
+      "nav": 125918558.0,
+      "cash": 128558.0,
+      "stock_value": 125790000.0,
+      "daily_change": 1820000.0,
+      "daily_change_pct": 1.47,
+      "delta_from_start": 25918558.0,
+      "delta_pct_from_start": 25.92
+    },
+    {
+      "date": "13/08/2026",
+      "nav": 123938558.0,
+      "cash": 128558.0,
+      "stock_value": 123810000.0,
+      "daily_change": -1980000.0,
+      "daily_change_pct": -1.57,
+      "delta_from_start": 23938558.0,
+      "delta_pct_from_start": 23.94
+    },
+    {
+      "date": "14/08/2026",
+      "nav": 122238243.0,
+      "cash": 323243.0,
+      "stock_value": 121915000.0,
+      "daily_change": -1700315.0,
+      "daily_change_pct": -1.37,
+      "delta_from_start": 22238243.0,
+      "delta_pct_from_start": 22.24
+    },
+    {
+      "date": "17/08/2026",
+      "nav": 122618243.0,
+      "cash": 323243.0,
+      "stock_value": 122295000.0,
+      "daily_change": 380000.0,
+      "daily_change_pct": 0.31,
+      "delta_from_start": 22618243.0,
+      "delta_pct_from_start": 22.62
+    },
+    {
+      "date": "18/08/2026",
+      "nav": 123833243.0,
+      "cash": 323243.0,
+      "stock_value": 123510000.0,
+      "daily_change": 1215000.0,
+      "daily_change_pct": 0.99,
+      "delta_from_start": 23833243.0,
+      "delta_pct_from_start": 23.83
+    },
+    {
+      "date": "19/08/2026",
+      "nav": 124183243.0,
+      "cash": 323243.0,
+      "stock_value": 123860000.0,
+      "daily_change": 350000.0,
+      "daily_change_pct": 0.28,
+      "delta_from_start": 24183243.0,
+      "delta_pct_from_start": 24.18
+    },
+    {
+      "date": "20/08/2026",
+      "nav": 124998243.0,
+      "cash": 323243.0,
+      "stock_value": 124675000.0,
+      "daily_change": 815000.0,
+      "daily_change_pct": 0.66,
+      "delta_from_start": 24998243.0,
+      "delta_pct_from_start": 25.0
+    },
+    {
+      "date": "21/08/2026",
+      "nav": 126103243.0,
+      "cash": 323243.0,
+      "stock_value": 125780000.0,
+      "daily_change": 1105000.0,
+      "daily_change_pct": 0.88,
+      "delta_from_start": 26103243.0,
+      "delta_pct_from_start": 26.1
+    },
+    {
+      "date": "24/08/2026",
+      "nav": 129475898.0,
+      "cash": 835898.0,
+      "stock_value": 128640000.0,
+      "daily_change": 3372655.0,
+      "daily_change_pct": 2.67,
+      "delta_from_start": 29475898.0,
+      "delta_pct_from_start": 29.48
+    },
+    {
+      "date": "25/08/2026",
+      "nav": 129145898.0,
+      "cash": 835898.0,
+      "stock_value": 128310000.0,
+      "daily_change": -330000.0,
+      "daily_change_pct": -0.25,
+      "delta_from_start": 29145898.0,
+      "delta_pct_from_start": 29.15
+    },
+    {
+      "date": "26/08/2026",
+      "nav": 131315898.0,
+      "cash": 835898.0,
+      "stock_value": 130480000.0,
+      "daily_change": 2170000.0,
+      "daily_change_pct": 1.68,
+      "delta_from_start": 31315898.0,
+      "delta_pct_from_start": 31.32
+    },
+    {
+      "date": "27/08/2026",
+      "nav": 130605898.0,
+      "cash": 835898.0,
+      "stock_value": 129770000.0,
+      "daily_change": -710000.0,
+      "daily_change_pct": -0.54,
+      "delta_from_start": 30605898.0,
+      "delta_pct_from_start": 30.61
+    },
+    {
+      "date": "28/08/2026",
+      "nav": 130295898.0,
+      "cash": 835898.0,
+      "stock_value": 129460000.0,
+      "daily_change": -310000.0,
+      "daily_change_pct": -0.24,
+      "delta_from_start": 30295898.0,
+      "delta_pct_from_start": 30.3
+    },
+    {
+      "date": "03/09/2026",
+      "nav": 130675898.0,
+      "cash": 835898.0,
+      "stock_value": 129840000.0,
+      "daily_change": 380000.0,
+      "daily_change_pct": 0.29,
+      "delta_from_start": 30675898.0,
+      "delta_pct_from_start": 30.68
+    },
+    {
+      "date": "04/09/2026",
+      "nav": 132075898.0,
+      "cash": 835898.0,
+      "stock_value": 131240000.0,
+      "daily_change": 1400000.0,
+      "daily_change_pct": 1.07,
+      "delta_from_start": 32075898.0,
+      "delta_pct_from_start": 32.08
+    },
+    {
+      "date": "07/09/2026",
+      "nav": 128065898.0,
+      "cash": 835898.0,
+      "stock_value": 127230000.0,
+      "daily_change": -4010000.0,
+      "daily_change_pct": -3.04,
+      "delta_from_start": 28065898.0,
+      "delta_pct_from_start": 28.07
+    },
+    {
+      "date": "08/09/2026",
+      "nav": 129185898.0,
+      "cash": 835898.0,
+      "stock_value": 128350000.0,
+      "daily_change": 1120000.0,
+      "daily_change_pct": 0.87,
+      "delta_from_start": 29185898.0,
+      "delta_pct_from_start": 29.19
+    },
+    {
+      "date": "09/09/2026",
+      "nav": 129265898.0,
+      "cash": 835898.0,
+      "stock_value": 128430000.0,
+      "daily_change": 80000.0,
+      "daily_change_pct": 0.06,
+      "delta_from_start": 29265898.0,
+      "delta_pct_from_start": 29.27
+    },
+    {
+      "date": "10/09/2026",
+      "nav": 129145898.0,
+      "cash": 835898.0,
+      "stock_value": 128310000.0,
+      "daily_change": -120000.0,
+      "daily_change_pct": -0.09,
+      "delta_from_start": 29145898.0,
+      "delta_pct_from_start": 29.15
+    },
+    {
+      "date": "11/09/2026",
+      "nav": 127305898.0,
+      "cash": 835898.0,
+      "stock_value": 126470000.0,
+      "daily_change": -1840000.0,
+      "daily_change_pct": -1.42,
+      "delta_from_start": 27305898.0,
+      "delta_pct_from_start": 27.31
+    },
+    {
+      "date": "14/09/2026",
+      "nav": 127615898.0,
+      "cash": 835898.0,
+      "stock_value": 126780000.0,
+      "daily_change": 310000.0,
+      "daily_change_pct": 0.24,
+      "delta_from_start": 27615898.0,
+      "delta_pct_from_start": 27.62
+    },
+    {
+      "date": "15/09/2026",
+      "nav": 129785898.0,
+      "cash": 835898.0,
+      "stock_value": 128950000.0,
+      "daily_change": 2170000.0,
+      "daily_change_pct": 1.7,
+      "delta_from_start": 29785898.0,
+      "delta_pct_from_start": 29.79
+    },
+    {
+      "date": "16/09/2026",
+      "nav": 129815898.0,
+      "cash": 835898.0,
+      "stock_value": 128980000.0,
+      "daily_change": 30000.0,
+      "daily_change_pct": 0.02,
+      "delta_from_start": 29815898.0,
+      "delta_pct_from_start": 29.82
+    },
+    {
+      "date": "17/09/2026",
+      "nav": 129185898.0,
+      "cash": 835898.0,
+      "stock_value": 128350000.0,
+      "daily_change": -630000.0,
+      "daily_change_pct": -0.49,
+      "delta_from_start": 29185898.0,
+      "delta_pct_from_start": 29.19
+    },
+    {
+      "date": "18/09/2026",
+      "nav": 129955898.0,
+      "cash": 835898.0,
+      "stock_value": 129120000.0,
+      "daily_change": 770000.0,
+      "daily_change_pct": 0.6,
+      "delta_from_start": 29955898.0,
+      "delta_pct_from_start": 29.96
+    },
+    {
+      "date": "21/09/2026",
+      "nav": 128915898.0,
+      "cash": 835898.0,
+      "stock_value": 128080000.0,
+      "daily_change": -1040000.0,
+      "daily_change_pct": -0.8,
+      "delta_from_start": 28915898.0,
+      "delta_pct_from_start": 28.92
+    },
+    {
+      "date": "22/09/2026",
+      "nav": 130085898.0,
+      "cash": 835898.0,
+      "stock_value": 129250000.0,
+      "daily_change": 1170000.0,
+      "daily_change_pct": 0.91,
+      "delta_from_start": 30085898.0,
+      "delta_pct_from_start": 30.09
+    },
+    {
+      "date": "23/09/2026",
+      "nav": 128285898.0,
+      "cash": 835898.0,
+      "stock_value": 127450000.0,
+      "daily_change": -1800000.0,
+      "daily_change_pct": -1.38,
+      "delta_from_start": 28285898.0,
+      "delta_pct_from_start": 28.29
+    },
+    {
+      "date": "24/09/2026",
+      "nav": 126085898.0,
+      "cash": 835898.0,
+      "stock_value": 125250000.0,
+      "daily_change": -2200000.0,
+      "daily_change_pct": -1.71,
+      "delta_from_start": 26085898.0,
+      "delta_pct_from_start": 26.09
+    },
+    {
+      "date": "25/09/2026",
+      "nav": 124655898.0,
+      "cash": 835898.0,
+      "stock_value": 123820000.0,
+      "daily_change": -1430000.0,
+      "daily_change_pct": -1.13,
+      "delta_from_start": 24655898.0,
+      "delta_pct_from_start": 24.66
+    },
+    {
+      "date": "28/09/2026",
+      "nav": 126785898.0,
+      "cash": 835898.0,
+      "stock_value": 125950000.0,
+      "daily_change": 2130000.0,
+      "daily_change_pct": 1.71,
+      "delta_from_start": 26785898.0,
+      "delta_pct_from_start": 26.79
+    },
+    {
+      "date": "29/09/2026",
+      "nav": 127375898.0,
+      "cash": 835898.0,
+      "stock_value": 126540000.0,
+      "daily_change": 590000.0,
+      "daily_change_pct": 0.47,
+      "delta_from_start": 27375898.0,
+      "delta_pct_from_start": 27.38
+    },
+    {
+      "date": "30/09/2026",
+      "nav": 124665898.0,
+      "cash": 835898.0,
+      "stock_value": 123830000.0,
+      "daily_change": -2710000.0,
+      "daily_change_pct": -2.13,
+      "delta_from_start": 24665898.0,
+      "delta_pct_from_start": 24.67
+    },
+    {
+      "date": "01/10/2026",
+      "nav": 123285898.0,
+      "cash": 835898.0,
+      "stock_value": 122450000.0,
+      "daily_change": -1380000.0,
+      "daily_change_pct": -1.11,
+      "delta_from_start": 23285898.0,
+      "delta_pct_from_start": 23.29
+    },
+    {
+      "date": "02/10/2026",
+      "nav": 121605898.0,
+      "cash": 835898.0,
+      "stock_value": 120770000.0,
+      "daily_change": -1680000.0,
+      "daily_change_pct": -1.36,
+      "delta_from_start": 21605898.0,
+      "delta_pct_from_start": 21.61
+    },
+    {
+      "date": "05/10/2026",
+      "nav": 121925898.0,
+      "cash": 835898.0,
+      "stock_value": 121090000.0,
+      "daily_change": 320000.0,
+      "daily_change_pct": 0.26,
+      "delta_from_start": 21925898.0,
+      "delta_pct_from_start": 21.93
+    },
+    {
+      "date": "06/10/2026",
+      "nav": 124955898.0,
+      "cash": 835898.0,
+      "stock_value": 124120000.0,
+      "daily_change": 3030000.0,
+      "daily_change_pct": 2.49,
+      "delta_from_start": 24955898.0,
+      "delta_pct_from_start": 24.96
+    },
+    {
+      "date": "07/10/2026",
+      "nav": 123615898.0,
+      "cash": 835898.0,
+      "stock_value": 122780000.0,
+      "daily_change": -1340000.0,
+      "daily_change_pct": -1.07,
+      "delta_from_start": 23615898.0,
+      "delta_pct_from_start": 23.62
+    },
+    {
+      "date": "08/10/2026",
+      "nav": 123195898.0,
+      "cash": 835898.0,
+      "stock_value": 122360000.0,
+      "daily_change": -420000.0,
+      "daily_change_pct": -0.34,
+      "delta_from_start": 23195898.0,
+      "delta_pct_from_start": 23.2
+    }
+  ],
+  "trade_history": [
+    {
+      "date": "17/12/2025",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 2500,
+      "price": 16170.000000000002,
+      "total_cost": 40425000.00000001,
+      "fee": 40425.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "17/12/2025",
+      "ticker": "VIC",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 200,
+      "price": 142900.0,
+      "total_cost": 28580000.0,
+      "fee": 28580.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "17/12/2025",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 500,
+      "price": 60960.0,
+      "total_cost": 30480000.0,
+      "fee": 30480.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "23/12/2025",
+      "ticker": "VIC",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 169900.0,
+      "total_cost": -16990000.0,
+      "fee": 16990.0,
+      "pnl_pct": 18.89
+    },
+    {
+      "date": "23/12/2025",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 16440.0,
+      "total_cost": 4932000.0,
+      "fee": 4932.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "23/12/2025",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 200,
+      "price": 60670.0,
+      "total_cost": 12134000.0,
+      "fee": 12134.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "24/12/2025",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 400,
+      "price": 16560.0,
+      "total_cost": -6624000.0,
+      "fee": 6624.0,
+      "pnl_pct": 2.23
+    },
+    {
+      "date": "24/12/2025",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 59600.0,
+      "total_cost": 5960000.0,
+      "fee": 5960.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "25/12/2025",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 300,
+      "price": 59410.0,
+      "total_cost": -17823000.0,
+      "fee": 17823.0,
+      "pnl_pct": -2.15
+    },
+    {
+      "date": "25/12/2025",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 15870.0,
+      "total_cost": 1587000.0,
+      "fee": 1587.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "25/12/2025",
+      "ticker": "VIC",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 158000.0,
+      "total_cost": 15800000.0,
+      "fee": 15800.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "26/12/2025",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 16379.999999999998,
+      "total_cost": -4913999.999999999,
+      "fee": 4914.0,
+      "pnl_pct": 1.2
+    },
+    {
+      "date": "26/12/2025",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 59600.0,
+      "total_cost": 5960000.0,
+      "fee": 5960.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "29/12/2025",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 60180.0,
+      "total_cost": -6018000.0,
+      "fee": 6018.0,
+      "pnl_pct": -0.58
+    },
+    {
+      "date": "29/12/2025",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 17070.0,
+      "total_cost": 5121000.0,
+      "fee": 5121.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "31/12/2025",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 16980.0,
+      "total_cost": -5094000.0,
+      "fee": 5094.0,
+      "pnl_pct": 4.22
+    },
+    {
+      "date": "31/12/2025",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 59310.0,
+      "total_cost": 5931000.0,
+      "fee": 5931.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "05/01/2026",
+      "ticker": "VIC",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 173100.0,
+      "total_cost": -17310000.0,
+      "fee": 17310.0,
+      "pnl_pct": 15.05
+    },
+    {
+      "date": "05/01/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 17430.0,
+      "total_cost": 5229000.0,
+      "fee": 5229.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "05/01/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 200,
+      "price": 58440.0,
+      "total_cost": 11688000.0,
+      "fee": 11688.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "06/01/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 17730.0,
+      "total_cost": -5319000.0,
+      "fee": 5319.0,
+      "pnl_pct": 7.92
+    },
+    {
+      "date": "06/01/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 200,
+      "price": 58920.0,
+      "total_cost": -11784000.0,
+      "fee": 11784.0,
+      "pnl_pct": -1.56
+    },
+    {
+      "date": "06/01/2026",
+      "ticker": "VIC",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 173100.0,
+      "total_cost": 17310000.0,
+      "fee": 17310.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "07/01/2026",
+      "ticker": "VIC",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 179000.0,
+      "total_cost": -17900000.0,
+      "fee": 17900.0,
+      "pnl_pct": 10.65
+    },
+    {
+      "date": "07/01/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 17970.0,
+      "total_cost": 5391000.0,
+      "fee": 5391.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "07/01/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 200,
+      "price": 59020.0,
+      "total_cost": 11804000.0,
+      "fee": 11804.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "12/01/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 200,
+      "price": 17010.0,
+      "total_cost": -3402000.0,
+      "fee": 3402.0,
+      "pnl_pct": 2.39
+    },
+    {
+      "date": "12/01/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 200,
+      "price": 60760.0,
+      "total_cost": -12152000.0,
+      "fee": 12152.0,
+      "pnl_pct": 1.87
+    },
+    {
+      "date": "12/01/2026",
+      "ticker": "VIC",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 163700.0,
+      "total_cost": 16370000.0,
+      "fee": 16370.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "23/02/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 400,
+      "price": 21860.0,
+      "total_cost": -8744000.0,
+      "fee": 8744.0,
+      "pnl_pct": 31.58
+    },
+    {
+      "date": "23/02/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 68420.0,
+      "total_cost": 6842000.0,
+      "fee": 6842.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "25/02/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 70070.0,
+      "total_cost": -7007000.0,
+      "fee": 7007.0,
+      "pnl_pct": 15.06
+    },
+    {
+      "date": "25/02/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 400,
+      "price": 21920.0,
+      "total_cost": 8768000.0,
+      "fee": 8768.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "26/02/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 22400.0,
+      "total_cost": -6720000.0,
+      "fee": 6720.0,
+      "pnl_pct": 27.73
+    },
+    {
+      "date": "26/02/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 68420.0,
+      "total_cost": 6842000.0,
+      "fee": 6842.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "05/03/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 25310.0,
+      "total_cost": -7593000.0,
+      "fee": 7593.0,
+      "pnl_pct": 44.33
+    },
+    {
+      "date": "05/03/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 61250.0,
+      "total_cost": 6125000.0,
+      "fee": 6125.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "10/03/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 60180.0,
+      "total_cost": -6018000.0,
+      "fee": 6018.0,
+      "pnl_pct": -2.75
+    },
+    {
+      "date": "10/03/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 23690.0,
+      "total_cost": 7107000.0,
+      "fee": 7107.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "12/03/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 24710.0,
+      "total_cost": -7413000.0,
+      "fee": 7413.0,
+      "pnl_pct": 33.86
+    },
+    {
+      "date": "12/03/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 59700.0,
+      "total_cost": 5970000.0,
+      "fee": 5970.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "16/03/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 59890.0,
+      "total_cost": -5989000.0,
+      "fee": 5989.0,
+      "pnl_pct": -2.79
+    },
+    {
+      "date": "16/03/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 22280.0,
+      "total_cost": 6684000.0,
+      "fee": 6684.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "16/04/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 59210.0,
+      "total_cost": -5921000.0,
+      "fee": 5921.0,
+      "pnl_pct": -3.9
+    },
+    {
+      "date": "16/04/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 19710.0,
+      "total_cost": 5913000.0,
+      "fee": 5913.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "17/04/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 19950.0,
+      "total_cost": -5985000.0,
+      "fee": 5985.0,
+      "pnl_pct": 4.34
+    },
+    {
+      "date": "17/04/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 59410.0,
+      "total_cost": 5941000.0,
+      "fee": 5941.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "20/04/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 59600.0,
+      "total_cost": -5960000.0,
+      "fee": 5960.0,
+      "pnl_pct": -2.77
+    },
+    {
+      "date": "20/04/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 19680.0,
+      "total_cost": 5904000.0,
+      "fee": 5904.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "22/04/2026",
+      "ticker": "VIC",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 207200.0,
+      "total_cost": -20720000.0,
+      "fee": 20720.0,
+      "pnl_pct": 27.32
+    },
+    {
+      "date": "22/04/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 200,
+      "price": 19110.0,
+      "total_cost": 3822000.0,
+      "fee": 3822.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "22/04/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 59890.0,
+      "total_cost": 17967000.0,
+      "fee": 17967.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "18/05/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 21440.0,
+      "total_cost": -6432000.0,
+      "fee": 6432.0,
+      "pnl_pct": 11.74
+    },
+    {
+      "date": "18/05/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 58630.0,
+      "total_cost": 5863000.0,
+      "fee": 5863.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "19/05/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 57950.0,
+      "total_cost": -5795000.0,
+      "fee": 5795.0,
+      "pnl_pct": -4.39
+    },
+    {
+      "date": "19/05/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 19950.0,
+      "total_cost": 5985000.0,
+      "fee": 5985.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "21/05/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 19620.0,
+      "total_cost": -5886000.0,
+      "fee": 5886.0,
+      "pnl_pct": 1.77
+    },
+    {
+      "date": "21/05/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 57180.0,
+      "total_cost": 5718000.0,
+      "fee": 5718.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "22/05/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 57660.0,
+      "total_cost": -5766000.0,
+      "fee": 5766.0,
+      "pnl_pct": -4.32
+    },
+    {
+      "date": "22/05/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 18900.0,
+      "total_cost": 5670000.0,
+      "fee": 5670.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "15/06/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 400,
+      "price": 17520.0,
+      "total_cost": -7008000.0,
+      "fee": 7008.0,
+      "pnl_pct": -8.91
+    },
+    {
+      "date": "15/06/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 200,
+      "price": 57860.0,
+      "total_cost": -11572000.0,
+      "fee": 11572.0,
+      "pnl_pct": -3.99
+    },
+    {
+      "date": "15/06/2026",
+      "ticker": "VIC",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 192600.0,
+      "total_cost": 19260000.0,
+      "fee": 19260.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "16/06/2026",
+      "ticker": "VIC",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 194000.0,
+      "total_cost": -19400000.0,
+      "fee": 19400.0,
+      "pnl_pct": 9.19
+    },
+    {
+      "date": "16/06/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 400,
+      "price": 18060.0,
+      "total_cost": 7224000.0,
+      "fee": 7224.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "16/06/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 200,
+      "price": 57280.0,
+      "total_cost": 11456000.0,
+      "fee": 11456.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "17/06/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 400,
+      "price": 18120.0,
+      "total_cost": -7248000.0,
+      "fee": 7248.0,
+      "pnl_pct": -4.86
+    },
+    {
+      "date": "17/06/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 200,
+      "price": 57180.0,
+      "total_cost": -11436000.0,
+      "fee": 11436.0,
+      "pnl_pct": -4.06
+    },
+    {
+      "date": "17/06/2026",
+      "ticker": "VIC",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 192000.0,
+      "total_cost": 19200000.0,
+      "fee": 19200.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "18/06/2026",
+      "ticker": "VIC",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 205400.0,
+      "total_cost": -20540000.0,
+      "fee": 20540.0,
+      "pnl_pct": 11.13
+    },
+    {
+      "date": "18/06/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 500,
+      "price": 18600.0,
+      "total_cost": 9300000.0,
+      "fee": 9300.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "18/06/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 200,
+      "price": 57370.0,
+      "total_cost": 11474000.0,
+      "fee": 11474.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "22/06/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 19260.0,
+      "total_cost": -5778000.0,
+      "fee": 5778.0,
+      "pnl_pct": 1.58
+    },
+    {
+      "date": "22/06/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 56790.0,
+      "total_cost": 5679000.0,
+      "fee": 5679.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "17/07/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 59000.0,
+      "total_cost": -5900000.0,
+      "fee": 5900.0,
+      "pnl_pct": 0.21
+    },
+    {
+      "date": "17/07/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 19550.0,
+      "total_cost": 5865000.0,
+      "fee": 5865.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "14/08/2026",
+      "ticker": "PVD",
+      "action": "SELL",
+      "order_type": "CẮT LỖ",
+      "shares": 100,
+      "price": 17950.0,
+      "total_cost": -1795000.0,
+      "fee": 1795.0,
+      "pnl_pct": -5.66
+    },
+    {
+      "date": "14/08/2026",
+      "ticker": "VNM",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 300,
+      "price": 61600.0,
+      "total_cost": -18480000.0,
+      "fee": 18480.0,
+      "pnl_pct": 4.63
+    },
+    {
+      "date": "14/08/2026",
+      "ticker": "VIC",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 200400.0,
+      "total_cost": 20040000.0,
+      "fee": 20040.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "24/08/2026",
+      "ticker": "VIC",
+      "action": "SELL",
+      "order_type": "CHỐT LỜI",
+      "shares": 100,
+      "price": 214500.0,
+      "total_cost": -21450000.0,
+      "fee": 21450.0,
+      "pnl_pct": 11.36
+    },
+    {
+      "date": "24/08/2026",
+      "ticker": "PVD",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 100,
+      "price": 19350.0,
+      "total_cost": 1935000.0,
+      "fee": 1935.0,
+      "pnl_pct": 0.0
+    },
+    {
+      "date": "24/08/2026",
+      "ticker": "VNM",
+      "action": "BUY",
+      "order_type": "MUA",
+      "shares": 300,
+      "price": 63200.0,
+      "total_cost": 18960000.0,
+      "fee": 18960.0,
+      "pnl_pct": 0.0
+    }
+  ],
+  "ai_predictions": [
+    {
+      "date": "17/12/2025",
+      "top_tickers": "PVD (36.1%), VNM (33.2%), VIC (30.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "18/12/2025",
+      "top_tickers": "PVD (35.3%), VNM (33.7%), VIC (31.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "19/12/2025",
+      "top_tickers": "PVD (36.1%), VNM (33.3%), VIC (30.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "22/12/2025",
+      "top_tickers": "PVD (35.6%), VNM (33.7%), VIC (30.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/12/2025",
+      "top_tickers": "PVD (35.3%), VNM (33.9%), VIC (30.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/12/2025",
+      "top_tickers": "VNM (34.6%), PVD (34.2%), VIC (31.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "25/12/2025",
+      "top_tickers": "PVD (34.8%), VNM (33.9%), VIC (31.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "26/12/2025",
+      "top_tickers": "PVD (34.7%), VNM (34.0%), VIC (31.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "29/12/2025",
+      "top_tickers": "PVD (35.5%), VNM (33.3%), VIC (31.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "30/12/2025",
+      "top_tickers": "PVD (35.3%), VNM (33.6%), VIC (31.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "31/12/2025",
+      "top_tickers": "PVD (34.3%), VNM (34.0%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "05/01/2026",
+      "top_tickers": "VNM (34.2%), PVD (34.0%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/01/2026",
+      "top_tickers": "VNM (34.3%), PVD (34.0%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "07/01/2026",
+      "top_tickers": "PVD (34.3%), VNM (34.0%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "08/01/2026",
+      "top_tickers": "VNM (34.6%), PVD (34.1%), VIC (31.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "09/01/2026",
+      "top_tickers": "VNM (34.8%), PVD (33.4%), VIC (31.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "12/01/2026",
+      "top_tickers": "VNM (35.3%), PVD (32.6%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "13/01/2026",
+      "top_tickers": "VNM (35.4%), PVD (32.5%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "14/01/2026",
+      "top_tickers": "VNM (35.5%), PVD (32.5%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "15/01/2026",
+      "top_tickers": "VNM (35.3%), PVD (33.1%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "16/01/2026",
+      "top_tickers": "VNM (35.2%), PVD (33.1%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "19/01/2026",
+      "top_tickers": "VNM (35.1%), PVD (32.9%), VIC (32.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "20/01/2026",
+      "top_tickers": "VNM (35.3%), PVD (32.8%), VIC (31.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "21/01/2026",
+      "top_tickers": "VNM (34.8%), PVD (33.9%), VIC (31.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "22/01/2026",
+      "top_tickers": "VNM (34.6%), PVD (34.0%), VIC (31.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/01/2026",
+      "top_tickers": "VNM (34.8%), PVD (34.0%), VIC (31.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "26/01/2026",
+      "top_tickers": "VNM (34.1%), PVD (33.9%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "27/01/2026",
+      "top_tickers": "VNM (34.8%), PVD (33.4%), VIC (31.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "28/01/2026",
+      "top_tickers": "VNM (34.0%), PVD (34.0%), VIC (32.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "29/01/2026",
+      "top_tickers": "VNM (33.9%), PVD (33.9%), VIC (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "30/01/2026",
+      "top_tickers": "VNM (34.2%), PVD (33.4%), VIC (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "02/02/2026",
+      "top_tickers": "VNM (34.2%), PVD (33.3%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "03/02/2026",
+      "top_tickers": "VNM (34.6%), PVD (33.0%), VIC (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "04/02/2026",
+      "top_tickers": "VNM (34.3%), PVD (33.7%), VIC (32.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "05/02/2026",
+      "top_tickers": "VNM (34.4%), PVD (33.6%), VIC (32.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/02/2026",
+      "top_tickers": "VNM (34.2%), PVD (33.4%), VIC (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "09/02/2026",
+      "top_tickers": "VNM (34.3%), PVD (33.6%), VIC (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "10/02/2026",
+      "top_tickers": "VNM (34.7%), PVD (33.3%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "11/02/2026",
+      "top_tickers": "VNM (34.5%), PVD (33.4%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "12/02/2026",
+      "top_tickers": "VNM (35.3%), PVD (32.8%), VIC (32.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "13/02/2026",
+      "top_tickers": "VNM (35.5%), PVD (32.8%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/02/2026",
+      "top_tickers": "VNM (34.7%), PVD (33.1%), VIC (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/02/2026",
+      "top_tickers": "VNM (34.3%), PVD (33.8%), VIC (31.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "25/02/2026",
+      "top_tickers": "VNM (34.4%), PVD (34.0%), VIC (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "26/02/2026",
+      "top_tickers": "VNM (34.6%), PVD (33.7%), VIC (31.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "27/02/2026",
+      "top_tickers": "VNM (34.2%), PVD (33.6%), VIC (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "02/03/2026",
+      "top_tickers": "PVD (34.1%), VNM (33.6%), VIC (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "03/03/2026",
+      "top_tickers": "PVD (34.3%), VNM (33.6%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "04/03/2026",
+      "top_tickers": "VNM (33.8%), PVD (33.6%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "05/03/2026",
+      "top_tickers": "VNM (34.2%), PVD (33.5%), VIC (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/03/2026",
+      "top_tickers": "VNM (34.7%), VIC (32.7%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "09/03/2026",
+      "top_tickers": "VNM (35.2%), PVD (32.6%), VIC (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "10/03/2026",
+      "top_tickers": "VNM (35.0%), VIC (32.8%), PVD (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "11/03/2026",
+      "top_tickers": "VNM (35.0%), PVD (32.5%), VIC (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "12/03/2026",
+      "top_tickers": "VNM (35.3%), VIC (32.7%), PVD (31.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "13/03/2026",
+      "top_tickers": "VNM (35.5%), VIC (32.7%), PVD (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "16/03/2026",
+      "top_tickers": "VNM (35.1%), VIC (32.5%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "17/03/2026",
+      "top_tickers": "VNM (34.8%), VIC (32.9%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "18/03/2026",
+      "top_tickers": "VNM (35.4%), PVD (32.5%), VIC (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "19/03/2026",
+      "top_tickers": "VNM (35.2%), VIC (32.5%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "20/03/2026",
+      "top_tickers": "VNM (35.2%), VIC (32.5%), PVD (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/03/2026",
+      "top_tickers": "VNM (35.3%), VIC (32.6%), PVD (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/03/2026",
+      "top_tickers": "VNM (35.0%), VIC (32.6%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "25/03/2026",
+      "top_tickers": "VNM (35.1%), PVD (32.7%), VIC (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "26/03/2026",
+      "top_tickers": "VNM (35.1%), VIC (32.5%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "27/03/2026",
+      "top_tickers": "VNM (35.4%), VIC (32.4%), PVD (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "30/03/2026",
+      "top_tickers": "VNM (34.7%), PVD (32.8%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "31/03/2026",
+      "top_tickers": "VNM (35.2%), VIC (32.4%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "01/04/2026",
+      "top_tickers": "VNM (34.8%), VIC (32.6%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "02/04/2026",
+      "top_tickers": "VNM (35.0%), VIC (32.5%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "03/04/2026",
+      "top_tickers": "VNM (34.8%), PVD (32.6%), VIC (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/04/2026",
+      "top_tickers": "VNM (34.8%), VIC (32.6%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "07/04/2026",
+      "top_tickers": "VNM (35.5%), PVD (32.3%), VIC (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "08/04/2026",
+      "top_tickers": "VNM (35.2%), PVD (32.5%), VIC (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "09/04/2026",
+      "top_tickers": "VNM (34.6%), VIC (32.7%), PVD (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "10/04/2026",
+      "top_tickers": "VNM (34.6%), PVD (32.7%), VIC (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "13/04/2026",
+      "top_tickers": "VNM (34.4%), PVD (33.0%), VIC (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "14/04/2026",
+      "top_tickers": "VNM (34.2%), PVD (33.0%), VIC (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "15/04/2026",
+      "top_tickers": "VNM (34.1%), PVD (33.0%), VIC (33.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "16/04/2026",
+      "top_tickers": "VNM (33.5%), VIC (33.4%), PVD (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "17/04/2026",
+      "top_tickers": "VNM (34.2%), VIC (33.3%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "20/04/2026",
+      "top_tickers": "VNM (33.7%), PVD (33.3%), VIC (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "21/04/2026",
+      "top_tickers": "VNM (33.9%), PVD (33.3%), VIC (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "22/04/2026",
+      "top_tickers": "VNM (33.6%), PVD (33.3%), VIC (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/04/2026",
+      "top_tickers": "VNM (33.6%), VIC (33.5%), PVD (32.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/04/2026",
+      "top_tickers": "VNM (33.8%), VIC (33.4%), PVD (32.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "28/04/2026",
+      "top_tickers": "VNM (34.0%), PVD (33.1%), VIC (32.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "29/04/2026",
+      "top_tickers": "VNM (34.6%), VIC (32.9%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "04/05/2026",
+      "top_tickers": "VNM (34.9%), VIC (32.7%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "05/05/2026",
+      "top_tickers": "VNM (34.4%), PVD (33.0%), VIC (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/05/2026",
+      "top_tickers": "VNM (34.6%), PVD (32.7%), VIC (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "07/05/2026",
+      "top_tickers": "VNM (34.7%), VIC (32.8%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "08/05/2026",
+      "top_tickers": "VNM (34.3%), VIC (32.9%), PVD (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "11/05/2026",
+      "top_tickers": "VNM (34.5%), VIC (32.8%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "12/05/2026",
+      "top_tickers": "VNM (35.2%), VIC (32.8%), PVD (32.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "13/05/2026",
+      "top_tickers": "VNM (34.5%), VIC (32.8%), PVD (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "14/05/2026",
+      "top_tickers": "VNM (34.3%), VIC (33.4%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "15/05/2026",
+      "top_tickers": "VNM (34.0%), VIC (33.3%), PVD (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "18/05/2026",
+      "top_tickers": "VNM (34.4%), VIC (32.9%), PVD (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "19/05/2026",
+      "top_tickers": "VNM (34.2%), VIC (33.2%), PVD (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "20/05/2026",
+      "top_tickers": "VNM (34.4%), VIC (33.3%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "21/05/2026",
+      "top_tickers": "VNM (34.8%), VIC (33.7%), PVD (31.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "22/05/2026",
+      "top_tickers": "VNM (34.4%), VIC (33.7%), PVD (31.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "25/05/2026",
+      "top_tickers": "VNM (34.6%), VIC (33.2%), PVD (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "26/05/2026",
+      "top_tickers": "VNM (34.5%), VIC (33.3%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "27/05/2026",
+      "top_tickers": "VNM (35.3%), VIC (33.1%), PVD (31.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "28/05/2026",
+      "top_tickers": "VNM (35.9%), VIC (33.2%), PVD (30.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "29/05/2026",
+      "top_tickers": "VNM (35.5%), VIC (33.4%), PVD (31.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "01/06/2026",
+      "top_tickers": "VNM (35.8%), VIC (32.8%), PVD (31.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "02/06/2026",
+      "top_tickers": "VNM (35.6%), VIC (32.6%), PVD (31.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "03/06/2026",
+      "top_tickers": "VNM (35.7%), VIC (33.3%), PVD (30.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "04/06/2026",
+      "top_tickers": "VNM (35.2%), VIC (33.1%), PVD (31.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "05/06/2026",
+      "top_tickers": "VNM (35.4%), VIC (32.7%), PVD (31.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "08/06/2026",
+      "top_tickers": "VNM (35.5%), VIC (32.9%), PVD (31.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "09/06/2026",
+      "top_tickers": "VNM (35.5%), VIC (32.7%), PVD (31.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "10/06/2026",
+      "top_tickers": "VNM (35.7%), VIC (33.0%), PVD (31.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "11/06/2026",
+      "top_tickers": "VNM (35.8%), VIC (33.1%), PVD (31.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "12/06/2026",
+      "top_tickers": "VNM (35.9%), VIC (33.0%), PVD (31.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "15/06/2026",
+      "top_tickers": "VNM (35.6%), VIC (33.4%), PVD (31.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "16/06/2026",
+      "top_tickers": "VNM (35.5%), VIC (33.0%), PVD (31.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "17/06/2026",
+      "top_tickers": "VNM (36.3%), VIC (33.1%), PVD (30.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "18/06/2026",
+      "top_tickers": "VNM (35.7%), VIC (33.0%), PVD (31.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "19/06/2026",
+      "top_tickers": "VNM (35.2%), VIC (33.2%), PVD (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "22/06/2026",
+      "top_tickers": "VNM (35.8%), VIC (33.1%), PVD (31.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/06/2026",
+      "top_tickers": "VNM (36.0%), VIC (33.1%), PVD (30.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/06/2026",
+      "top_tickers": "VNM (35.9%), VIC (33.7%), PVD (30.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "25/06/2026",
+      "top_tickers": "VNM (36.2%), VIC (33.4%), PVD (30.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "26/06/2026",
+      "top_tickers": "VNM (35.9%), VIC (33.1%), PVD (31.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "29/06/2026",
+      "top_tickers": "VNM (35.0%), VIC (33.6%), PVD (31.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "30/06/2026",
+      "top_tickers": "VNM (35.8%), VIC (33.3%), PVD (30.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "01/07/2026",
+      "top_tickers": "VNM (35.9%), VIC (33.3%), PVD (30.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "02/07/2026",
+      "top_tickers": "VNM (36.2%), VIC (33.0%), PVD (30.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "03/07/2026",
+      "top_tickers": "VNM (35.6%), VIC (33.1%), PVD (31.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/07/2026",
+      "top_tickers": "VNM (35.3%), VIC (33.0%), PVD (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "07/07/2026",
+      "top_tickers": "VNM (35.0%), VIC (33.1%), PVD (31.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "08/07/2026",
+      "top_tickers": "VNM (35.3%), VIC (32.8%), PVD (31.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "09/07/2026",
+      "top_tickers": "VNM (35.2%), VIC (32.9%), PVD (31.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "10/07/2026",
+      "top_tickers": "VNM (34.9%), VIC (32.6%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "13/07/2026",
+      "top_tickers": "VNM (35.0%), VIC (32.6%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "14/07/2026",
+      "top_tickers": "VNM (34.9%), PVD (32.6%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "15/07/2026",
+      "top_tickers": "VNM (34.8%), PVD (32.8%), VIC (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "16/07/2026",
+      "top_tickers": "VNM (34.7%), PVD (32.9%), VIC (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "17/07/2026",
+      "top_tickers": "VNM (34.9%), PVD (32.7%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "20/07/2026",
+      "top_tickers": "VNM (34.2%), PVD (33.1%), VIC (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "21/07/2026",
+      "top_tickers": "VNM (34.7%), PVD (32.8%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "22/07/2026",
+      "top_tickers": "VNM (34.9%), VIC (32.5%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/07/2026",
+      "top_tickers": "VNM (34.5%), VIC (32.8%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/07/2026",
+      "top_tickers": "VNM (34.7%), PVD (32.8%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "27/07/2026",
+      "top_tickers": "VNM (34.4%), VIC (32.9%), PVD (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "28/07/2026",
+      "top_tickers": "VNM (34.0%), VIC (33.1%), PVD (32.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "29/07/2026",
+      "top_tickers": "VNM (34.2%), VIC (33.5%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "30/07/2026",
+      "top_tickers": "VNM (35.2%), VIC (32.6%), PVD (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "31/07/2026",
+      "top_tickers": "VNM (34.8%), VIC (32.9%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "03/08/2026",
+      "top_tickers": "VNM (35.0%), VIC (32.9%), PVD (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "04/08/2026",
+      "top_tickers": "VNM (34.4%), VIC (33.0%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "05/08/2026",
+      "top_tickers": "VNM (34.8%), VIC (32.8%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/08/2026",
+      "top_tickers": "VNM (34.5%), VIC (32.9%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "07/08/2026",
+      "top_tickers": "VNM (34.7%), VIC (33.0%), PVD (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "10/08/2026",
+      "top_tickers": "VNM (34.5%), VIC (33.0%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "11/08/2026",
+      "top_tickers": "VNM (34.8%), VIC (32.8%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "12/08/2026",
+      "top_tickers": "VNM (34.7%), VIC (32.7%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "13/08/2026",
+      "top_tickers": "VNM (34.5%), PVD (33.1%), VIC (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "14/08/2026",
+      "top_tickers": "VNM (34.3%), VIC (32.9%), PVD (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "17/08/2026",
+      "top_tickers": "VNM (34.1%), PVD (33.2%), VIC (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "18/08/2026",
+      "top_tickers": "VNM (34.3%), PVD (33.2%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "19/08/2026",
+      "top_tickers": "VNM (33.9%), PVD (33.4%), VIC (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "20/08/2026",
+      "top_tickers": "VNM (34.2%), VIC (33.0%), PVD (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "21/08/2026",
+      "top_tickers": "VNM (34.8%), VIC (33.1%), PVD (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/08/2026",
+      "top_tickers": "VNM (33.8%), PVD (33.2%), VIC (33.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "25/08/2026",
+      "top_tickers": "VNM (34.5%), PVD (33.3%), VIC (32.3%)",
+      "hold_cash": false
+    },
+    {
+      "date": "26/08/2026",
+      "top_tickers": "PVD (34.0%), VNM (33.7%), VIC (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "27/08/2026",
+      "top_tickers": "PVD (34.1%), VNM (33.2%), VIC (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "28/08/2026",
+      "top_tickers": "VNM (33.8%), PVD (33.4%), VIC (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "03/09/2026",
+      "top_tickers": "PVD (33.8%), VNM (33.7%), VIC (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "04/09/2026",
+      "top_tickers": "VNM (34.3%), PVD (33.1%), VIC (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "07/09/2026",
+      "top_tickers": "VNM (34.2%), PVD (32.9%), VIC (32.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "08/09/2026",
+      "top_tickers": "VNM (34.3%), PVD (32.9%), VIC (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "09/09/2026",
+      "top_tickers": "VNM (33.9%), PVD (33.2%), VIC (32.9%)",
+      "hold_cash": false
+    },
+    {
+      "date": "10/09/2026",
+      "top_tickers": "VNM (33.6%), PVD (33.3%), VIC (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "11/09/2026",
+      "top_tickers": "VNM (33.8%), VIC (33.2%), PVD (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "14/09/2026",
+      "top_tickers": "VNM (33.8%), VIC (33.2%), PVD (33.0%)",
+      "hold_cash": false
+    },
+    {
+      "date": "15/09/2026",
+      "top_tickers": "VNM (34.2%), VIC (33.2%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "16/09/2026",
+      "top_tickers": "VNM (33.9%), VIC (33.3%), PVD (32.8%)",
+      "hold_cash": false
+    },
+    {
+      "date": "17/09/2026",
+      "top_tickers": "VNM (33.7%), VIC (33.3%), PVD (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "18/09/2026",
+      "top_tickers": "VNM (34.5%), VIC (33.2%), PVD (32.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "21/09/2026",
+      "top_tickers": "VNM (34.2%), VIC (33.7%), PVD (32.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "22/09/2026",
+      "top_tickers": "VIC (33.8%), VNM (33.7%), PVD (32.5%)",
+      "hold_cash": false
+    },
+    {
+      "date": "23/09/2026",
+      "top_tickers": "VNM (34.4%), VIC (33.9%), PVD (31.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "24/09/2026",
+      "top_tickers": "VIC (34.4%), VNM (34.2%), PVD (31.4%)",
+      "hold_cash": false
+    },
+    {
+      "date": "25/09/2026",
+      "top_tickers": "VIC (34.0%), VNM (33.8%), PVD (32.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "28/09/2026",
+      "top_tickers": "VIC (33.7%), VNM (33.2%), PVD (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "29/09/2026",
+      "top_tickers": "PVD (33.6%), VNM (33.2%), VIC (33.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "30/09/2026",
+      "top_tickers": "VNM (33.7%), VIC (33.2%), PVD (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "01/10/2026",
+      "top_tickers": "VNM (33.9%), VIC (33.4%), PVD (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "02/10/2026",
+      "top_tickers": "VNM (34.1%), VIC (33.2%), PVD (32.6%)",
+      "hold_cash": false
+    },
+    {
+      "date": "05/10/2026",
+      "top_tickers": "PVD (33.4%), VNM (33.4%), VIC (33.2%)",
+      "hold_cash": false
+    },
+    {
+      "date": "06/10/2026",
+      "top_tickers": "PVD (33.6%), VNM (33.4%), VIC (33.1%)",
+      "hold_cash": false
+    },
+    {
+      "date": "07/10/2026",
+      "top_tickers": "VNM (33.7%), PVD (33.6%), VIC (32.7%)",
+      "hold_cash": false
+    },
+    {
+      "date": "08/10/2026",
+      "top_tickers": "PVD (33.7%), VNM (33.5%), VIC (32.8%)",
+      "hold_cash": false
+    }
+  ]
+}
